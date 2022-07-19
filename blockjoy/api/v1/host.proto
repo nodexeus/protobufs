@@ -1,3 +1,40 @@
 syntax="proto3";
 
 package blockjoy.api.v1;
+
+message ProvisionHostRequest {
+    string otp = 1;
+    Uuid org_id = 2;
+    string name = 3;
+    string version = 4;
+    string location = 5;
+    int32 cpu_count = 6;
+    int32 mem_size = 7;
+    int32 disk_size = 8;
+    string os = 9;
+    string os_version = 10;
+    string ip = 11;
+    repeated string validator_ips = 12;
+    string token = 13;
+    ConnectionStatus.Status status = 14;
+}
+
+message ProvisionHostResponse {
+    Uuid id = 1;
+    string token = 2;
+    repeated string messages = 3;
+}
+
+message HostInfoUpdateRequest {
+    Uuid id = 1;
+    optional int32 cpu_count = 2;
+    optional int32 mem_size = 3;
+    optional int32 disk_size = 4;
+    optional string os = 5;
+    optional string os_version = 6;
+    optional string ip = 7;
+}
+
+message HostInfoUpdateResponse {
+    repeated string messages = 1;
+}

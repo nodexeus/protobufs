@@ -2,21 +2,32 @@ syntax="proto3";
 
 package blockjoy.api.v1;
 
+import "messages.proto";
+
+enum ConnectionStatus {
+    Online = 0;
+    Offline = 1;
+}
+
+message HostInfo {
+    optional string name = 1;
+    optional string version = 2;
+    optional string location = 3;
+    optional int32 cpu_count = 4;
+    optional int32 mem_size = 5;
+    optional int32 disk_size = 6;
+    optional string os = 7;
+    optional string os_version = 8;
+    optional string ip = 9;
+}
+
 message ProvisionHostRequest {
     string otp = 1;
     Uuid org_id = 2;
-    string name = 3;
-    string version = 4;
-    string location = 5;
-    int32 cpu_count = 6;
-    int32 mem_size = 7;
-    int32 disk_size = 8;
-    string os = 9;
-    string os_version = 10;
-    string ip = 11;
-    repeated string validator_ips = 12;
-    string token = 13;
-    ConnectionStatus.Status status = 14;
+    HostInfo info = 3;
+    repeated string validator_ips = 4;
+    string token = 5;
+    ConnectionStatus status = 6;
 }
 
 message ProvisionHostResponse {
@@ -27,12 +38,7 @@ message ProvisionHostResponse {
 
 message HostInfoUpdateRequest {
     Uuid id = 1;
-    optional int32 cpu_count = 2;
-    optional int32 mem_size = 3;
-    optional int32 disk_size = 4;
-    optional string os = 5;
-    optional string os_version = 6;
-    optional string ip = 7;
+    HostInfo info = 2;
 }
 
 message HostInfoUpdateResponse {

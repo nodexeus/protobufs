@@ -4,44 +4,10 @@ package blockjoy.api.v1;
 
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/any.proto";
-import "node_messages.proto";
 
+// Common message types
 message Uuid {
     string value = 1;
-}
-
-message NodeType {
-  enum Types {
-    API = 1;
-    ETL = 2;
-    Miner = 3;
-    Validator = 4;
-  }
-}
-
-message NodeStatus {
-  enum Status {
-    Consensus = 1;
-    Syncing = 2;
-  }
-}
-
-message VmImage {
-    string version = 1;
-    string blockchain = 2;
-    NodeType.Types node_type = 3;
-    string url = 4;
-}
-
-message VmStatus {
-  enum Status {
-    Starting = 1;
-    Started = 2;
-    Stopping = 3;
-    Stopped = 4;
-    Upgrading = 5;
-    Upgraded = 6;
-  }
 }
 
 message CommandMeta {
@@ -49,38 +15,7 @@ message CommandMeta {
     google.protobuf.Timestamp created_at = 2;
 }
 
-message Command {
-    oneof _type {
-        NodeCommand node = 1;
-        // HostCommand host = 2;
-    }
-}
-
-message NodeInfo {
-  Uuid id = 1;
-  string name = 2;
-  string ip = 3;
-  VmStatus vm_status = 4;
-  NodeStatus node_status = 5;
-  int64 block_height = 6;
-  string onchain_name = 7;
-}
-
-message InfoUpdate {
-  oneof info {
-      HostInfo host = 1;
-      NodeInfo node = 2;
-  }
-}
-
 message Parameter {
     string name = 1;
     google.protobuf.Any value = 2;
-}
-
-message ConnectionStatus {
-  enum Status {
-    Online = 1;
-    Offline = 2;
-  }
 }

@@ -2,6 +2,46 @@ syntax="proto3";
 
 package blockjoy.api.v1;
 
+import "messages.proto";
+
+enum NodeStatus {
+    Consensus = 0;
+    Syncing = 1;
+}
+
+enum NodeType {
+    API = 0;
+    ETL = 1;
+    Miner = 2;
+    Validator = 3;
+}
+
+enum VmStatus {
+    Starting = 0;
+    Started = 1;
+    Stopping = 2;
+    Stopped = 3;
+    Upgrading = 4;
+    Upgraded = 5;
+}
+
+message VmImage {
+    string version = 1;
+    string blockchain = 2;
+    NodeType node_type = 3;
+    string url = 4;
+}
+
+message NodeInfo {
+    Uuid id = 1;
+    string name = 2;
+    string ip = 3;
+    VmStatus vm_status = 4;
+    NodeStatus node_status = 5;
+    int64 block_height = 6;
+    string onchain_name = 7;
+}
+
 message NodeStart {}
 message NodeStop {}
 message NodeRestart {}
@@ -22,18 +62,18 @@ message NodeCreate {
 message NodeDelete {}
 
 message NodeCommand {
-    oneof command {
-        NodeStart start = 1;
-        NodeStop stop = 2;
-        NodeRestart restart = 3;
-        NodeUpgrade upgrade = 4;
-        NodeInfoUpdate update = 5;
-        NodeInfoGet info_get = 6;
-        NodeGenericCommand generic = 7;
-        NodeCreate create = 8;
-        NodeDelete delete = 9;
-    };
-
     Uuid node_id = 1;
     CommandMeta _meta = 2;
+
+    oneof command {
+        NodeStart start = 3;
+        NodeStop stop = 4;
+        NodeRestart restart = 5;
+        NodeUpgrade upgrade = 6;
+        NodeInfoUpdate update = 7;
+        NodeInfoGet info_get = 8;
+        NodeGenericCommand generic = 9;
+        NodeCreate create = 10;
+        NodeDelete delete = 11;
+    };
 }

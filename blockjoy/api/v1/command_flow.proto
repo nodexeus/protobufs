@@ -2,7 +2,22 @@ syntax="proto3";
 
 package blockjoy.api.v1;
 
-import "cf_messages.proto";
+import "node.proto";
+import "host.proto";
+
+message Command {
+    oneof type {
+        NodeCommand node = 1;
+        // HostCommand host = 2;
+    }
+}
+
+message InfoUpdate {
+    oneof info {
+        HostInfo host = 1;
+        NodeInfo node = 2;
+    }
+}
 
 service CommandFlow {
     rpc Commands(stream InfoUpdate) returns (stream Command) {}

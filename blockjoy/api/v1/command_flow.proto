@@ -1,0 +1,9 @@
+syntax="proto3";
+
+package blockjoy.api.v1;
+
+import "cf_messages.proto";
+
+service CommandFlow {
+    rpc Commands(stream InfoUpdate) returns (stream Command) {}
+}

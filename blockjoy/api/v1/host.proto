@@ -5,8 +5,9 @@ package blockjoy.api.v1;
 import "messages.proto";
 
 enum ConnectionStatus {
-    Online = 0;
-    Offline = 1;
+    UndefinedConnectionStatus = 0;
+    Online = 1;
+    Offline = 2;
 }
 
 message HostInfo {

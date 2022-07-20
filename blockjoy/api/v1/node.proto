@@ -5,24 +5,27 @@ package blockjoy.api.v1;
 import "messages.proto";
 
 enum NodeStatus {
-    Consensus = 0;
-    Syncing = 1;
+    UndefinedNodeStatus = 0;
+    Consensus = 1;
+    Syncing = 2;
 }
 
 enum NodeType {
-    API = 0;
-    ETL = 1;
-    Miner = 2;
-    Validator = 3;
+    UndefinedNodeType = 0;
+    API = 1;
+    ETL = 2;
+    Miner = 3;
+    Validator = 4;
 }
 
 enum VmStatus {
-    Starting = 0;
-    Started = 1;
-    Stopping = 2;
-    Stopped = 3;
-    Upgrading = 4;
-    Upgraded = 5;
+    UndefinedVmStatus = 0;
+    Starting = 1;
+    Started = 2;
+    Stopping = 3;
+    Stopped = 4;
+    Upgrading = 5;
+    Upgraded = 6;
 }
 
 message VmImage {
@@ -57,7 +60,7 @@ message NodeGenericCommand {
 }
 message NodeCreate {
     string name = 1;
-    VmImage image = 3;
+    VmImage image = 2;
 }
 message NodeDelete {}
 

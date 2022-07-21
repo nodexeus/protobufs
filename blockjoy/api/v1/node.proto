@@ -1,4 +1,4 @@
-syntax="proto3";
+syntax = "proto3";
 
 package blockjoy.api.v1;
 
@@ -46,22 +46,30 @@ message NodeInfo {
 }
 
 message NodeStart {}
+
 message NodeStop {}
+
 message NodeRestart {}
+
 message NodeUpgrade {
     VmImage image = 1;
 }
+
 message NodeInfoUpdate {
     optional string name = 1;
 }
+
 message NodeInfoGet {}
+
 message NodeGenericCommand {
     repeated Parameter params = 1;
 }
+
 message NodeCreate {
     string name = 1;
     VmImage image = 2;
 }
+
 message NodeDelete {}
 
 message NodeCommand {

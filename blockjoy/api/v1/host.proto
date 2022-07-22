@@ -14,9 +14,9 @@ message HostInfo {
     optional string name = 1;
     optional string version = 2;
     optional string location = 3;
-    optional int32 cpu_count = 4;
-    optional int32 mem_size = 5;
-    optional int32 disk_size = 6;
+    optional int64 cpu_count = 4;
+    optional int64 mem_size = 5;
+    optional int64 disk_size = 6;
     optional string os = 7;
     optional string os_version = 8;
     optional string ip = 9;

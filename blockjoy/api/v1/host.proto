@@ -11,15 +11,16 @@ enum ConnectionStatus {
 }
 
 message HostInfo {
-    optional string name = 1;
-    optional string version = 2;
-    optional string location = 3;
-    optional int64 cpu_count = 4;
-    optional int64 mem_size = 5;
-    optional int64 disk_size = 6;
-    optional string os = 7;
-    optional string os_version = 8;
-    optional string ip = 9;
+    Uuid id = 1;
+    optional string name = 2;
+    optional string version = 3;
+    optional string location = 4;
+    optional int64 cpu_count = 5;
+    optional int64 mem_size = 6;
+    optional int64 disk_size = 7;
+    optional string os = 8;
+    optional string os_version = 9;
+    optional string ip = 10;
 }
 
 message ProvisionHostRequest {

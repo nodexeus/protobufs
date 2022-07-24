@@ -46,3 +46,14 @@ Possible commands are (defined in [node.proto](https://github.com/blockjoy/api-p
 
 
 All commands are wrapped inside a [NodeCommand](https://github.com/blockjoy/api-proto/blob/63e00e0fdc527b737da2b4b8e3d051dc89e0d148/blockjoy/api/v1/node.proto#L75) message, containing the node ID and corresponding meta data.
+
+
+**Info updates***
+
+
+Info updates will be sent from BV to API. Possible updates:
+
+
+- HostInfo
+- NodeInfo
+- CommandInfo

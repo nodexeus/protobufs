@@ -24,18 +24,20 @@ message HostInfo {
 }
 
 message ProvisionHostRequest {
-    string otp = 1;
-    Uuid org_id = 2;
-    HostInfo info = 3;
-    repeated string validator_ips = 4;
-    string token = 5;
-    ConnectionStatus status = 6;
+    Uuid request_id = 1;
+    string otp = 2;
+    Uuid org_id = 3;
+    HostInfo info = 4;
+    repeated string validator_ips = 5;
+    string token = 6;
+    ConnectionStatus status = 7;
 }
 
 message ProvisionHostResponse {
     Uuid host_id = 1;
     string token = 2;
     repeated string messages = 3;
+    optional Uuid origin_request_id = 4;
 }
 
 message HostInfoUpdateRequest {
@@ -45,4 +47,5 @@ message HostInfoUpdateRequest {
 
 message HostInfoUpdateResponse {
     repeated string messages = 1;
+    optional Uuid origin_request_id = 2;
 }

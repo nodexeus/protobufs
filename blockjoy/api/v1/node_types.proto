@@ -5,17 +5,18 @@ package blockjoy.api.v1;
 message NodeType {
   message Generic {
     enum Status {
-      UndefinedStatus = 0;
-      Consensus = 1;
-      Syncing = 2;
-
       // Common states
-      Starting = 3;
-      Started = 4;
-      Stopping = 5;
-      Stopped = 6;
-      Upgrading = 7;
-      Upgraded = 8;
+      UndefinedStatus = 0;
+      Starting = 1;
+      Started = 2;
+      Stopping = 3;
+      Stopped = 4;
+      Upgrading = 5;
+      Upgraded = 6;
+
+      // Node type specific
+      Consensus = 7;
+      Syncing = 8;
     }
 
     Status status = 2;
@@ -23,17 +24,18 @@ message NodeType {
 
   message API {
     enum Status {
-      UndefinedStatus = 0;
-      Consensus = 1;
-      Syncing = 2;
-
       // Common states
-      Starting = 3;
-      Started = 4;
-      Stopping = 5;
-      Stopped = 6;
-      Upgrading = 7;
-      Upgraded = 8;
+      UndefinedStatus = 0;
+      Starting = 1;
+      Started = 2;
+      Stopping = 3;
+      Stopped = 4;
+      Upgrading = 5;
+      Upgraded = 6;
+
+      // Node type specific
+      Consensus = 7;
+      Syncing = 8;
     }
 
     Status status = 2;
@@ -41,17 +43,18 @@ message NodeType {
 
   message ETL {
     enum Status {
-      UndefinedStatus = 0;
-      Consensus = 1;
-      Syncing = 2;
-
       // Common states
-      Starting = 3;
-      Started = 4;
-      Stopping = 5;
-      Stopped = 6;
-      Upgrading = 7;
-      Upgraded = 8;
+      UndefinedStatus = 0;
+      Starting = 1;
+      Started = 2;
+      Stopping = 3;
+      Stopped = 4;
+      Upgrading = 5;
+      Upgraded = 6;
+
+      // Node type specific
+      Consensus = 7;
+      Syncing = 8;
     }
 
     Status status = 2;
@@ -59,17 +62,18 @@ message NodeType {
 
   message Validator {
     enum Status {
-      UndefinedStatus = 0;
-      Consensus = 1;
-      Syncing = 2;
-
       // Common states
-      Starting = 3;
-      Started = 4;
-      Stopping = 5;
-      Stopped = 6;
-      Upgrading = 7;
-      Upgraded = 8;
+      UndefinedStatus = 0;
+      Starting = 1;
+      Started = 2;
+      Stopping = 3;
+      Stopped = 4;
+      Upgrading = 5;
+      Upgraded = 6;
+
+      // Node type specific
+      Consensus = 7;
+      Syncing = 8;
     }
 
     Status status = 2;
@@ -77,17 +81,18 @@ message NodeType {
 
   message Miner {
     enum Status {
-      UndefinedStatus = 0;
-      Consensus = 1;
-      Syncing = 2;
-
       // Common states
-      Starting = 3;
-      Started = 4;
-      Stopping = 5;
-      Stopped = 6;
-      Upgrading = 7;
-      Upgraded = 8;
+      UndefinedStatus = 0;
+      Starting = 1;
+      Started = 2;
+      Stopping = 3;
+      Stopped = 4;
+      Upgrading = 5;
+      Upgraded = 6;
+
+      // Node type specific
+      Consensus = 7;
+      Syncing = 8;
     }
 
     Status status = 2;

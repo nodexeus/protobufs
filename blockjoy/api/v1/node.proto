@@ -36,7 +36,7 @@ message VmImage {
 }
 
 message NodeInfo {
-    Uuid id = 1;
+    Uuid node_id = 1;
     string name = 2;
     string ip = 3;
     VmStatus vm_status = 4;
@@ -74,7 +74,7 @@ message NodeDelete {}
 
 message NodeCommand {
     Uuid node_id = 1;
-    CommandMeta _meta = 2;
+    CommandMeta meta = 2;
 
     oneof command {
         NodeStart start = 3;

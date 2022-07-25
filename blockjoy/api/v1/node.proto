@@ -14,11 +14,8 @@ message NodeInfo {
     NodeType node_type = 8;
 }
 
-message VmImage {
-    string version = 1;
-    string blockchain = 2;
-    string url = 3;
-    NodeType node_type = 4;
+message ContainerImage {
+    string url = 1;
 }
 
 message NodeStart {}
@@ -28,7 +25,7 @@ message NodeStop {}
 message NodeRestart {}
 
 message NodeUpgrade {
-    VmImage image = 1;
+    ContainerImage image = 1;
 }
 
 message NodeInfoUpdate {
@@ -43,7 +40,7 @@ message NodeGenericCommand {
 
 message NodeCreate {
     string name = 1;
-    VmImage image = 2;
+    ContainerImage image = 2;
 }
 
 message NodeDelete {}

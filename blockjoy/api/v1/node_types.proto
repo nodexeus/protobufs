@@ -2,100 +2,142 @@ syntax = "proto3";
 
 package blockjoy.api.v1;
 
+// Declare node type
 message NodeType {
+  // Generic node type to be used, when none of the already defined types match
   message Generic {
     enum Status {
+      option allow_alias = true;
+      // Reserving values up to 15 for possible later use
+      // Up to 15 to ensure only 1 byte is used for the most common values
+      reserved 7 to 15;
+
       // Common states
       UndefinedStatus = 0;
-      Starting = 1;
-      Started = 2;
+      Available = 1;
+      Running = 1;
+      Started = 1;
+      Starting = 2;
       Stopping = 3;
       Stopped = 4;
       Upgrading = 5;
       Upgraded = 6;
+      // States specific to Generic node type
+      // Node specific types need to start at value 16
+      Consensus = 16;
+      Syncing = 17;
 
-      // Node type specific
-      Consensus = 7;
-      Syncing = 8;
     }
 
-    Status status = 2;
+    Status status = 1;
   }
 
   message API {
+    // States specific to API node type
     enum Status {
+      option allow_alias = true;
+      // Reserving values up to 15 for possible later use
+      // Up to 15 to ensure only 1 byte is used for the most common values
+      reserved 7 to 15;
+
       // Common states
       UndefinedStatus = 0;
-      Starting = 1;
-      Started = 2;
+      Available = 1;
+      Running = 1;
+      Started = 1;
+      Starting = 2;
       Stopping = 3;
       Stopped = 4;
       Upgrading = 5;
       Upgraded = 6;
-
-      // Node type specific
-      Consensus = 7;
-      Syncing = 8;
+      // States specific to Generic node type
+      // Node specific types need to start at value 16
+      Consensus = 16;
+      Syncing = 17;
     }
 
-    Status status = 2;
+    Status status = 1;
   }
 
   message ETL {
+    // States specific to API node type
     enum Status {
+      option allow_alias = true;
+      // Reserving values up to 15 for possible later use
+      // Up to 15 to ensure only 1 byte is used for the most common values
+      reserved 7 to 15;
+
       // Common states
       UndefinedStatus = 0;
-      Starting = 1;
-      Started = 2;
+      Available = 1;
+      Running = 1;
+      Started = 1;
+      Starting = 2;
       Stopping = 3;
       Stopped = 4;
       Upgrading = 5;
       Upgraded = 6;
-
-      // Node type specific
-      Consensus = 7;
-      Syncing = 8;
+      // States specific to API node type
+      // Node specific types need to start at value 16
+      Consensus = 16;
+      Syncing = 17;
     }
 
-    Status status = 2;
+    Status status = 1;
   }
 
   message Validator {
+    // States specific to API node type
     enum Status {
+      option allow_alias = true;
+      // Reserving values up to 15 for possible later use
+      // Up to 15 to ensure only 1 byte is used for the most common values
+      reserved 7 to 15;
+
       // Common states
       UndefinedStatus = 0;
-      Starting = 1;
-      Started = 2;
+      Available = 1;
+      Running = 1;
+      Started = 1;
+      Starting = 2;
       Stopping = 3;
       Stopped = 4;
       Upgrading = 5;
       Upgraded = 6;
-
-      // Node type specific
-      Consensus = 7;
-      Syncing = 8;
+      // States specific to Validator node type
+      // Node specific types need to start at value 16
+      Consensus = 16;
+      Syncing = 17;
     }
 
-    Status status = 2;
+    Status status = 1;
   }
 
   message Miner {
+    // States specific to API node type
     enum Status {
+      option allow_alias = true;
+      // Reserving values up to 15 for possible later use
+      // Up to 15 to ensure only 1 byte is used for the most common values
+      reserved 7 to 15;
+
       // Common states
       UndefinedStatus = 0;
-      Starting = 1;
-      Started = 2;
+      Available = 1;
+      Running = 1;
+      Started = 1;
+      Starting = 2;
       Stopping = 3;
       Stopped = 4;
       Upgrading = 5;
       Upgraded = 6;
-
-      // Node type specific
-      Consensus = 7;
-      Syncing = 8;
+      // States specific to Miner node type
+      // Node specific types need to start at value 16
+      Consensus = 16;
+      Syncing = 17;
     }
 
-    Status status = 2;
+    Status status = 1;
   }
 
   oneof type {

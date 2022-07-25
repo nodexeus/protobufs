@@ -1,0 +1,103 @@
+syntax = "proto3";
+
+package blockjoy.api.v1;
+
+message NodeType {
+  message Generic {
+    enum Status {
+      UndefinedStatus = 0;
+      Consensus = 1;
+      Syncing = 2;
+
+      // Common states
+      Starting = 3;
+      Started = 4;
+      Stopping = 5;
+      Stopped = 6;
+      Upgrading = 7;
+      Upgraded = 8;
+    }
+
+    Status status = 2;
+  }
+
+  message API {
+    enum Status {
+      UndefinedStatus = 0;
+      Consensus = 1;
+      Syncing = 2;
+
+      // Common states
+      Starting = 3;
+      Started = 4;
+      Stopping = 5;
+      Stopped = 6;
+      Upgrading = 7;
+      Upgraded = 8;
+    }
+
+    Status status = 2;
+  }
+
+  message ETL {
+    enum Status {
+      UndefinedStatus = 0;
+      Consensus = 1;
+      Syncing = 2;
+
+      // Common states
+      Starting = 3;
+      Started = 4;
+      Stopping = 5;
+      Stopped = 6;
+      Upgrading = 7;
+      Upgraded = 8;
+    }
+
+    Status status = 2;
+  }
+
+  message Validator {
+    enum Status {
+      UndefinedStatus = 0;
+      Consensus = 1;
+      Syncing = 2;
+
+      // Common states
+      Starting = 3;
+      Started = 4;
+      Stopping = 5;
+      Stopped = 6;
+      Upgrading = 7;
+      Upgraded = 8;
+    }
+
+    Status status = 2;
+  }
+
+  message Miner {
+    enum Status {
+      UndefinedStatus = 0;
+      Consensus = 1;
+      Syncing = 2;
+
+      // Common states
+      Starting = 3;
+      Started = 4;
+      Stopping = 5;
+      Stopped = 6;
+      Upgrading = 7;
+      Upgraded = 8;
+    }
+
+    Status status = 2;
+  }
+
+  oneof type {
+    Generic generic = 1;
+    API api = 2;
+    ETL etl = 3;
+    Validator validator = 4;
+    Miner miner = 5;
+  }
+}

@@ -3,46 +3,22 @@ syntax = "proto3";
 package blockjoy.api.v1;
 
 import "messages.proto";
-
-enum NodeStatus {
-    UndefinedNodeStatus = 0;
-    Consensus = 1;
-    Syncing = 2;
-}
-
-enum NodeType {
-    UndefinedNodeType = 0;
-    API = 1;
-    ETL = 2;
-    Miner = 3;
-    Validator = 4;
-}
-
-enum VmStatus {
-    UndefinedVmStatus = 0;
-    Starting = 1;
-    Started = 2;
-    Stopping = 3;
-    Stopped = 4;
-    Upgrading = 5;
-    Upgraded = 6;
-}
-
-message VmImage {
-    string version = 1;
-    string blockchain = 2;
-    NodeType node_type = 3;
-    string url = 4;
-}
+import "node_types.proto";
 
 message NodeInfo {
     Uuid node_id = 1;
     string name = 2;
     string ip = 3;
-    VmStatus vm_status = 4;
-    NodeStatus node_status = 5;
     int64 block_height = 6;
     string onchain_name = 7;
+    NodeType node_type = 8;
+}
+
+message VmImage {
+    string version = 1;
+    string blockchain = 2;
+    string url = 3;
+    NodeType node_type = 4;
 }
 
 message NodeStart {}

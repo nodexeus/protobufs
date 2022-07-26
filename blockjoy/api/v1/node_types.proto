@@ -13,7 +13,7 @@ message NodeType {
       reserved 7 to 15;
 
       // Common states
-      UndefinedStatus = 0;
+      Undefined = 0;
       Available = 1;
       Running = 1;
       Started = 1;
@@ -41,7 +41,7 @@ message NodeType {
       reserved 7 to 15;
 
       // Common states
-      UndefinedStatus = 0;
+      Undefined = 0;
       Available = 1;
       Running = 1;
       Started = 1;
@@ -68,7 +68,7 @@ message NodeType {
       reserved 7 to 15;
 
       // Common states
-      UndefinedStatus = 0;
+      Undefined = 0;
       Available = 1;
       Running = 1;
       Started = 1;
@@ -95,7 +95,7 @@ message NodeType {
       reserved 7 to 15;
 
       // Common states
-      UndefinedStatus = 0;
+      Undefined = 0;
       Available = 1;
       Running = 1;
       Started = 1;
@@ -122,7 +122,7 @@ message NodeType {
       reserved 7 to 15;
 
       // Common states
-      UndefinedStatus = 0;
+      Undefined = 0;
       Available = 1;
       Running = 1;
       Started = 1;

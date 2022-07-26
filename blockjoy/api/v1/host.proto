@@ -50,12 +50,15 @@ message HostInfoUpdateResponse {
     optional Uuid origin_request_id = 2;
 }
 
-message HostGetBVSVersion {}
+// @see https://github.com/blockjoy/stakejoy-api/blob/86ee17643d02af81221ee2fa6403fc34155fe087/src/models/mod.rs#L54
+message HostUpdateBVS {
+    SemVersion version = 1;
+}
 
-message HostUpdateBVS {}
-
+// @see https://github.com/blockjoy/stakejoy-api/blob/86ee17643d02af81221ee2fa6403fc34155fe087/src/models/mod.rs#L54
 message HostRestartBVS {}
 
+// @see https://github.com/blockjoy/stakejoy-api/blob/86ee17643d02af81221ee2fa6403fc34155fe087/src/models/mod.rs#L54
 message HostRemoveBVS {}
 
 message HostGenericCommand {
@@ -68,9 +71,8 @@ message HostCommand {
 
     oneof command {
         HostGenericCommand generic = 3;
-        HostGetBVSVersion get_bvs_version = 4;
-        HostUpdateBVS update_bvs= 5;
-        HostRestartBVS restart_bvs = 6;
-        HostRemoveBVS remove_bvs = 7;
+        HostUpdateBVS update_bvs= 4;
+        HostRestartBVS restart_bvs = 5;
+        HostRemoveBVS remove_bvs = 6;
     }
 }

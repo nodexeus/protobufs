@@ -49,3 +49,28 @@ message HostInfoUpdateResponse {
     repeated string messages = 1;
     optional Uuid origin_request_id = 2;
 }
+
+message HostGetBVSVersion {}
+
+message HostUpdateBVS {}
+
+message HostRestartBVS {}
+
+message HostRemoveBVS {}
+
+message HostGenericCommand {
+    repeated Parameter params = 1;
+}
+
+message HostCommand {
+    Uuid host_id = 1;
+    CommandMeta meta = 2;
+
+    oneof command {
+        HostGenericCommand generic = 3;
+        HostGetBVSVersion get_bvs_version = 4;
+        HostUpdateBVS update_bvs= 5;
+        HostRestartBVS restart_bvs = 6;
+        HostRemoveBVS remove_bvs = 7;
+    }
+}

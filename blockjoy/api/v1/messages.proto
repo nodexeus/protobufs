@@ -19,3 +19,7 @@ message Parameter {
     string name = 1;
     google.protobuf.Any value = 2;
 }
+
+message ContainerImage {
+    string url = 1;
+}

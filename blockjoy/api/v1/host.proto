@@ -51,7 +51,7 @@ message HostInfoUpdateResponse {
 
 // @see https://github.com/blockjoy/stakejoy-api/blob/86ee17643d02af81221ee2fa6403fc34155fe087/src/models/mod.rs#L54
 message HostUpdateBVS {
-    SemVersion version = 1;
+    string version = 1;
 }
 
 // @see https://github.com/blockjoy/stakejoy-api/blob/86ee17643d02af81221ee2fa6403fc34155fe087/src/models/mod.rs#L54

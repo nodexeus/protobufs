@@ -23,10 +23,3 @@ message Parameter {
 message ContainerImage {
     string url = 1;
 }
-
-message SemVersion {
-    int32 major = 1;
-    int32 minor = 2;
-    int32 patch = 3;
-    optional string label = 4;
-}

@@ -2,149 +2,54 @@ syntax = "proto3";
 
 package blockjoy.api.v1;
 
+import "chains/cosmos.proto";
+import "chains/helium.proto";
+import "chains/polkadot.proto";
+
 // Declare node type
 message NodeType {
-  // Generic node type to be used, when none of the already defined types match
-  message Generic {
-    enum Status {
-      option allow_alias = true;
-      // Reserving values up to 15 for possible later use
-      // Up to 15 to ensure only 1 byte is used for the most common values
-      reserved 7 to 15;
+  // States common to all node types among all chains
+  enum Status {
+    option allow_alias = true;
+    // Reserving values up to 15 for possible later use
+    // Up to 15 to ensure only 1 byte is used for the most common values
+    reserved 9 to 15;
 
-      // Common states
-      Undefined = 0;
-      Available = 1;
-      Running = 1;
-      Started = 1;
-      Starting = 2;
-      Stopping = 3;
-      Stopped = 4;
-      Upgrading = 5;
-      Upgraded = 6;
-      // States specific to Generic node type
-      // Node specific types need to start at value 16
-      Consensus = 16;
-      Syncing = 17;
-
-    }
-
-    Status status = 1;
+    UndefinedStatus = 0;
+    Creating = 1;
+    Available = 2;
+    Running = 2;
+    Started = 2;
+    Starting = 3;
+    Stopping = 4;
+    Stopped = 5;
+    Upgrading = 6;
+    Upgraded = 7;
+    Deleting = 8;
   }
 
-  message API {
-    // States specific to API node type
-    enum Status {
-      option allow_alias = true;
-      // Reserving values up to 15 for possible later use
-      // Up to 15 to ensure only 1 byte is used for the most common values
-      reserved 7 to 15;
-
-      // Common states
-      Undefined = 0;
-      Available = 1;
-      Running = 1;
-      Started = 1;
-      Starting = 2;
-      Stopping = 3;
-      Stopped = 4;
-      Upgrading = 5;
-      Upgraded = 6;
-      // States specific to Generic node type
-      // Node specific types need to start at value 16
-      Consensus = 16;
-      Syncing = 17;
-    }
-
-    Status status = 1;
+  enum SyncStatus {
+    UndefinedSyncStatus = 0;
+    Syncing = 1;
+    Synced = 2;
   }
 
-  message ETL {
-    // States specific to API node type
-    enum Status {
-      option allow_alias = true;
-      // Reserving values up to 15 for possible later use
-      // Up to 15 to ensure only 1 byte is used for the most common values
-      reserved 7 to 15;
-
-      // Common states
-      Undefined = 0;
-      Available = 1;
-      Running = 1;
-      Started = 1;
-      Starting = 2;
-      Stopping = 3;
-      Stopped = 4;
-      Upgrading = 5;
-      Upgraded = 6;
-      // States specific to API node type
-      // Node specific types need to start at value 16
-      Consensus = 16;
-      Syncing = 17;
-    }
-
-    Status status = 1;
+  enum Type {
+    UndefinedType = 0;
+    Generic = 1;
+    API = 2;
+    ETL = 3;
+    Miner = 4;
+    Validator = 5;
   }
 
-  message Validator {
-    // States specific to API node type
-    enum Status {
-      option allow_alias = true;
-      // Reserving values up to 15 for possible later use
-      // Up to 15 to ensure only 1 byte is used for the most common values
-      reserved 7 to 15;
+  Status status = 1;
+  SyncStatus sync_status = 2;
+  Type type = 3;
 
-      // Common states
-      Undefined = 0;
-      Available = 1;
-      Running = 1;
-      Started = 1;
-      Starting = 2;
-      Stopping = 3;
-      Stopped = 4;
-      Upgrading = 5;
-      Upgraded = 6;
-      // States specific to Validator node type
-      // Node specific types need to start at value 16
-      Consensus = 16;
-      Syncing = 17;
-    }
-
-    Status status = 1;
-  }
-
-  message Miner {
-    // States specific to API node type
-    enum Status {
-      option allow_alias = true;
-      // Reserving values up to 15 for possible later use
-      // Up to 15 to ensure only 1 byte is used for the most common values
-      reserved 7 to 15;
-
-      // Common states
-      Undefined = 0;
-      Available = 1;
-      Running = 1;
-      Started = 1;
-      Starting = 2;
-      Stopping = 3;
-      Stopped = 4;
-      Upgrading = 5;
-      Upgraded = 6;
-      // States specific to Miner node type
-      // Node specific types need to start at value 16
-      Consensus = 16;
-      Syncing = 17;
-    }
-
-    Status status = 1;
-  }
-
-  oneof type {
-    Generic generic = 1;
-    API api = 2;
-    ETL etl = 3;
-    Validator validator = 4;
-    Miner miner = 5;
+  oneof chain {
+    HeliumNode helium = 10;
+    PolkadotNode polkadot = 11;
+    CosmosNode cosmos = 12;
   }
 }

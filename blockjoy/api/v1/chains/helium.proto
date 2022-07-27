@@ -1,0 +1,77 @@
+syntax = "proto3";
+
+package blockjoy.api.v1;
+
+message HeliumNode {
+  message Generic {
+    enum Status {
+      // Reserving values up to 15 for possible later use
+      // Up to 15 to ensure only 1 byte is used for the most common values
+      reserved 2 to 15;
+
+      Undefined = 0;
+      Consensus = 1;
+    }
+
+    Status status = 1;
+  }
+
+  message API {
+    enum Status {
+      // Reserving values up to 15 for possible later use
+      // Up to 15 to ensure only 1 byte is used for the most common values
+      reserved 2 to 15;
+
+      Undefined = 0;
+      Consensus = 1;
+    }
+
+    Status status = 1;
+  }
+
+  message ETL {
+    enum Status {
+      // Reserving values up to 15 for possible later use
+      // Up to 15 to ensure only 1 byte is used for the most common values
+      reserved 2 to 15;
+
+      Undefined = 0;
+      Consensus = 1;
+    }
+
+    Status status = 1;
+  }
+
+  message Miner {
+    enum Status {
+      // Reserving values up to 15 for possible later use
+      // Up to 15 to ensure only 1 byte is used for the most common values
+      reserved 2 to 15;
+
+      Undefined = 0;
+      Consensus = 1;
+    }
+
+    Status status = 1;
+  }
+
+  message Validator {
+    enum Status {
+      // Reserving values up to 15 for possible later use
+      // Up to 15 to ensure only 1 byte is used for the most common values
+      reserved 2 to 15;
+
+      Undefined = 0;
+      Consensus = 1;
+    }
+
+    Status status = 1;
+  }
+
+  oneof type {
+    API api = 1;
+    ETL etl = 2;
+    Validator validator = 3;
+    Miner miner = 4;
+  }
+}

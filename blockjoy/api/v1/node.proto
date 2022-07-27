@@ -14,10 +14,6 @@ message NodeInfo {
     NodeType node_type = 8;
 }
 
-message ContainerImage {
-    string url = 1;
-}
-
 message NodeStart {}
 
 message NodeStop {}
@@ -50,13 +46,13 @@ message NodeCommand {
     CommandMeta meta = 2;
 
     oneof command {
-        NodeStart start = 3;
-        NodeStop stop = 4;
-        NodeRestart restart = 5;
-        NodeUpgrade upgrade = 6;
-        NodeInfoUpdate update = 7;
-        NodeInfoGet info_get = 8;
-        NodeGenericCommand generic = 9;
+        NodeGenericCommand generic = 3;
+        NodeStart start = 4;
+        NodeStop stop = 5;
+        NodeRestart restart = 6;
+        NodeUpgrade upgrade = 7;
+        NodeInfoUpdate update = 8;
+        NodeInfoGet info_get = 9;
         NodeCreate create = 10;
         NodeDelete delete = 11;
     };

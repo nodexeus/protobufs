@@ -9,7 +9,7 @@ import "command.proto";
 message Command {
     oneof type {
         NodeCommand node = 1;
-        // HostCommand host = 2;
+        HostCommand host = 2;
     }
 }
 

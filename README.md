@@ -43,6 +43,10 @@ Possible commands are (defined in [node.proto](https://github.com/blockjoy/api-p
 - **NodeCreate:** Create a node
 - **NodeDelete:** Delete a node
 - **NodeGenericCommand:** Generic command used for building yet unknown commands (use with caution! Try to create a dedicated command instead if applicable)
+- **HostGenericCommand:** Generic host command (same here: use with caution!)
+- **HostUpdateBVS:** Update BVS
+- **HostRestartBVS:** Restart BVS
+- **HostRemoveBVS:** Remove BVS from host
 
 
 All commands are wrapped inside a [NodeCommand](https://github.com/blockjoy/api-proto/blob/63e00e0fdc527b737da2b4b8e3d051dc89e0d148/blockjoy/api/v1/node.proto#L75) message, containing the node ID and corresponding meta data.

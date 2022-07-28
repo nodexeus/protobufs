@@ -2,14 +2,10 @@ syntax = "proto3";
 
 package blockjoy.api.v1;
 
-import "chains/cosmos.proto";
-import "chains/helium.proto";
-import "chains/polkadot.proto";
-
 // Declare node type
 message NodeType {
-  // States common to all node types among all chains
-  enum Status {
+  // Describe the status of the node itself
+  enum NodeStatus {
     option allow_alias = true;
     // Reserving values up to 15 for possible later use
     // Up to 15 to ensure only 1 byte is used for the most common values
@@ -28,12 +24,46 @@ message NodeType {
     Deleting = 8;
   }
 
+  // Describe the node's syncing status
   enum SyncStatus {
+    // Reserving values up to 15 for possible later use
+    // Up to 15 to ensure only 1 byte is used for the most common values
+    reserved 3 to 15;
+
     UndefinedSyncStatus = 0;
     Syncing = 1;
     Synced = 2;
   }
 
+  // Describe the node's chain related status
+  enum ChainStatus {
+    UndefinedChainStatus = 0;
+    Broadcasting = 1;
+    Cancelled = 2;
+    Consensus = 3;
+    Delegating = 4;
+    Delinquent = 5;
+    Disabled = 6;
+    Earning = 7;
+    Electing = 8;
+    Elected = 9;
+    Exporting = 10;
+    Ingesting = 11;
+    Installing = 12;
+    Migrating = 13;
+    Mining = 14;
+    Minting = 15;
+    Processing = 16;
+    Relaying = 17;
+    Removed = 18;
+    Removing = 19;
+    Snapshotting = 20;
+    Staked = 21;
+    Staking = 22;
+    Validating = 23;
+  }
+
+  // Define the type of node
   enum Type {
     UndefinedType = 0;
     Generic = 1;
@@ -43,13 +73,8 @@ message NodeType {
     Validator = 5;
   }
 
-  Status status = 1;
+  NodeStatus node_status = 1;
   SyncStatus sync_status = 2;
-  Type type = 3;
-
-  oneof chain {
-    HeliumNode helium = 10;
-    PolkadotNode polkadot = 11;
-    CosmosNode cosmos = 12;
-  }
+  ChainStatus chain_status = 3;
+  Type type = 4;
 }

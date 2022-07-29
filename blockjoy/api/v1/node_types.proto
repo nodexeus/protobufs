@@ -66,11 +66,13 @@ message NodeType {
   // Define the type of node
   enum Type {
     UndefinedType = 0;
-    Generic = 1;
+    Node = 1;
     API = 2;
     ETL = 3;
     Miner = 4;
     Validator = 5;
+    Oracle = 6;
+    Relay = 7;
   }
 
   NodeStatus node_status = 1;

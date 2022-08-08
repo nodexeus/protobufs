@@ -13,15 +13,14 @@ message NodeType {
 
     UndefinedStatus = 0;
     Creating = 1;
-    Available = 2;
     Running = 2;
-    Started = 2;
     Starting = 3;
     Stopping = 4;
     Stopped = 5;
     Upgrading = 6;
     Upgraded = 7;
     Deleting = 8;
+    Deleted = 9;
   }
 
   // Describe the node's syncing status

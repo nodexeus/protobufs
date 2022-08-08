@@ -73,7 +73,7 @@ graph TD;
     Running --> Stopping --> Stopped;
     Running --> Upgrading --> Upgraded --> Running;
     Stopped --> Deleting --> Deleted;
-    Running --> Stopping --> Stopped --> Snapshotting --> Starting;
+    Stopped --> Snapshotting --> Starting;
 ```
 
 ## Compile Rust code

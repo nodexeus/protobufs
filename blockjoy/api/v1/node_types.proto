@@ -5,13 +5,18 @@ package blockjoy.api.v1;
 // Declare node type
 message NodeType {
   // Describe the status of the node itself
-  enum NodeStatus {
-    option allow_alias = true;
+  message NodeStatus {
+    ChainStatus chain_status = 1;
+    ContainerStatus container_status = 2;
+  }
+
+  // Possible states the container is described with
+  enum ContainerStatus {
     // Reserving values up to 15 for possible later use
     // Up to 15 to ensure only 1 byte is used for the most common values
-    reserved 9 to 15;
+    reserved 12 to 15;
 
-    UndefinedStatus = 0;
+    UndefinedContainerStatus = 0;
     Creating = 1;
     Running = 2;
     Starting = 3;
@@ -21,6 +26,8 @@ message NodeType {
     Upgraded = 7;
     Deleting = 8;
     Deleted = 9;
+    Installing = 10;
+    Snapshotting = 11;
   }
 
   // Describe the node's syncing status
@@ -35,31 +42,34 @@ message NodeType {
   }
 
   // Describe the node's chain related status
+  // Generic, NOT chain specific states. These states are used to describe the
+  // node's states as seen by the blockchain. Babel is responsible for mapping chain specific
+  // states to the one in here
   enum ChainStatus {
     UndefinedChainStatus = 0;
-    Broadcasting = 1;
-    Cancelled = 2;
-    Consensus = 3;
-    Delegating = 4;
-    Delinquent = 5;
-    Disabled = 6;
-    Earning = 7;
-    Electing = 8;
-    Elected = 9;
-    Exporting = 10;
-    Ingesting = 11;
-    Installing = 12;
-    Migrating = 13;
-    Mining = 14;
-    Minting = 15;
-    Processing = 16;
-    Relaying = 17;
-    Removed = 18;
-    Removing = 19;
-    Snapshotting = 20;
-    Staked = 21;
-    Staking = 22;
-    Validating = 23;
+    // Staking states
+    Follower = 1;
+    Staked = 2;
+    Staking = 3;
+    Validating = 4;
+    Consensus = 5;
+    // General chain states
+    Broadcasting = 6;
+    Cancelled = 7;
+    Delegating = 8;
+    Delinquent = 9;
+    Disabled = 10;
+    Earning = 11;
+    Electing = 12;
+    Elected = 13;
+    Exporting = 14;
+    Ingesting = 15;
+    Mining = 16;
+    Minting = 17;
+    Processing = 18;
+    Relaying = 19;
+    Removed = 20;
+    Removing = 21;
   }
 
   // Define the type of node
@@ -76,6 +86,5 @@ message NodeType {
 
   NodeStatus node_status = 1;
   SyncStatus sync_status = 2;
-  ChainStatus chain_status = 3;
-  Type type = 4;
+  Type type = 3;
 }

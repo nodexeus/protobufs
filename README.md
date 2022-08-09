@@ -63,15 +63,17 @@ Info updates will be sent from BV to API. Possible updates:
 - CommandInfo
 
 
-#### Nodes state flow
+#### Container states flow
 
 ```mermaid
 graph TD;
+    UndefinedContainerStatus --> Installing --> Creating;
     Creating --> Stopped;
     Stopped --> Starting --> Running;
     Running --> Stopping --> Stopped;
     Running --> Upgrading --> Upgraded --> Running;
     Stopped --> Deleting --> Deleted;
+    Stopped --> Snapshotting --> Starting;
 ```
 
 ## Compile Rust code

@@ -53,8 +53,8 @@ message NodeType {
   // Generic, NOT chain specific states. These states are used to describe the
   // node's states as seen by the blockchain. Babel is responsible for mapping chain specific
   // states to the one in here
-  enum ChainStatus {
-    UndefinedChainStatus = 0;
+  enum ApplicationStatus {
+    UndefinedApplicationStatus = 0;
     // General chain states
     Broadcasting = 1;
     Cancelled = 2;
@@ -86,7 +86,7 @@ message NodeType {
     Relay = 7;
   }
 
-  ChainStatus chain_status = 1;
+  ApplicationStatus chain_status = 1;
   ContainerStatus container_status = 2;
   SyncStatus sync_status = 3;
   StakingStatus staking_status = 4;

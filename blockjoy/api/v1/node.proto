@@ -89,7 +89,7 @@ message NodeInfo {
         Removing = 16;
     }
 
-    Uuid node_id = 1;
+    Uuid id = 1;
     optional string name = 2;
     optional string ip = 3;
     optional int64 block_height = 6;
@@ -130,7 +130,7 @@ message NodeCreate {
 message NodeDelete {}
 
 message NodeCommand {
-    Uuid node_id = 1;
+    Uuid id = 1;
     CommandMeta meta = 2;
 
     oneof command {

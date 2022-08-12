@@ -86,9 +86,9 @@ message NodeType {
     Relay = 7;
   }
 
-  ApplicationStatus app_status = 1;
-  ContainerStatus container_status = 2;
-  SyncStatus sync_status = 3;
-  StakingStatus staking_status = 4;
-  Type type = 5;
+  optional ApplicationStatus app_status = 1;
+  optional ContainerStatus container_status = 2;
+  optional SyncStatus sync_status = 3;
+  optional StakingStatus staking_status = 4;
+  optional Type type = 5;
 }

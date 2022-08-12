@@ -68,7 +68,7 @@ message HostGenericCommand {
 message HostInfoGet {}
 
 message HostCommand {
-    Uuid host_id = 1;
+    Uuid id = 1;
     CommandMeta meta = 2;
 
     oneof command {

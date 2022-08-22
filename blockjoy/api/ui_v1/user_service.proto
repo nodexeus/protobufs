@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+package blockjoy.api.ui_v1;
+
+/* TODO: maybe move auth service stuff in here? */
+service UserService {
+}

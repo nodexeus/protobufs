@@ -1,0 +1,78 @@
+syntax = "proto3";
+
+package blockjoy.api.ui_v1;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/any.proto";
+
+/*
+ * UUID representation
+ * As there's no specific UUID type, we use this one to indicate the value of the field
+ * will be some UUID
+ */
+message Uuid {
+  string value = 1;
+}
+
+/*
+ * API token representation
+ * As there's no specific token type, we use this one to indicate the value of the field
+ * will be an API token
+ */
+message ApiToken {
+  string value = 1;
+}
+
+/*
+ * Pagination information, used in the response type
+ */
+message Pagination {
+  int32 count = 1;
+  int32 max = 2;
+}
+
+/* General request meta data */
+message RequestMeta {
+  /* Request ID. Should be generated when constructing the request */
+  Uuid id = 1;
+  /* The user issuing this request, identified by it's API token */
+  optional ApiToken token = 2;
+  /* Optionally pass in an array of field names expected to be returned. */
+  repeated string fields = 3;
+  /* Optionally pass in a number of entities to be returned. May not be bigger than MAX_COUNT */
+  optional int32 count = 4;
+}
+
+/* General response meta data */
+message ResponseMeta {
+  /* Response status codes */
+  enum Status {
+    reserved 3 to 15;
+
+    UnknownResponse = 0;
+    Success = 1;
+    GeneralError = 2;
+  }
+
+  /* Response status code */
+  Status status = 1;
+  /* Request ID which generated this response */
+  Uuid origin_request_id = 2;
+  /* Optional array of additional messages */
+  repeated string messages = 3;
+  /* Optional pagination information */
+  optional Pagination pagination = 4;
+}
+
+/*
+ * TODO: Single host representation.
+ */
+message Host {
+  Uuid id = 1;
+  repeated Node nodes = 2;
+}
+
+/* Blockchain node representation */
+message Node {
+  Uuid id = 1;
+}

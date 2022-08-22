@@ -6,14 +6,17 @@ import "common.proto";
 
 message GetHostProvisionRequest {
   RequestMeta meta = 1;
+  Uuid id = 2;
 }
 
 message GetHostProvisionResponse {
   ResponseMeta meta = 1;
+  HostProvision host_provision = 2;
 }
 
 message CreateHostProvisionRequest {
   RequestMeta meta = 1;
+  HostProvision host_provision = 2;
 }
 
 message CreateHostProvisionResponse {

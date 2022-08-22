@@ -4,10 +4,6 @@ package blockjoy.api.ui_v1;
 
 import "common.proto";
 
-message Organization {
-  optional Uuid id = 1;
-}
-
 message GetOrganizationsRequest {
   RequestMeta meta = 1;
 }

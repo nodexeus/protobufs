@@ -2,6 +2,30 @@ syntax = "proto3";
 
 package blockjoy.api.ui_v1;
 
-/* TODO: maybe move auth service stuff in here? */
+import "common.proto";
+
+message GetUserRequest {
+  RequestMeta meta = 1;
+}
+
+message GetUserResponse {
+  ResponseMeta meta = 1;
+  User user = 2;
+}
+
+message CreateUserRequest {
+  RequestMeta meta = 1;
+  User user = 2;
+}
+
+message CreateUserResponse {
+  ResponseMeta meta = 1;
+}
+
+/* User related services */
 service UserService {
+  /* Retrieve a single user */
+  rpc Get(GetUserRequest) returns (GetUserResponse) {}
+  /* Create a single user */
+  rpc Create(CreateUserRequest) returns (CreateUserResponse) {}
 }

@@ -4,11 +4,6 @@ package blockjoy.api.ui_v1;
 
 import "common.proto";
 
-message InfoUpdate {
-  optional Host host = 1;
-  optional Node node = 2;
-}
-
 message GetUpdatesRequest {
   RequestMeta meta = 1;
 }

@@ -6,6 +6,7 @@ import "common.proto";
 
 message CreateNodeRequest {
   RequestMeta meta = 1;
+  Node node = 2;
 }
 
 message CreateNodeResponse {
@@ -14,14 +15,17 @@ message CreateNodeResponse {
 
 message GetNodeRequest {
   RequestMeta meta = 1;
+  Uuid id = 2;
 }
 
 message GetNodeResponse {
   ResponseMeta meta = 1;
+  Node node = 2;
 }
 
 message UpdateNodeRequest {
   RequestMeta meta = 1;
+  Node node = 2;
 }
 
 message UpdateNodeResponse {

@@ -18,6 +18,7 @@ message GetHostsResponse {
 
 message CreateHostRequest {
   RequestMeta meta = 1;
+  Host host = 2;
 }
 
 message CreateHostResponse {
@@ -26,6 +27,7 @@ message CreateHostResponse {
 
 message UpdateHostRequest {
   RequestMeta meta = 1;
+  Host host = 2;
 }
 
 message UpdateHostResponse {
@@ -34,6 +36,7 @@ message UpdateHostResponse {
 
 message DeleteHostRequest {
   RequestMeta meta = 1;
+  Uuid id = 2;
 }
 
 message DeleteHostResponse {

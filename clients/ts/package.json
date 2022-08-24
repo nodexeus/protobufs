@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "grpc": "protoc -I=../../blockjoy/api/ui_v1 authentication_service.proto common.proto --grpc-web_out=import_style=typescript,mode=grpcwebtext:./ts_out"
+    "grpc": "protoc -I=../../blockjoy/api/ui_v1 authentication_service.proto common.proto --js_out=import_style=commonjs,binary:./js_out --grpc-web_out=import_style=typescript,mode=grpcwebtext:./ts_out"
   },
   "author": "",
   "license": "ISC",

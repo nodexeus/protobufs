@@ -1,0 +1,16 @@
+{
+  "name": "bv_ts_client",
+  "version": "0.1.0",
+  "description": "Stub client for blockvisor gRPC",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "grpc": "protoc -I=../../blockjoy/api/ui_v1 authentication_service.proto common.proto --grpc-web_out=import_style=typescript,mode=grpcwebtext:./ts_out"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "grpc-web": "^1.3.1",
+    "uuid": "^8.3.2"
+  }
+}

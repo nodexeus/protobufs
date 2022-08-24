@@ -106,7 +106,7 @@ message Host {
 
 /* HostProvision entity */
 message HostProvision {
-  optional Uuid id = 1;
+  optional string id = 1;
   optional Uuid org_id = 2;
   optional Uuid host_id = 3;
   optional google.protobuf.Timestamp created_at = 4;

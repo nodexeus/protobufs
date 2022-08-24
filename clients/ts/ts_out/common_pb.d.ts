@@ -336,8 +336,8 @@ export namespace Host {
 }
 
 export class HostProvision extends jspb.Message {
-  getId(): Uuid | undefined;
-  setId(value?: Uuid): HostProvision;
+  getId(): string;
+  setId(value: string): HostProvision;
   hasId(): boolean;
   clearId(): HostProvision;
 
@@ -376,7 +376,7 @@ export class HostProvision extends jspb.Message {
 
 export namespace HostProvision {
   export type AsObject = {
-    id?: Uuid.AsObject,
+    id?: string,
     orgId?: Uuid.AsObject,
     hostId?: Uuid.AsObject,
     createdAt?: google_protobuf_timestamp_pb.Timestamp.AsObject,

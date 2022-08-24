@@ -2198,7 +2198,7 @@ proto.blockjoy.api.ui_v1.HostProvision.prototype.toObject = function(opt_include
  */
 proto.blockjoy.api.ui_v1.HostProvision.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: (f = msg.getId()) && proto.blockjoy.api.ui_v1.Uuid.toObject(includeInstance, f),
+    id: jspb.Message.getFieldWithDefault(msg, 1, ""),
     orgId: (f = msg.getOrgId()) && proto.blockjoy.api.ui_v1.Uuid.toObject(includeInstance, f),
     hostId: (f = msg.getHostId()) && proto.blockjoy.api.ui_v1.Uuid.toObject(includeInstance, f),
     createdAt: (f = msg.getCreatedAt()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
@@ -2241,8 +2241,7 @@ proto.blockjoy.api.ui_v1.HostProvision.deserializeBinaryFromReader = function(ms
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = new proto.blockjoy.api.ui_v1.Uuid;
-      reader.readMessage(value,proto.blockjoy.api.ui_v1.Uuid.deserializeBinaryFromReader);
+      var value = /** @type {string} */ (reader.readString());
       msg.setId(value);
       break;
     case 2:
@@ -2298,12 +2297,11 @@ proto.blockjoy.api.ui_v1.HostProvision.prototype.serializeBinary = function() {
  */
 proto.blockjoy.api.ui_v1.HostProvision.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getId();
+  f = /** @type {string} */ (jspb.Message.getField(message, 1));
   if (f != null) {
-    writer.writeMessage(
+    writer.writeString(
       1,
-      f,
-      proto.blockjoy.api.ui_v1.Uuid.serializeBinaryToWriter
+      f
     );
   }
   f = message.getOrgId();
@@ -2349,30 +2347,29 @@ proto.blockjoy.api.ui_v1.HostProvision.serializeBinaryToWriter = function(messag
 
 
 /**
- * optional Uuid id = 1;
- * @return {?proto.blockjoy.api.ui_v1.Uuid}
+ * optional string id = 1;
+ * @return {string}
  */
 proto.blockjoy.api.ui_v1.HostProvision.prototype.getId = function() {
-  return /** @type{?proto.blockjoy.api.ui_v1.Uuid} */ (
-    jspb.Message.getWrapperField(this, proto.blockjoy.api.ui_v1.Uuid, 1));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
 /**
- * @param {?proto.blockjoy.api.ui_v1.Uuid|undefined} value
+ * @param {string} value
  * @return {!proto.blockjoy.api.ui_v1.HostProvision} returns this
-*/
+ */
 proto.blockjoy.api.ui_v1.HostProvision.prototype.setId = function(value) {
-  return jspb.Message.setWrapperField(this, 1, value);
+  return jspb.Message.setField(this, 1, value);
 };
 
 
 /**
- * Clears the message field making it undefined.
+ * Clears the field making it undefined.
  * @return {!proto.blockjoy.api.ui_v1.HostProvision} returns this
  */
 proto.blockjoy.api.ui_v1.HostProvision.prototype.clearId = function() {
-  return this.setId(undefined);
+  return jspb.Message.setField(this, 1, undefined);
 };
 
 

@@ -210,3 +210,23 @@ message Bill {
   optional float gross_amount = 8;
   optional string pdf_url = 9;
 }
+
+/* Single KPI value */
+message KPI {
+  enum Name {
+    Unknown = 0;
+    Nodes = 1;
+    Hosts = 2;
+    Online = 3;
+    Offline = 4;
+  }
+
+  Name name = 1;
+  google.protobuf.Any value = 2;
+}
+
+/* UI configuration */
+message UserConfigurationParameter {
+  string name = 1;
+  google.protobuf.Any value = 2;
+}

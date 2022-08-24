@@ -22,10 +22,32 @@ message CreateUserResponse {
   ResponseMeta meta = 1;
 }
 
+message UpsertConfigurationRequest {
+  RequestMeta meta = 1;
+  repeated UserConfigurationParameter params = 2;
+}
+
+message UpsertConfigurationResponse {
+  ResponseMeta meta = 1;
+}
+
+message GetConfigurationRequest {
+  RequestMeta meta = 1;
+}
+
+message GetConfigurationResponse {
+  ResponseMeta meta = 1;
+  repeated UserConfigurationParameter params = 2;
+}
+
 /* User related services */
 service UserService {
   /* Retrieve a single user */
   rpc Get(GetUserRequest) returns (GetUserResponse) {}
   /* Create a single user */
   rpc Create(CreateUserRequest) returns (CreateUserResponse) {}
+  /* Create/update configuration parameters */
+  rpc UpsertConfiguration(UpsertConfigurationRequest) returns (UpsertConfigurationResponse) {}
+  /* Retrieve all configuration parameters */
+  rpc GetConfiguration(GetConfigurationRequest) returns (GetConfigurationResponse) {}
 }

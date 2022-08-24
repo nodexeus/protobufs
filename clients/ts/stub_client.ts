@@ -64,7 +64,20 @@ export class GrpcClient {
     private token: string;
 
     constructor(host: string) {
-        /* Initialize all gRPC clients */
+        // TODO: uncomment when backend services are available
+        // this.initClients(host);
+
+        this.token = "";
+    }
+
+    setTokenValue(token: string) {
+        this.token = token;
+    }
+
+    /**
+     * Initialize all gRPC clients
+     */
+    private initClients(host: string) {
         this.authentication = new AuthenticationServiceClient(host, null, null);
         this.billing = new BillingServiceClient(host, null, null);
         this.dashboard = new DashboardServiceClient(host, null, null);
@@ -74,12 +87,6 @@ export class GrpcClient {
         this.organization = new OrganizationServiceClient(host, null, null);
         this.update = new UpdateServiceClient(host, null, null);
         this.user = new UserServiceClient(host, null, null);
-
-        this.token = "";
-    }
-
-    setTokenValue(token: string) {
-        this.token = token;
     }
 
     getApiToken() {

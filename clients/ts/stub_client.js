@@ -29,7 +29,17 @@ var user_service_pb_1 = require("./ts_out/user_service_pb");
 var update_service_pb_1 = require("./ts_out/update_service_pb");
 var GrpcClient = /** @class */ (function () {
     function GrpcClient(host) {
-        /* Initialize all gRPC clients */
+        // TODO: uncomment when backend services are available
+        // this.initClients(host);
+        this.token = "";
+    }
+    GrpcClient.prototype.setTokenValue = function (token) {
+        this.token = token;
+    };
+    /**
+     * Initialize all gRPC clients
+     */
+    GrpcClient.prototype.initClients = function (host) {
         this.authentication = new Authentication_serviceServiceClientPb_1.AuthenticationServiceClient(host, null, null);
         this.billing = new Billing_serviceServiceClientPb_1.BillingServiceClient(host, null, null);
         this.dashboard = new Dashboard_serviceServiceClientPb_1.DashboardServiceClient(host, null, null);
@@ -39,10 +49,6 @@ var GrpcClient = /** @class */ (function () {
         this.organization = new Organization_serviceServiceClientPb_1.OrganizationServiceClient(host, null, null);
         this.update = new Update_serviceServiceClientPb_1.UpdateServiceClient(host, null, null);
         this.user = new User_serviceServiceClientPb_1.UserServiceClient(host, null, null);
-        this.token = "";
-    }
-    GrpcClient.prototype.setTokenValue = function (token) {
-        this.token = token;
     };
     GrpcClient.prototype.getApiToken = function () {
         var api_token = new common_pb_1.ApiToken();

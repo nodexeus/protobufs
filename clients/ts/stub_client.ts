@@ -1,5 +1,5 @@
-import {AuthenticationServiceClient} from "./ts_out/Authentication_serviceServiceClientPb";
-import {LoginUserResponse, RefreshTokenResponse} from "./ts_out/authentication_service_pb";
+import {AuthenticationServiceClient} from "./out/Authentication_serviceServiceClientPb";
+import {LoginUserResponse, RefreshTokenResponse} from "./out/authentication_service_pb";
 import {
     ApiToken,
     Bill,
@@ -11,44 +11,44 @@ import {
     Organization,
     ResponseMeta,
     User
-} from "./ts_out/common_pb";
+} from "./out/common_pb";
 import {v4 as uuidv4} from 'uuid';
-import {BillingServiceClient} from "./ts_out/Billing_serviceServiceClientPb";
-import {DashboardServiceClient} from "./ts_out/Dashboard_serviceServiceClientPb";
-import {HostServiceClient} from "./ts_out/Fe_host_serviceServiceClientPb";
-import {HostProvisionServiceClient} from "./ts_out/Host_provision_serviceServiceClientPb";
-import {NodeServiceClient} from "./ts_out/Node_serviceServiceClientPb";
-import {OrganizationServiceClient} from "./ts_out/Organization_serviceServiceClientPb";
-import {UpdateServiceClient} from "./ts_out/Update_serviceServiceClientPb";
-import {UserServiceClient} from "./ts_out/User_serviceServiceClientPb";
-import {CreateBillResponse} from "./ts_out/billing_service_pb";
-import * as google_protobuf_timestamp_pb from 'google-protobuf/google/protobuf/timestamp_pb';
-import * as google_protobuf_any_pb from 'google-protobuf/google/protobuf/any_pb';
-import {DashboardKpiResponse} from "./ts_out/dashboard_service_pb";
+import {BillingServiceClient} from "./out/Billing_serviceServiceClientPb";
+import {DashboardServiceClient} from "./out/Dashboard_serviceServiceClientPb";
+import {HostServiceClient} from "./out/Fe_host_serviceServiceClientPb";
+import {HostProvisionServiceClient} from "./out/Host_provision_serviceServiceClientPb";
+import {NodeServiceClient} from "./out/Node_serviceServiceClientPb";
+import {OrganizationServiceClient} from "./out/Organization_serviceServiceClientPb";
+import {UpdateServiceClient} from "./out/Update_serviceServiceClientPb";
+import {UserServiceClient} from "./out/User_serviceServiceClientPb";
+import {CreateBillResponse} from "./out/billing_service_pb";
+import * as google_protobuf_timestamp_pb from "google-protobuf/google/protobuf/timestamp_pb";
+import * as google_protobuf_any_pb from "google-protobuf/google/protobuf/any_pb";
+import {DashboardKpiResponse} from "./out/dashboard_service_pb";
 import {
     CreateHostResponse,
     DeleteHostResponse,
     GetHostsResponse,
     UpdateHostResponse
-} from "./ts_out/fe_host_service_pb";
+} from "./out/fe_host_service_pb";
 import Name = KPI.Name;
 import HostStatus = Host.HostStatus;
 import NodeType = Node.NodeType;
 import NodeStatus = Node.NodeStatus;
-import {CreateHostProvisionResponse, GetHostProvisionResponse} from "./ts_out/host_provision_service_pb";
-import {CreateNodeResponse, GetNodeResponse, UpdateNodeResponse} from "./ts_out/node_service_pb";
+import {CreateHostProvisionResponse, GetHostProvisionResponse} from "./out/host_provision_service_pb";
+import {CreateNodeResponse, GetNodeResponse, UpdateNodeResponse} from "./out/node_service_pb";
 import {
     CreateOrganizationResponse,
     DeleteOrganizationResponse, GetOrganizationsResponse,
     UpdateOrganizationResponse
-} from "./ts_out/organization_service_pb";
+} from "./out/organization_service_pb";
 import {
     CreateUserResponse,
     GetConfigurationResponse,
     GetUserResponse,
     UpsertConfigurationResponse
-} from "./ts_out/user_service_pb";
-import {GetUpdatesResponse} from "./ts_out/update_service_pb";
+} from "./out/user_service_pb";
+import {GetUpdatesResponse} from "./out/update_service_pb";
 
 export class GrpcClient {
     private authentication: AuthenticationServiceClient;
@@ -268,7 +268,7 @@ export class GrpcClient {
     getNode(): GetNodeResponse {
         let response = new GetNodeResponse();
         response.setMeta(this.getDummyMeta());
-        response.setNode(this.getDummyNode());
+        response.setNodesList([this.getDummyNode()]);
 
         return response
     }

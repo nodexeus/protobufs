@@ -1,32 +1,32 @@
 "use strict";
 exports.__esModule = true;
 exports.GrpcClient = void 0;
-var Authentication_serviceServiceClientPb_1 = require("./ts_out/Authentication_serviceServiceClientPb");
-var authentication_service_pb_1 = require("./ts_out/authentication_service_pb");
-var common_pb_1 = require("./ts_out/common_pb");
+var Authentication_serviceServiceClientPb_1 = require("./out/Authentication_serviceServiceClientPb");
+var authentication_service_pb_1 = require("./out/authentication_service_pb");
+var common_pb_1 = require("./out/common_pb");
 var uuid_1 = require("uuid");
-var Billing_serviceServiceClientPb_1 = require("./ts_out/Billing_serviceServiceClientPb");
-var Dashboard_serviceServiceClientPb_1 = require("./ts_out/Dashboard_serviceServiceClientPb");
-var Fe_host_serviceServiceClientPb_1 = require("./ts_out/Fe_host_serviceServiceClientPb");
-var Host_provision_serviceServiceClientPb_1 = require("./ts_out/Host_provision_serviceServiceClientPb");
-var Node_serviceServiceClientPb_1 = require("./ts_out/Node_serviceServiceClientPb");
-var Organization_serviceServiceClientPb_1 = require("./ts_out/Organization_serviceServiceClientPb");
-var Update_serviceServiceClientPb_1 = require("./ts_out/Update_serviceServiceClientPb");
-var User_serviceServiceClientPb_1 = require("./ts_out/User_serviceServiceClientPb");
-var billing_service_pb_1 = require("./ts_out/billing_service_pb");
+var Billing_serviceServiceClientPb_1 = require("./out/Billing_serviceServiceClientPb");
+var Dashboard_serviceServiceClientPb_1 = require("./out/Dashboard_serviceServiceClientPb");
+var Fe_host_serviceServiceClientPb_1 = require("./out/Fe_host_serviceServiceClientPb");
+var Host_provision_serviceServiceClientPb_1 = require("./out/Host_provision_serviceServiceClientPb");
+var Node_serviceServiceClientPb_1 = require("./out/Node_serviceServiceClientPb");
+var Organization_serviceServiceClientPb_1 = require("./out/Organization_serviceServiceClientPb");
+var Update_serviceServiceClientPb_1 = require("./out/Update_serviceServiceClientPb");
+var User_serviceServiceClientPb_1 = require("./out/User_serviceServiceClientPb");
+var billing_service_pb_1 = require("./out/billing_service_pb");
 var google_protobuf_timestamp_pb = require("google-protobuf/google/protobuf/timestamp_pb");
 var google_protobuf_any_pb = require("google-protobuf/google/protobuf/any_pb");
-var dashboard_service_pb_1 = require("./ts_out/dashboard_service_pb");
-var fe_host_service_pb_1 = require("./ts_out/fe_host_service_pb");
+var dashboard_service_pb_1 = require("./out/dashboard_service_pb");
+var fe_host_service_pb_1 = require("./out/fe_host_service_pb");
 var Name = common_pb_1.KPI.Name;
 var HostStatus = common_pb_1.Host.HostStatus;
 var NodeType = common_pb_1.Node.NodeType;
 var NodeStatus = common_pb_1.Node.NodeStatus;
-var host_provision_service_pb_1 = require("./ts_out/host_provision_service_pb");
-var node_service_pb_1 = require("./ts_out/node_service_pb");
-var organization_service_pb_1 = require("./ts_out/organization_service_pb");
-var user_service_pb_1 = require("./ts_out/user_service_pb");
-var update_service_pb_1 = require("./ts_out/update_service_pb");
+var host_provision_service_pb_1 = require("./out/host_provision_service_pb");
+var node_service_pb_1 = require("./out/node_service_pb");
+var organization_service_pb_1 = require("./out/organization_service_pb");
+var user_service_pb_1 = require("./out/user_service_pb");
+var update_service_pb_1 = require("./out/update_service_pb");
 var GrpcClient = /** @class */ (function () {
     function GrpcClient(host) {
         // TODO: uncomment when backend services are available
@@ -189,7 +189,7 @@ var GrpcClient = /** @class */ (function () {
     GrpcClient.prototype.getNode = function () {
         var response = new node_service_pb_1.GetNodeResponse();
         response.setMeta(this.getDummyMeta());
-        response.setNode(this.getDummyNode());
+        response.setNodesList([this.getDummyNode()]);
         return response;
     };
     GrpcClient.prototype.createNode = function () {

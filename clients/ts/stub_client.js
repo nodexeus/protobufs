@@ -96,7 +96,7 @@ var GrpcClient = /** @class */ (function () {
         host.setIp("127.0.0.1");
         host.addNodes(this.getDummyNode());
         host.setStatus(HostStatus.CREATING);
-        host.setCreatedAt(new google_protobuf_timestamp_pb.Timestamp());
+        host.setCreatedAt(this.getDummyTimestamp());
         return host;
     };
     GrpcClient.prototype.getDummyTimestamp = function () {
@@ -123,7 +123,7 @@ var GrpcClient = /** @class */ (function () {
         var bill = new common_pb_1.Bill();
         bill.setId((0, uuid_1.v4)());
         bill.setPdfUrl("/some/url.pdf");
-        bill.setCreatedAt(new google_protobuf_timestamp_pb.Timestamp());
+        bill.setCreatedAt(this.getDummyTimestamp());
         bill.setTaxNumber("tax-number");
         bill.setReceiverName("Max Mustermann");
         bill.setReceiverAddress("Bondstreet 1a, 12312 Djibouti");
@@ -173,8 +173,8 @@ var GrpcClient = /** @class */ (function () {
         provision.setOrgId((0, uuid_1.v4)());
         provision.setHostId((0, uuid_1.v4)());
         provision.setInstallCmd("install cmd");
-        provision.setCreatedAt(new google_protobuf_timestamp_pb.Timestamp());
-        provision.setClaimedAt(new google_protobuf_timestamp_pb.Timestamp());
+        provision.setCreatedAt(this.getDummyTimestamp());
+        provision.setClaimedAt(this.getDummyTimestamp());
         var response = new host_provision_service_pb_1.GetHostProvisionResponse();
         response.setMeta(this.getDummyMeta());
         response.setHostProvision(provision);
@@ -209,8 +209,8 @@ var GrpcClient = /** @class */ (function () {
         organization.setName("ThisGroup");
         organization.setPersonal(true);
         organization.setMemberCount(1);
-        organization.setCreatedAt(new google_protobuf_timestamp_pb.Timestamp());
-        organization.setUpdatedAt(new google_protobuf_timestamp_pb.Timestamp());
+        organization.setCreatedAt(this.getDummyTimestamp());
+        organization.setUpdatedAt(this.getDummyTimestamp());
         var response = new organization_service_pb_1.GetOrganizationsResponse();
         response.setMeta(this.getDummyMeta());
         response.setOrganizationsList([organization]);
@@ -238,8 +238,8 @@ var GrpcClient = /** @class */ (function () {
         user.setFirstName("max");
         user.setLastName("Mustermann");
         user.setEmail("max@mustermann.at");
-        user.setCreatedAt(new google_protobuf_timestamp_pb.Timestamp());
-        user.setUpdatedAt(new google_protobuf_timestamp_pb.Timestamp());
+        user.setCreatedAt(this.getDummyTimestamp());
+        user.setUpdatedAt(this.getDummyTimestamp());
         var response = new user_service_pb_1.GetUserResponse();
         response.setMeta(this.getDummyMeta());
         response.setUser(user);

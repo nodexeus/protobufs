@@ -141,7 +141,7 @@ export class GrpcClient {
         host.setIp("127.0.0.1");
         host.addNodes(this.getDummyNode());
         host.setStatus(HostStatus.CREATING);
-        host.setCreatedAt(new google_protobuf_timestamp_pb.Timestamp());
+        host.setCreatedAt(this.getDummyTimestamp());
 
         return host
     }
@@ -179,7 +179,7 @@ export class GrpcClient {
         let bill = new Bill();
         bill.setId(uuidv4());
         bill.setPdfUrl("/some/url.pdf");
-        bill.setCreatedAt(new google_protobuf_timestamp_pb.Timestamp());
+        bill.setCreatedAt(this.getDummyTimestamp());
         bill.setTaxNumber("tax-number");
         bill.setReceiverName("Max Mustermann");
         bill.setReceiverAddress("Bondstreet 1a, 12312 Djibouti");
@@ -246,8 +246,8 @@ export class GrpcClient {
         provision.setOrgId(uuidv4());
         provision.setHostId(uuidv4());
         provision.setInstallCmd("install cmd");
-        provision.setCreatedAt(new google_protobuf_timestamp_pb.Timestamp());
-        provision.setClaimedAt(new google_protobuf_timestamp_pb.Timestamp());
+        provision.setCreatedAt(this.getDummyTimestamp());
+        provision.setClaimedAt(this.getDummyTimestamp());
 
         let response = new GetHostProvisionResponse();
         response.setMeta(this.getDummyMeta());
@@ -295,8 +295,8 @@ export class GrpcClient {
         organization.setName("ThisGroup");
         organization.setPersonal(true);
         organization.setMemberCount(1);
-        organization.setCreatedAt(new google_protobuf_timestamp_pb.Timestamp());
-        organization.setUpdatedAt(new google_protobuf_timestamp_pb.Timestamp());
+        organization.setCreatedAt(this.getDummyTimestamp());
+        organization.setUpdatedAt(this.getDummyTimestamp());
 
         let response = new GetOrganizationsResponse();
         response.setMeta(this.getDummyMeta());
@@ -334,8 +334,8 @@ export class GrpcClient {
         user.setFirstName("max");
         user.setLastName("Mustermann");
         user.setEmail("max@mustermann.at");
-        user.setCreatedAt(new google_protobuf_timestamp_pb.Timestamp());
-        user.setUpdatedAt(new google_protobuf_timestamp_pb.Timestamp());
+        user.setCreatedAt(this.getDummyTimestamp());
+        user.setUpdatedAt(this.getDummyTimestamp());
 
         let response = new GetUserResponse();
         response.setMeta(this.getDummyMeta());

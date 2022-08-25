@@ -15,12 +15,13 @@ message CreateNodeResponse {
 
 message GetNodeRequest {
   RequestMeta meta = 1;
-  Uuid id = 2;
+  optional Uuid id = 2;
+  optional Uuid org_id = 3;
 }
 
 message GetNodeResponse {
   ResponseMeta meta = 1;
-  Node node = 2;
+  repeated Node nodes = 2;
 }
 
 message UpdateNodeRequest {
@@ -33,7 +34,7 @@ message UpdateNodeResponse {
 }
 
 service NodeService {
-  /* Get a single blockchain node */
+  /* Get blockchain node(s) */
   rpc Get(GetNodeRequest) returns (GetNodeResponse) {}
   /* Create a single blockchain node */
   rpc Create(CreateNodeRequest) returns (CreateNodeResponse) {}

@@ -15,14 +15,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :value, :string, 1
     end
     add_message "blockjoy.api.ui_v1.Pagination" do
-      optional :count, :int32, 1
-      optional :max, :int32, 2
+      optional :total_items, :int32, 1
+      optional :offset, :int32, 2
+      optional :items_per_page, :int32, 3
     end
     add_message "blockjoy.api.ui_v1.RequestMeta" do
       optional :id, :message, 1, "blockjoy.api.ui_v1.Uuid"
       proto3_optional :token, :message, 2, "blockjoy.api.ui_v1.ApiToken"
       repeated :fields, :string, 3
-      proto3_optional :count, :int32, 4
+      proto3_optional :limit, :int32, 4
     end
     add_message "blockjoy.api.ui_v1.ResponseMeta" do
       optional :status, :enum, 1, "blockjoy.api.ui_v1.ResponseMeta.Status"
@@ -66,7 +67,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :Snapshotting, 11
     end
     add_message "blockjoy.api.ui_v1.HostProvision" do
-      proto3_optional :id, :message, 1, "blockjoy.api.ui_v1.Uuid"
+      proto3_optional :id, :string, 1
       proto3_optional :org_id, :message, 2, "blockjoy.api.ui_v1.Uuid"
       proto3_optional :host_id, :message, 3, "blockjoy.api.ui_v1.Uuid"
       proto3_optional :created_at, :message, 4, "google.protobuf.Timestamp"

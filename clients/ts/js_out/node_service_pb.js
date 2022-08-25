@@ -97,7 +97,7 @@ if (goog.DEBUG && !COMPILED) {
  * @constructor
  */
 proto.blockjoy.api.ui_v1.GetNodeResponse = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.blockjoy.api.ui_v1.GetNodeResponse.repeatedFields_, null);
 };
 goog.inherits(proto.blockjoy.api.ui_v1.GetNodeResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -535,7 +535,8 @@ proto.blockjoy.api.ui_v1.GetNodeRequest.prototype.toObject = function(opt_includ
 proto.blockjoy.api.ui_v1.GetNodeRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     meta: (f = msg.getMeta()) && common_pb.RequestMeta.toObject(includeInstance, f),
-    id: (f = msg.getId()) && common_pb.Uuid.toObject(includeInstance, f)
+    id: (f = msg.getId()) && common_pb.Uuid.toObject(includeInstance, f),
+    orgId: (f = msg.getOrgId()) && common_pb.Uuid.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -582,6 +583,11 @@ proto.blockjoy.api.ui_v1.GetNodeRequest.deserializeBinaryFromReader = function(m
       reader.readMessage(value,common_pb.Uuid.deserializeBinaryFromReader);
       msg.setId(value);
       break;
+    case 3:
+      var value = new common_pb.Uuid;
+      reader.readMessage(value,common_pb.Uuid.deserializeBinaryFromReader);
+      msg.setOrgId(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -623,6 +629,14 @@ proto.blockjoy.api.ui_v1.GetNodeRequest.serializeBinaryToWriter = function(messa
   if (f != null) {
     writer.writeMessage(
       2,
+      f,
+      common_pb.Uuid.serializeBinaryToWriter
+    );
+  }
+  f = message.getOrgId();
+  if (f != null) {
+    writer.writeMessage(
+      3,
       f,
       common_pb.Uuid.serializeBinaryToWriter
     );
@@ -704,6 +718,50 @@ proto.blockjoy.api.ui_v1.GetNodeRequest.prototype.hasId = function() {
 };
 
 
+/**
+ * optional Uuid org_id = 3;
+ * @return {?proto.blockjoy.api.ui_v1.Uuid}
+ */
+proto.blockjoy.api.ui_v1.GetNodeRequest.prototype.getOrgId = function() {
+  return /** @type{?proto.blockjoy.api.ui_v1.Uuid} */ (
+    jspb.Message.getWrapperField(this, common_pb.Uuid, 3));
+};
+
+
+/**
+ * @param {?proto.blockjoy.api.ui_v1.Uuid|undefined} value
+ * @return {!proto.blockjoy.api.ui_v1.GetNodeRequest} returns this
+*/
+proto.blockjoy.api.ui_v1.GetNodeRequest.prototype.setOrgId = function(value) {
+  return jspb.Message.setWrapperField(this, 3, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.blockjoy.api.ui_v1.GetNodeRequest} returns this
+ */
+proto.blockjoy.api.ui_v1.GetNodeRequest.prototype.clearOrgId = function() {
+  return this.setOrgId(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.blockjoy.api.ui_v1.GetNodeRequest.prototype.hasOrgId = function() {
+  return jspb.Message.getField(this, 3) != null;
+};
+
+
+
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.blockjoy.api.ui_v1.GetNodeResponse.repeatedFields_ = [2];
 
 
 
@@ -737,7 +795,8 @@ proto.blockjoy.api.ui_v1.GetNodeResponse.prototype.toObject = function(opt_inclu
 proto.blockjoy.api.ui_v1.GetNodeResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     meta: (f = msg.getMeta()) && common_pb.ResponseMeta.toObject(includeInstance, f),
-    node: (f = msg.getNode()) && common_pb.Node.toObject(includeInstance, f)
+    nodesList: jspb.Message.toObjectList(msg.getNodesList(),
+    common_pb.Node.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -782,7 +841,7 @@ proto.blockjoy.api.ui_v1.GetNodeResponse.deserializeBinaryFromReader = function(
     case 2:
       var value = new common_pb.Node;
       reader.readMessage(value,common_pb.Node.deserializeBinaryFromReader);
-      msg.setNode(value);
+      msg.addNodes(value);
       break;
     default:
       reader.skipField();
@@ -821,9 +880,9 @@ proto.blockjoy.api.ui_v1.GetNodeResponse.serializeBinaryToWriter = function(mess
       common_pb.ResponseMeta.serializeBinaryToWriter
     );
   }
-  f = message.getNode();
-  if (f != null) {
-    writer.writeMessage(
+  f = message.getNodesList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
       2,
       f,
       common_pb.Node.serializeBinaryToWriter
@@ -870,39 +929,40 @@ proto.blockjoy.api.ui_v1.GetNodeResponse.prototype.hasMeta = function() {
 
 
 /**
- * optional Node node = 2;
- * @return {?proto.blockjoy.api.ui_v1.Node}
+ * repeated Node nodes = 2;
+ * @return {!Array<!proto.blockjoy.api.ui_v1.Node>}
  */
-proto.blockjoy.api.ui_v1.GetNodeResponse.prototype.getNode = function() {
-  return /** @type{?proto.blockjoy.api.ui_v1.Node} */ (
-    jspb.Message.getWrapperField(this, common_pb.Node, 2));
+proto.blockjoy.api.ui_v1.GetNodeResponse.prototype.getNodesList = function() {
+  return /** @type{!Array<!proto.blockjoy.api.ui_v1.Node>} */ (
+    jspb.Message.getRepeatedWrapperField(this, common_pb.Node, 2));
 };
 
 
 /**
- * @param {?proto.blockjoy.api.ui_v1.Node|undefined} value
+ * @param {!Array<!proto.blockjoy.api.ui_v1.Node>} value
  * @return {!proto.blockjoy.api.ui_v1.GetNodeResponse} returns this
 */
-proto.blockjoy.api.ui_v1.GetNodeResponse.prototype.setNode = function(value) {
-  return jspb.Message.setWrapperField(this, 2, value);
+proto.blockjoy.api.ui_v1.GetNodeResponse.prototype.setNodesList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 2, value);
 };
 
 
 /**
- * Clears the message field making it undefined.
+ * @param {!proto.blockjoy.api.ui_v1.Node=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.blockjoy.api.ui_v1.Node}
+ */
+proto.blockjoy.api.ui_v1.GetNodeResponse.prototype.addNodes = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.blockjoy.api.ui_v1.Node, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
  * @return {!proto.blockjoy.api.ui_v1.GetNodeResponse} returns this
  */
-proto.blockjoy.api.ui_v1.GetNodeResponse.prototype.clearNode = function() {
-  return this.setNode(undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {boolean}
- */
-proto.blockjoy.api.ui_v1.GetNodeResponse.prototype.hasNode = function() {
-  return jspb.Message.getField(this, 2) != null;
+proto.blockjoy.api.ui_v1.GetNodeResponse.prototype.clearNodesList = function() {
+  return this.setNodesList([]);
 };
 
 

@@ -905,7 +905,7 @@ proto.blockjoy.api.ui_v1.CreateUserResponse.prototype.hasMeta = function() {
  * @private {!Array<number>}
  * @const
  */
-proto.blockjoy.api.ui_v1.UpsertConfigurationRequest.repeatedFields_ = [2];
+proto.blockjoy.api.ui_v1.UpsertConfigurationRequest.repeatedFields_ = [3];
 
 
 
@@ -939,6 +939,7 @@ proto.blockjoy.api.ui_v1.UpsertConfigurationRequest.prototype.toObject = functio
 proto.blockjoy.api.ui_v1.UpsertConfigurationRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     meta: (f = msg.getMeta()) && common_pb.RequestMeta.toObject(includeInstance, f),
+    userId: (f = msg.getUserId()) && common_pb.Uuid.toObject(includeInstance, f),
     paramsList: jspb.Message.toObjectList(msg.getParamsList(),
     common_pb.UserConfigurationParameter.toObject, includeInstance)
   };
@@ -983,6 +984,11 @@ proto.blockjoy.api.ui_v1.UpsertConfigurationRequest.deserializeBinaryFromReader 
       msg.setMeta(value);
       break;
     case 2:
+      var value = new common_pb.Uuid;
+      reader.readMessage(value,common_pb.Uuid.deserializeBinaryFromReader);
+      msg.setUserId(value);
+      break;
+    case 3:
       var value = new common_pb.UserConfigurationParameter;
       reader.readMessage(value,common_pb.UserConfigurationParameter.deserializeBinaryFromReader);
       msg.addParams(value);
@@ -1024,10 +1030,18 @@ proto.blockjoy.api.ui_v1.UpsertConfigurationRequest.serializeBinaryToWriter = fu
       common_pb.RequestMeta.serializeBinaryToWriter
     );
   }
+  f = message.getUserId();
+  if (f != null) {
+    writer.writeMessage(
+      2,
+      f,
+      common_pb.Uuid.serializeBinaryToWriter
+    );
+  }
   f = message.getParamsList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
-      2,
+      3,
       f,
       common_pb.UserConfigurationParameter.serializeBinaryToWriter
     );
@@ -1073,12 +1087,49 @@ proto.blockjoy.api.ui_v1.UpsertConfigurationRequest.prototype.hasMeta = function
 
 
 /**
- * repeated UserConfigurationParameter params = 2;
+ * optional Uuid user_id = 2;
+ * @return {?proto.blockjoy.api.ui_v1.Uuid}
+ */
+proto.blockjoy.api.ui_v1.UpsertConfigurationRequest.prototype.getUserId = function() {
+  return /** @type{?proto.blockjoy.api.ui_v1.Uuid} */ (
+    jspb.Message.getWrapperField(this, common_pb.Uuid, 2));
+};
+
+
+/**
+ * @param {?proto.blockjoy.api.ui_v1.Uuid|undefined} value
+ * @return {!proto.blockjoy.api.ui_v1.UpsertConfigurationRequest} returns this
+*/
+proto.blockjoy.api.ui_v1.UpsertConfigurationRequest.prototype.setUserId = function(value) {
+  return jspb.Message.setWrapperField(this, 2, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.blockjoy.api.ui_v1.UpsertConfigurationRequest} returns this
+ */
+proto.blockjoy.api.ui_v1.UpsertConfigurationRequest.prototype.clearUserId = function() {
+  return this.setUserId(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.blockjoy.api.ui_v1.UpsertConfigurationRequest.prototype.hasUserId = function() {
+  return jspb.Message.getField(this, 2) != null;
+};
+
+
+/**
+ * repeated UserConfigurationParameter params = 3;
  * @return {!Array<!proto.blockjoy.api.ui_v1.UserConfigurationParameter>}
  */
 proto.blockjoy.api.ui_v1.UpsertConfigurationRequest.prototype.getParamsList = function() {
   return /** @type{!Array<!proto.blockjoy.api.ui_v1.UserConfigurationParameter>} */ (
-    jspb.Message.getRepeatedWrapperField(this, common_pb.UserConfigurationParameter, 2));
+    jspb.Message.getRepeatedWrapperField(this, common_pb.UserConfigurationParameter, 3));
 };
 
 
@@ -1087,7 +1138,7 @@ proto.blockjoy.api.ui_v1.UpsertConfigurationRequest.prototype.getParamsList = fu
  * @return {!proto.blockjoy.api.ui_v1.UpsertConfigurationRequest} returns this
 */
 proto.blockjoy.api.ui_v1.UpsertConfigurationRequest.prototype.setParamsList = function(value) {
-  return jspb.Message.setRepeatedWrapperField(this, 2, value);
+  return jspb.Message.setRepeatedWrapperField(this, 3, value);
 };
 
 
@@ -1097,7 +1148,7 @@ proto.blockjoy.api.ui_v1.UpsertConfigurationRequest.prototype.setParamsList = fu
  * @return {!proto.blockjoy.api.ui_v1.UserConfigurationParameter}
  */
 proto.blockjoy.api.ui_v1.UpsertConfigurationRequest.prototype.addParams = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.blockjoy.api.ui_v1.UserConfigurationParameter, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 3, opt_value, proto.blockjoy.api.ui_v1.UserConfigurationParameter, opt_index);
 };
 
 
@@ -1293,7 +1344,8 @@ proto.blockjoy.api.ui_v1.GetConfigurationRequest.prototype.toObject = function(o
  */
 proto.blockjoy.api.ui_v1.GetConfigurationRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    meta: (f = msg.getMeta()) && common_pb.RequestMeta.toObject(includeInstance, f)
+    meta: (f = msg.getMeta()) && common_pb.RequestMeta.toObject(includeInstance, f),
+    userId: (f = msg.getUserId()) && common_pb.Uuid.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -1335,6 +1387,11 @@ proto.blockjoy.api.ui_v1.GetConfigurationRequest.deserializeBinaryFromReader = f
       reader.readMessage(value,common_pb.RequestMeta.deserializeBinaryFromReader);
       msg.setMeta(value);
       break;
+    case 2:
+      var value = new common_pb.Uuid;
+      reader.readMessage(value,common_pb.Uuid.deserializeBinaryFromReader);
+      msg.setUserId(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -1370,6 +1427,14 @@ proto.blockjoy.api.ui_v1.GetConfigurationRequest.serializeBinaryToWriter = funct
       1,
       f,
       common_pb.RequestMeta.serializeBinaryToWriter
+    );
+  }
+  f = message.getUserId();
+  if (f != null) {
+    writer.writeMessage(
+      2,
+      f,
+      common_pb.Uuid.serializeBinaryToWriter
     );
   }
 };
@@ -1409,6 +1474,43 @@ proto.blockjoy.api.ui_v1.GetConfigurationRequest.prototype.clearMeta = function(
  */
 proto.blockjoy.api.ui_v1.GetConfigurationRequest.prototype.hasMeta = function() {
   return jspb.Message.getField(this, 1) != null;
+};
+
+
+/**
+ * optional Uuid user_id = 2;
+ * @return {?proto.blockjoy.api.ui_v1.Uuid}
+ */
+proto.blockjoy.api.ui_v1.GetConfigurationRequest.prototype.getUserId = function() {
+  return /** @type{?proto.blockjoy.api.ui_v1.Uuid} */ (
+    jspb.Message.getWrapperField(this, common_pb.Uuid, 2));
+};
+
+
+/**
+ * @param {?proto.blockjoy.api.ui_v1.Uuid|undefined} value
+ * @return {!proto.blockjoy.api.ui_v1.GetConfigurationRequest} returns this
+*/
+proto.blockjoy.api.ui_v1.GetConfigurationRequest.prototype.setUserId = function(value) {
+  return jspb.Message.setWrapperField(this, 2, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.blockjoy.api.ui_v1.GetConfigurationRequest} returns this
+ */
+proto.blockjoy.api.ui_v1.GetConfigurationRequest.prototype.clearUserId = function() {
+  return this.setUserId(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.blockjoy.api.ui_v1.GetConfigurationRequest.prototype.hasUserId = function() {
+  return jspb.Message.getField(this, 2) != null;
 };
 
 

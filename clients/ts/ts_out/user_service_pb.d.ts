@@ -101,6 +101,11 @@ export class UpsertConfigurationRequest extends jspb.Message {
   hasMeta(): boolean;
   clearMeta(): UpsertConfigurationRequest;
 
+  getUserId(): common_pb.Uuid | undefined;
+  setUserId(value?: common_pb.Uuid): UpsertConfigurationRequest;
+  hasUserId(): boolean;
+  clearUserId(): UpsertConfigurationRequest;
+
   getParamsList(): Array<common_pb.UserConfigurationParameter>;
   setParamsList(value: Array<common_pb.UserConfigurationParameter>): UpsertConfigurationRequest;
   clearParamsList(): UpsertConfigurationRequest;
@@ -117,6 +122,7 @@ export class UpsertConfigurationRequest extends jspb.Message {
 export namespace UpsertConfigurationRequest {
   export type AsObject = {
     meta?: common_pb.RequestMeta.AsObject,
+    userId?: common_pb.Uuid.AsObject,
     paramsList: Array<common_pb.UserConfigurationParameter.AsObject>,
   }
 }
@@ -147,6 +153,11 @@ export class GetConfigurationRequest extends jspb.Message {
   hasMeta(): boolean;
   clearMeta(): GetConfigurationRequest;
 
+  getUserId(): common_pb.Uuid | undefined;
+  setUserId(value?: common_pb.Uuid): GetConfigurationRequest;
+  hasUserId(): boolean;
+  clearUserId(): GetConfigurationRequest;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetConfigurationRequest.AsObject;
   static toObject(includeInstance: boolean, msg: GetConfigurationRequest): GetConfigurationRequest.AsObject;
@@ -158,6 +169,7 @@ export class GetConfigurationRequest extends jspb.Message {
 export namespace GetConfigurationRequest {
   export type AsObject = {
     meta?: common_pb.RequestMeta.AsObject,
+    userId?: common_pb.Uuid.AsObject,
   }
 }
 

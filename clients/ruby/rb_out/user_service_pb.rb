@@ -23,13 +23,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "blockjoy.api.ui_v1.UpsertConfigurationRequest" do
       optional :meta, :message, 1, "blockjoy.api.ui_v1.RequestMeta"
-      repeated :params, :message, 2, "blockjoy.api.ui_v1.UserConfigurationParameter"
+      optional :user_id, :message, 2, "blockjoy.api.ui_v1.Uuid"
+      repeated :params, :message, 3, "blockjoy.api.ui_v1.UserConfigurationParameter"
     end
     add_message "blockjoy.api.ui_v1.UpsertConfigurationResponse" do
       optional :meta, :message, 1, "blockjoy.api.ui_v1.ResponseMeta"
     end
     add_message "blockjoy.api.ui_v1.GetConfigurationRequest" do
       optional :meta, :message, 1, "blockjoy.api.ui_v1.RequestMeta"
+      optional :user_id, :message, 2, "blockjoy.api.ui_v1.Uuid"
     end
     add_message "blockjoy.api.ui_v1.GetConfigurationResponse" do
       optional :meta, :message, 1, "blockjoy.api.ui_v1.ResponseMeta"

@@ -16,7 +16,7 @@ module Blockjoy
           self.unmarshal_class_method = :decode
           self.service_name = 'blockjoy.api.ui_v1.NodeService'
 
-          # Get a single blockchain node 
+          # Get blockchain node(s) 
           rpc :Get, ::Blockjoy::Api::UiV1::GetNodeRequest, ::Blockjoy::Api::UiV1::GetNodeResponse
           # Create a single blockchain node 
           rpc :Create, ::Blockjoy::Api::UiV1::CreateNodeRequest, ::Blockjoy::Api::UiV1::CreateNodeResponse

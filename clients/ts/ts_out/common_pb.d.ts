@@ -41,11 +41,14 @@ export namespace ApiToken {
 }
 
 export class Pagination extends jspb.Message {
-  getCount(): number;
-  setCount(value: number): Pagination;
+  getTotalItems(): number;
+  setTotalItems(value: number): Pagination;
 
-  getMax(): number;
-  setMax(value: number): Pagination;
+  getOffset(): number;
+  setOffset(value: number): Pagination;
+
+  getItemsPerPage(): number;
+  setItemsPerPage(value: number): Pagination;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Pagination.AsObject;
@@ -57,8 +60,9 @@ export class Pagination extends jspb.Message {
 
 export namespace Pagination {
   export type AsObject = {
-    count: number,
-    max: number,
+    totalItems: number,
+    offset: number,
+    itemsPerPage: number,
   }
 }
 
@@ -78,10 +82,10 @@ export class RequestMeta extends jspb.Message {
   clearFieldsList(): RequestMeta;
   addFields(value: string, index?: number): RequestMeta;
 
-  getCount(): number;
-  setCount(value: number): RequestMeta;
-  hasCount(): boolean;
-  clearCount(): RequestMeta;
+  getLimit(): number;
+  setLimit(value: number): RequestMeta;
+  hasLimit(): boolean;
+  clearLimit(): RequestMeta;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): RequestMeta.AsObject;
@@ -96,7 +100,7 @@ export namespace RequestMeta {
     id?: Uuid.AsObject,
     token?: ApiToken.AsObject,
     fieldsList: Array<string>,
-    count?: number,
+    limit?: number,
   }
 
   export enum TokenCase { 
@@ -104,9 +108,9 @@ export namespace RequestMeta {
     TOKEN = 2,
   }
 
-  export enum CountCase { 
-    _COUNT_NOT_SET = 0,
-    COUNT = 4,
+  export enum LimitCase { 
+    _LIMIT_NOT_SET = 0,
+    LIMIT = 4,
   }
 }
 

@@ -60,6 +60,11 @@ export class GetNodeRequest extends jspb.Message {
   hasId(): boolean;
   clearId(): GetNodeRequest;
 
+  getOrgId(): common_pb.Uuid | undefined;
+  setOrgId(value?: common_pb.Uuid): GetNodeRequest;
+  hasOrgId(): boolean;
+  clearOrgId(): GetNodeRequest;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetNodeRequest.AsObject;
   static toObject(includeInstance: boolean, msg: GetNodeRequest): GetNodeRequest.AsObject;
@@ -72,6 +77,17 @@ export namespace GetNodeRequest {
   export type AsObject = {
     meta?: common_pb.RequestMeta.AsObject,
     id?: common_pb.Uuid.AsObject,
+    orgId?: common_pb.Uuid.AsObject,
+  }
+
+  export enum IdCase { 
+    _ID_NOT_SET = 0,
+    ID = 2,
+  }
+
+  export enum OrgIdCase { 
+    _ORG_ID_NOT_SET = 0,
+    ORG_ID = 3,
   }
 }
 
@@ -81,10 +97,10 @@ export class GetNodeResponse extends jspb.Message {
   hasMeta(): boolean;
   clearMeta(): GetNodeResponse;
 
-  getNode(): common_pb.Node | undefined;
-  setNode(value?: common_pb.Node): GetNodeResponse;
-  hasNode(): boolean;
-  clearNode(): GetNodeResponse;
+  getNodesList(): Array<common_pb.Node>;
+  setNodesList(value: Array<common_pb.Node>): GetNodeResponse;
+  clearNodesList(): GetNodeResponse;
+  addNodes(value?: common_pb.Node, index?: number): common_pb.Node;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetNodeResponse.AsObject;
@@ -97,7 +113,7 @@ export class GetNodeResponse extends jspb.Message {
 export namespace GetNodeResponse {
   export type AsObject = {
     meta?: common_pb.ResponseMeta.AsObject,
-    node?: common_pb.Node.AsObject,
+    nodesList: Array<common_pb.Node.AsObject>,
   }
 }
 

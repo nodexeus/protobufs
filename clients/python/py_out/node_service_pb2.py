@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 import common_pb2 as common__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x12node_service.proto\x12\x12\x62lockjoy.api.ui_v1\x1a\x0c\x63ommon.proto\"j\n\x11\x43reateNodeRequest\x12-\n\x04meta\x18\x01 \x01(\x0b\x32\x1f.blockjoy.api.ui_v1.RequestMeta\x12&\n\x04node\x18\x02 \x01(\x0b\x32\x18.blockjoy.api.ui_v1.Node\"D\n\x12\x43reateNodeResponse\x12.\n\x04meta\x18\x01 \x01(\x0b\x32 .blockjoy.api.ui_v1.ResponseMeta\"e\n\x0eGetNodeRequest\x12-\n\x04meta\x18\x01 \x01(\x0b\x32\x1f.blockjoy.api.ui_v1.RequestMeta\x12$\n\x02id\x18\x02 \x01(\x0b\x32\x18.blockjoy.api.ui_v1.Uuid\"i\n\x0fGetNodeResponse\x12.\n\x04meta\x18\x01 \x01(\x0b\x32 .blockjoy.api.ui_v1.ResponseMeta\x12&\n\x04node\x18\x02 \x01(\x0b\x32\x18.blockjoy.api.ui_v1.Node\"j\n\x11UpdateNodeRequest\x12-\n\x04meta\x18\x01 \x01(\x0b\x32\x1f.blockjoy.api.ui_v1.RequestMeta\x12&\n\x04node\x18\x02 \x01(\x0b\x32\x18.blockjoy.api.ui_v1.Node\"D\n\x12UpdateNodeResponse\x12.\n\x04meta\x18\x01 \x01(\x0b\x32 .blockjoy.api.ui_v1.ResponseMeta2\x95\x02\n\x0bNodeService\x12P\n\x03Get\x12\".blockjoy.api.ui_v1.GetNodeRequest\x1a#.blockjoy.api.ui_v1.GetNodeResponse\"\x00\x12Y\n\x06\x43reate\x12%.blockjoy.api.ui_v1.CreateNodeRequest\x1a&.blockjoy.api.ui_v1.CreateNodeResponse\"\x00\x12Y\n\x06Update\x12%.blockjoy.api.ui_v1.UpdateNodeRequest\x1a&.blockjoy.api.ui_v1.UpdateNodeResponse\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x12node_service.proto\x12\x12\x62lockjoy.api.ui_v1\x1a\x0c\x63ommon.proto\"j\n\x11\x43reateNodeRequest\x12-\n\x04meta\x18\x01 \x01(\x0b\x32\x1f.blockjoy.api.ui_v1.RequestMeta\x12&\n\x04node\x18\x02 \x01(\x0b\x32\x18.blockjoy.api.ui_v1.Node\"D\n\x12\x43reateNodeResponse\x12.\n\x04meta\x18\x01 \x01(\x0b\x32 .blockjoy.api.ui_v1.ResponseMeta\"\xab\x01\n\x0eGetNodeRequest\x12-\n\x04meta\x18\x01 \x01(\x0b\x32\x1f.blockjoy.api.ui_v1.RequestMeta\x12)\n\x02id\x18\x02 \x01(\x0b\x32\x18.blockjoy.api.ui_v1.UuidH\x00\x88\x01\x01\x12-\n\x06org_id\x18\x03 \x01(\x0b\x32\x18.blockjoy.api.ui_v1.UuidH\x01\x88\x01\x01\x42\x05\n\x03_idB\t\n\x07_org_id\"j\n\x0fGetNodeResponse\x12.\n\x04meta\x18\x01 \x01(\x0b\x32 .blockjoy.api.ui_v1.ResponseMeta\x12\'\n\x05nodes\x18\x02 \x03(\x0b\x32\x18.blockjoy.api.ui_v1.Node\"j\n\x11UpdateNodeRequest\x12-\n\x04meta\x18\x01 \x01(\x0b\x32\x1f.blockjoy.api.ui_v1.RequestMeta\x12&\n\x04node\x18\x02 \x01(\x0b\x32\x18.blockjoy.api.ui_v1.Node\"D\n\x12UpdateNodeResponse\x12.\n\x04meta\x18\x01 \x01(\x0b\x32 .blockjoy.api.ui_v1.ResponseMeta2\x95\x02\n\x0bNodeService\x12P\n\x03Get\x12\".blockjoy.api.ui_v1.GetNodeRequest\x1a#.blockjoy.api.ui_v1.GetNodeResponse\"\x00\x12Y\n\x06\x43reate\x12%.blockjoy.api.ui_v1.CreateNodeRequest\x1a&.blockjoy.api.ui_v1.CreateNodeResponse\"\x00\x12Y\n\x06Update\x12%.blockjoy.api.ui_v1.UpdateNodeRequest\x1a&.blockjoy.api.ui_v1.UpdateNodeResponse\"\x00\x62\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'node_service_pb2', globals())
@@ -25,14 +25,14 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _CREATENODEREQUEST._serialized_end=162
   _CREATENODERESPONSE._serialized_start=164
   _CREATENODERESPONSE._serialized_end=232
-  _GETNODEREQUEST._serialized_start=234
-  _GETNODEREQUEST._serialized_end=335
-  _GETNODERESPONSE._serialized_start=337
-  _GETNODERESPONSE._serialized_end=442
-  _UPDATENODEREQUEST._serialized_start=444
-  _UPDATENODEREQUEST._serialized_end=550
-  _UPDATENODERESPONSE._serialized_start=552
-  _UPDATENODERESPONSE._serialized_end=620
-  _NODESERVICE._serialized_start=623
-  _NODESERVICE._serialized_end=900
+  _GETNODEREQUEST._serialized_start=235
+  _GETNODEREQUEST._serialized_end=406
+  _GETNODERESPONSE._serialized_start=408
+  _GETNODERESPONSE._serialized_end=514
+  _UPDATENODEREQUEST._serialized_start=516
+  _UPDATENODEREQUEST._serialized_end=622
+  _UPDATENODERESPONSE._serialized_start=624
+  _UPDATENODERESPONSE._serialized_end=692
+  _NODESERVICE._serialized_start=695
+  _NODESERVICE._serialized_end=972
 # @@protoc_insertion_point(module_scope)

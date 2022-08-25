@@ -624,8 +624,9 @@ proto.blockjoy.api.ui_v1.Pagination.prototype.toObject = function(opt_includeIns
  */
 proto.blockjoy.api.ui_v1.Pagination.toObject = function(includeInstance, msg) {
   var f, obj = {
-    count: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    max: jspb.Message.getFieldWithDefault(msg, 2, 0)
+    totalItems: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    offset: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    itemsPerPage: jspb.Message.getFieldWithDefault(msg, 3, 0)
   };
 
   if (includeInstance) {
@@ -664,11 +665,15 @@ proto.blockjoy.api.ui_v1.Pagination.deserializeBinaryFromReader = function(msg, 
     switch (field) {
     case 1:
       var value = /** @type {number} */ (reader.readInt32());
-      msg.setCount(value);
+      msg.setTotalItems(value);
       break;
     case 2:
       var value = /** @type {number} */ (reader.readInt32());
-      msg.setMax(value);
+      msg.setOffset(value);
+      break;
+    case 3:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setItemsPerPage(value);
       break;
     default:
       reader.skipField();
@@ -699,17 +704,24 @@ proto.blockjoy.api.ui_v1.Pagination.prototype.serializeBinary = function() {
  */
 proto.blockjoy.api.ui_v1.Pagination.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getCount();
+  f = message.getTotalItems();
   if (f !== 0) {
     writer.writeInt32(
       1,
       f
     );
   }
-  f = message.getMax();
+  f = message.getOffset();
   if (f !== 0) {
     writer.writeInt32(
       2,
+      f
+    );
+  }
+  f = message.getItemsPerPage();
+  if (f !== 0) {
+    writer.writeInt32(
+      3,
       f
     );
   }
@@ -717,10 +729,10 @@ proto.blockjoy.api.ui_v1.Pagination.serializeBinaryToWriter = function(message, 
 
 
 /**
- * optional int32 count = 1;
+ * optional int32 total_items = 1;
  * @return {number}
  */
-proto.blockjoy.api.ui_v1.Pagination.prototype.getCount = function() {
+proto.blockjoy.api.ui_v1.Pagination.prototype.getTotalItems = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
@@ -729,16 +741,16 @@ proto.blockjoy.api.ui_v1.Pagination.prototype.getCount = function() {
  * @param {number} value
  * @return {!proto.blockjoy.api.ui_v1.Pagination} returns this
  */
-proto.blockjoy.api.ui_v1.Pagination.prototype.setCount = function(value) {
+proto.blockjoy.api.ui_v1.Pagination.prototype.setTotalItems = function(value) {
   return jspb.Message.setProto3IntField(this, 1, value);
 };
 
 
 /**
- * optional int32 max = 2;
+ * optional int32 offset = 2;
  * @return {number}
  */
-proto.blockjoy.api.ui_v1.Pagination.prototype.getMax = function() {
+proto.blockjoy.api.ui_v1.Pagination.prototype.getOffset = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
 };
 
@@ -747,8 +759,26 @@ proto.blockjoy.api.ui_v1.Pagination.prototype.getMax = function() {
  * @param {number} value
  * @return {!proto.blockjoy.api.ui_v1.Pagination} returns this
  */
-proto.blockjoy.api.ui_v1.Pagination.prototype.setMax = function(value) {
+proto.blockjoy.api.ui_v1.Pagination.prototype.setOffset = function(value) {
   return jspb.Message.setProto3IntField(this, 2, value);
+};
+
+
+/**
+ * optional int32 items_per_page = 3;
+ * @return {number}
+ */
+proto.blockjoy.api.ui_v1.Pagination.prototype.getItemsPerPage = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.blockjoy.api.ui_v1.Pagination} returns this
+ */
+proto.blockjoy.api.ui_v1.Pagination.prototype.setItemsPerPage = function(value) {
+  return jspb.Message.setProto3IntField(this, 3, value);
 };
 
 
@@ -794,7 +824,7 @@ proto.blockjoy.api.ui_v1.RequestMeta.toObject = function(includeInstance, msg) {
     id: (f = msg.getId()) && proto.blockjoy.api.ui_v1.Uuid.toObject(includeInstance, f),
     token: (f = msg.getToken()) && proto.blockjoy.api.ui_v1.ApiToken.toObject(includeInstance, f),
     fieldsList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f,
-    count: jspb.Message.getFieldWithDefault(msg, 4, 0)
+    limit: jspb.Message.getFieldWithDefault(msg, 4, 0)
   };
 
   if (includeInstance) {
@@ -847,7 +877,7 @@ proto.blockjoy.api.ui_v1.RequestMeta.deserializeBinaryFromReader = function(msg,
       break;
     case 4:
       var value = /** @type {number} */ (reader.readInt32());
-      msg.setCount(value);
+      msg.setLimit(value);
       break;
     default:
       reader.skipField();
@@ -1023,10 +1053,10 @@ proto.blockjoy.api.ui_v1.RequestMeta.prototype.clearFieldsList = function() {
 
 
 /**
- * optional int32 count = 4;
+ * optional int32 limit = 4;
  * @return {number}
  */
-proto.blockjoy.api.ui_v1.RequestMeta.prototype.getCount = function() {
+proto.blockjoy.api.ui_v1.RequestMeta.prototype.getLimit = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
 };
 
@@ -1035,7 +1065,7 @@ proto.blockjoy.api.ui_v1.RequestMeta.prototype.getCount = function() {
  * @param {number} value
  * @return {!proto.blockjoy.api.ui_v1.RequestMeta} returns this
  */
-proto.blockjoy.api.ui_v1.RequestMeta.prototype.setCount = function(value) {
+proto.blockjoy.api.ui_v1.RequestMeta.prototype.setLimit = function(value) {
   return jspb.Message.setField(this, 4, value);
 };
 
@@ -1044,7 +1074,7 @@ proto.blockjoy.api.ui_v1.RequestMeta.prototype.setCount = function(value) {
  * Clears the field making it undefined.
  * @return {!proto.blockjoy.api.ui_v1.RequestMeta} returns this
  */
-proto.blockjoy.api.ui_v1.RequestMeta.prototype.clearCount = function() {
+proto.blockjoy.api.ui_v1.RequestMeta.prototype.clearLimit = function() {
   return jspb.Message.setField(this, 4, undefined);
 };
 
@@ -1053,7 +1083,7 @@ proto.blockjoy.api.ui_v1.RequestMeta.prototype.clearCount = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.blockjoy.api.ui_v1.RequestMeta.prototype.hasCount = function() {
+proto.blockjoy.api.ui_v1.RequestMeta.prototype.hasLimit = function() {
   return jspb.Message.getField(this, 4) != null;
 };
 

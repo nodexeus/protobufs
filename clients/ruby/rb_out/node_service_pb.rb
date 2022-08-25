@@ -16,11 +16,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "blockjoy.api.ui_v1.GetNodeRequest" do
       optional :meta, :message, 1, "blockjoy.api.ui_v1.RequestMeta"
-      optional :id, :message, 2, "blockjoy.api.ui_v1.Uuid"
+      proto3_optional :id, :message, 2, "blockjoy.api.ui_v1.Uuid"
+      proto3_optional :org_id, :message, 3, "blockjoy.api.ui_v1.Uuid"
     end
     add_message "blockjoy.api.ui_v1.GetNodeResponse" do
       optional :meta, :message, 1, "blockjoy.api.ui_v1.ResponseMeta"
-      optional :node, :message, 2, "blockjoy.api.ui_v1.Node"
+      repeated :nodes, :message, 2, "blockjoy.api.ui_v1.Node"
     end
     add_message "blockjoy.api.ui_v1.UpdateNodeRequest" do
       optional :meta, :message, 1, "blockjoy.api.ui_v1.RequestMeta"

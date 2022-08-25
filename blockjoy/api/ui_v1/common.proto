@@ -41,7 +41,7 @@ message RequestMeta {
   /* Optionally pass in an array of field names expected to be returned. */
   repeated string fields = 3;
   /* Optionally pass in a number of entities to be returned. May not be bigger than MAX_COUNT */
-  optional int32 count = 4;
+  optional int32 limit = 4;
 }
 
 /* General response meta data */

@@ -27,8 +27,9 @@ message ApiToken {
  * Pagination information, used in the response type
  */
 message Pagination {
-  int32 count = 1;
-  int32 max = 2;
+  int32 total_items = 1;
+  int32 offset = 2;
+  int32 items_per_page = 3;O
 }
 
 /* General request meta data */

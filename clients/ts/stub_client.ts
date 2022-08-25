@@ -119,8 +119,8 @@ export class GrpcClient {
         node.setWalletAddress("0x000000001");
         node.setBlockHeight(12_121_112);
         node.setNodeData("some-blob");
-        node.setCreatedAt(new google_protobuf_timestamp_pb.Timestamp());
-        node.setUpdatedAt(new google_protobuf_timestamp_pb.Timestamp());
+        node.setCreatedAt(this.getDummyTimestamp());
+        node.setUpdatedAt(this.getDummyTimestamp());
         node.setStatus(NodeStatus.PROCESSING);
 
         return node
@@ -144,6 +144,16 @@ export class GrpcClient {
         host.setCreatedAt(new google_protobuf_timestamp_pb.Timestamp());
 
         return host
+    }
+
+    getDummyTimestamp(): google_protobuf_timestamp_pb.Timestamp {
+        let fromdate = new Date();
+        let timestamp = new google_protobuf_timestamp_pb.Timestamp();
+
+        timestamp.setSeconds(fromdate.getSeconds());
+        timestamp.setNanos(0);
+
+        return timestamp
     }
 
     /* Authentication service */

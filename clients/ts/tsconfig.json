@@ -1,10 +1,11 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "ES6",
     "noImplicitAny": true,
     "removeComments": true,
     "preserveConstEnums": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "target": "ES6"
   },
   "include": ["out/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"]

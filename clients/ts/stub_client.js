@@ -57,9 +57,11 @@ var GrpcClient = /** @class */ (function () {
         return api_token;
     };
     GrpcClient.prototype.getDummyMeta = function () {
+        var uuid = new common_pb_1.Uuid();
+        uuid.setValue((0, uuid_1.v4)());
         var meta = new common_pb_1.ResponseMeta();
         meta.setStatus(common_pb_1.ResponseMeta.Status.SUCCESS);
-        meta.setOriginRequestId((0, uuid_1.v4)());
+        meta.setOriginRequestId(uuid);
         return meta;
     };
     GrpcClient.prototype.getDummyNode = function () {

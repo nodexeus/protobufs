@@ -10,7 +10,7 @@ import {
     Node,
     Organization,
     ResponseMeta,
-    User
+    User, Uuid
 } from "./out/common_pb";
 import {v4 as uuidv4} from 'uuid';
 import {BillingServiceClient} from "./out/Billing_serviceServiceClientPb";
@@ -98,9 +98,12 @@ export class GrpcClient {
     }
 
     getDummyMeta(): ResponseMeta {
+        let uuid = new Uuid();
+        uuid.setValue(uuidv4());
+
         let meta = new ResponseMeta();
         meta.setStatus(ResponseMeta.Status.SUCCESS);
-        meta.setOriginRequestId(uuidv4());
+        meta.setOriginRequestId(uuid);
 
         return meta
     }

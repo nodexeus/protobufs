@@ -412,10 +412,11 @@ var GrpcClient = /** @class */ (function () {
         });
     };
     // @ts-ignore
-    GrpcClient.prototype.createUser = function () {
+    GrpcClient.prototype.createUser = function (user) {
         return __awaiter(this, void 0, void 0, function () {
             var response;
             return __generator(this, function (_a) {
+                console.log("using user data: ".concat(user));
                 response = new user_service_pb_1.CreateUserResponse();
                 response.setMeta(this.getDummyMeta());
                 return [2 /*return*/, response];

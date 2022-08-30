@@ -51,6 +51,13 @@ import {
 import {GetUpdatesResponse} from "./out/update_service_pb";
 
 export type StatusResponse = { code: string, message: string, metadata: { headers: {} }, source: string };
+export type UIUser = {
+    first_name: string,
+    last_name: string,
+    email: string,
+    password: string,
+    password_confirmation: string
+};
 
 export class GrpcClient {
     private authentication: AuthenticationServiceClient;
@@ -388,7 +395,9 @@ export class GrpcClient {
     }
 
     // @ts-ignore
-    async createUser(): Promise<CreateUserResponse> {
+    async createUser(user: UIUser): Promise<CreateUserResponse> {
+        console.log(`using user data: ${user}`);
+
         let response = new CreateUserResponse();
         response.setMeta(this.getDummyMeta());
 

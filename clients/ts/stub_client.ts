@@ -100,21 +100,25 @@ export class GrpcClient {
     }
 
     getDummyMeta(): ResponseMeta {
-        let uuid = new Uuid();
-        uuid.setValue(uuidv4());
-
         let meta = new ResponseMeta();
         meta.setStatus(ResponseMeta.Status.SUCCESS);
-        meta.setOriginRequestId(uuid);
+        meta.setOriginRequestId(this.getDummyUuid());
 
         return meta
     }
 
+    getDummyUuid(): Uuid {
+        let uuid = new Uuid();
+        uuid.setValue(uuidv4());
+
+        return uuid
+    }
+
     getDummyNode(): Node {
         let node = new Node();
-        node.setId(uuidv4());
-        node.setOrgId(uuidv4());
-        node.setBlockchainId(uuidv4());
+        node.setId(this.getDummyUuid());
+        node.setOrgId(this.getDummyUuid());
+        node.setBlockchainId(this.getDummyUuid());
         node.setName("lorem-node");
         node.setGroupsList(["group-one"]);
         node.setVersion("0.1.0");
@@ -133,8 +137,8 @@ export class GrpcClient {
 
     getDummyHost(): Host {
         let host = new Host();
-        host.setId(uuidv4());
-        host.setOrgId(uuidv4());
+        host.setId(this.getDummyUuid());
+        host.setOrgId(this.getDummyUuid());
         host.setName("lorem-ipsum");
         host.setVersion("0.1.0");
         host.setLocation("Djibouti");
@@ -201,7 +205,7 @@ export class GrpcClient {
 
     createBill(): CreateBillResponse {
         let bill = new Bill();
-        bill.setId(uuidv4());
+        bill.setId("some-bill-id");
         bill.setPdfUrl("/some/url.pdf");
         bill.setCreatedAt(this.getDummyTimestamp());
         bill.setTaxNumber("tax-number");
@@ -273,8 +277,8 @@ export class GrpcClient {
     async getHostProvision(): Promise<GetHostProvisionResponse> {
         let provision = new HostProvision();
         provision.setId("abcdefgh");
-        provision.setOrgId(uuidv4());
-        provision.setHostId(uuidv4());
+        provision.setOrgId(this.getDummyUuid());
+        provision.setHostId(this.getDummyUuid());
         provision.setInstallCmd("install cmd");
         provision.setCreatedAt(this.getDummyTimestamp());
         provision.setClaimedAt(this.getDummyTimestamp());
@@ -326,7 +330,7 @@ export class GrpcClient {
     // @ts-ignore
     async getOrganizations(): Promise<GetOrganizationsResponse> {
         let organization = new Organization();
-        organization.setId(uuidv4());
+        organization.setId(this.getDummyUuid());
         organization.setName("ThisGroup");
         organization.setPersonal(true);
         organization.setMemberCount(1);
@@ -369,7 +373,7 @@ export class GrpcClient {
     // @ts-ignore
     async getUser(): Promise<GetUserResponse> {
         let user = new User();
-        user.setId(uuidv4());
+        user.setId(this.getDummyUuid());
         user.setFirstName("max");
         user.setLastName("Mustermann");
         user.setEmail("max@mustermann.at");

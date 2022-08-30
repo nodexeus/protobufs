@@ -98,18 +98,21 @@ var GrpcClient = /** @class */ (function () {
         return api_token;
     };
     GrpcClient.prototype.getDummyMeta = function () {
-        var uuid = new common_pb_1.Uuid();
-        uuid.setValue((0, uuid_1.v4)());
         var meta = new common_pb_1.ResponseMeta();
         meta.setStatus(common_pb_1.ResponseMeta.Status.SUCCESS);
-        meta.setOriginRequestId(uuid);
+        meta.setOriginRequestId(this.getDummyUuid());
         return meta;
+    };
+    GrpcClient.prototype.getDummyUuid = function () {
+        var uuid = new common_pb_1.Uuid();
+        uuid.setValue((0, uuid_1.v4)());
+        return uuid;
     };
     GrpcClient.prototype.getDummyNode = function () {
         var node = new common_pb_1.Node();
-        node.setId((0, uuid_1.v4)());
-        node.setOrgId((0, uuid_1.v4)());
-        node.setBlockchainId((0, uuid_1.v4)());
+        node.setId(this.getDummyUuid());
+        node.setOrgId(this.getDummyUuid());
+        node.setBlockchainId(this.getDummyUuid());
         node.setName("lorem-node");
         node.setGroupsList(["group-one"]);
         node.setVersion("0.1.0");
@@ -126,8 +129,8 @@ var GrpcClient = /** @class */ (function () {
     };
     GrpcClient.prototype.getDummyHost = function () {
         var host = new common_pb_1.Host();
-        host.setId((0, uuid_1.v4)());
-        host.setOrgId((0, uuid_1.v4)());
+        host.setId(this.getDummyUuid());
+        host.setOrgId(this.getDummyUuid());
         host.setName("lorem-ipsum");
         host.setVersion("0.1.0");
         host.setLocation("Djibouti");
@@ -194,7 +197,7 @@ var GrpcClient = /** @class */ (function () {
     /* Billing service */
     GrpcClient.prototype.createBill = function () {
         var bill = new common_pb_1.Bill();
-        bill.setId((0, uuid_1.v4)());
+        bill.setId("some-bill-id");
         bill.setPdfUrl("/some/url.pdf");
         bill.setCreatedAt(this.getDummyTimestamp());
         bill.setTaxNumber("tax-number");
@@ -277,8 +280,8 @@ var GrpcClient = /** @class */ (function () {
             return __generator(this, function (_a) {
                 provision = new common_pb_1.HostProvision();
                 provision.setId("abcdefgh");
-                provision.setOrgId((0, uuid_1.v4)());
-                provision.setHostId((0, uuid_1.v4)());
+                provision.setOrgId(this.getDummyUuid());
+                provision.setHostId(this.getDummyUuid());
                 provision.setInstallCmd("install cmd");
                 provision.setCreatedAt(this.getDummyTimestamp());
                 provision.setClaimedAt(this.getDummyTimestamp());
@@ -342,7 +345,7 @@ var GrpcClient = /** @class */ (function () {
             var organization, response;
             return __generator(this, function (_a) {
                 organization = new common_pb_1.Organization();
-                organization.setId((0, uuid_1.v4)());
+                organization.setId(this.getDummyUuid());
                 organization.setName("ThisGroup");
                 organization.setPersonal(true);
                 organization.setMemberCount(1);
@@ -395,7 +398,7 @@ var GrpcClient = /** @class */ (function () {
             var user, response;
             return __generator(this, function (_a) {
                 user = new common_pb_1.User();
-                user.setId((0, uuid_1.v4)());
+                user.setId(this.getDummyUuid());
                 user.setFirstName("max");
                 user.setLastName("Mustermann");
                 user.setEmail("max@mustermann.at");

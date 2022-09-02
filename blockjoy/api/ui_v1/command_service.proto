@@ -37,5 +37,5 @@ service CommandService {
   /* "Restart host" command */
   rpc RestartHost(CommandRequest) returns (CommandResponse) {}
   /* Generic command used for additional stuff we don't know yet */
-  rpc Generic(CommandRequest) returns (CommandResponse) {}
+  rpc ExecuteGeneric(CommandRequest) returns (CommandResponse) {}
 }

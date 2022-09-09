@@ -57,8 +57,8 @@ message ResetPasswordRequest {
   string email = 1;
 }
 
-message Void {
-
+message ResetPasswordResponse {
+  ResponseMeta meta = 1;
 }
 
 /* User related services */
@@ -75,5 +75,5 @@ service UserService {
   rpc GetConfiguration(GetConfigurationRequest) returns (GetConfigurationResponse) {}
   /* Send the reset password email out to this user. Intentionally returns nothing to hide whether
   the user was registered or not */
-  rpc ResetPassword(ResetPasswordRequest) returns (Void) {}
+  rpc ResetPassword(ResetPasswordRequest) returns (ResetPasswordResponse) {}
 }

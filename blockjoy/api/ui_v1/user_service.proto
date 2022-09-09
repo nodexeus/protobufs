@@ -25,9 +25,8 @@ message CreateUserResponse {
 }
 
 message UpdateUserRequest {
-  optional string email = 2;
-  optional string first_name = 3;
-  optional string last_name = 4;
+  RequestMeta meta = 1;
+  User user = 2;
 }
 
 message UpdateUserResponse {

@@ -3,7 +3,6 @@ syntax = "proto3";
 package blockjoy.api.v1;
 
 import "google/protobuf/timestamp.proto";
-import "google/protobuf/any.proto";
 
 // Common message types
 message Uuid {
@@ -17,7 +16,7 @@ message CommandMeta {
 
 message Parameter {
     string name = 1;
-    google.protobuf.Any value = 2;
+    string value = 2;
 }
 
 message ContainerImage {

@@ -5,15 +5,6 @@ package blockjoy.api.ui_v1;
 import "google/protobuf/timestamp.proto";
 
 /*
- * UUID representation
- * As there's no specific UUID type, we use this one to indicate the value of the field
- * will be some UUID
- */
-message Uuid {
-  string value = 1;
-}
-
-/*
  * API token representation
  * As there's no specific token type, we use this one to indicate the value of the field
  * will be an API token
@@ -35,7 +26,7 @@ message Pagination {
 /* General request meta data */
 message RequestMeta {
   /* Request ID. Should be generated when constructing the request */
-  Uuid id = 1;
+  string id = 1;
   /* The user issuing this request, identified by it's API token */
   optional ApiToken token = 2;
   /* Optionally pass in an array of field names expected to be returned. */
@@ -58,7 +49,7 @@ message ResponseMeta {
   /* Response status code */
   Status status = 1;
   /* Request ID which generated this response */
-  Uuid origin_request_id = 2;
+  string origin_request_id = 2;
   /* Optional array of additional messages */
   repeated string messages = 3;
   /* Optional pagination information */
@@ -86,8 +77,8 @@ message Host {
     Snapshotting = 11;
   }
 
-  optional Uuid id = 1;
-  optional Uuid org_id = 2;
+  optional string id = 1;
+  optional string org_id = 2;
   optional string name = 3;
   optional string version = 4;
   optional string location = 5;
@@ -105,8 +96,8 @@ message Host {
 /* HostProvision entity */
 message HostProvision {
   optional string id = 1;
-  optional Uuid org_id = 2;
-  optional Uuid host_id = 3;
+  optional string org_id = 2;
+  optional string host_id = 3;
   optional google.protobuf.Timestamp created_at = 4;
   optional google.protobuf.Timestamp claimed_at = 5;
   optional string install_cmd = 6;
@@ -140,10 +131,10 @@ message Node {
     Removing = 16;
   }
 
-  optional Uuid id = 1;
-  optional Uuid org_id = 2;
-  optional Uuid host_id = 3;
-  optional Uuid blockchain_id = 4;
+  optional string id = 1;
+  optional string org_id = 2;
+  optional string host_id = 3;
+  optional string blockchain_id = 4;
   optional string name = 5;
   repeated string groups = 6;
   optional string version = 7;
@@ -160,7 +151,7 @@ message Node {
 
 /* Organization representation */
 message Organization {
-  optional Uuid id = 1;
+  optional string id = 1;
   optional string name = 2;
   optional bool personal = 3;
   optional int64 member_count = 4;
@@ -178,7 +169,7 @@ message UpdateNotification {
 
 /* User representation */
 message User {
-  optional Uuid id = 1;
+  optional string id = 1;
   optional string email = 2;
   optional string first_name = 3;
   optional string last_name = 4;
@@ -235,7 +226,7 @@ message Blockchain {
     Deleted = 5;
   }
 
-  Uuid id = 1;
+  string id = 1;
   string name = 2;
   optional string description = 3;
   BlockchainStatus status = 4;

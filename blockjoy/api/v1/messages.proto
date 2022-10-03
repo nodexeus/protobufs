@@ -5,12 +5,8 @@ package blockjoy.api.v1;
 import "google/protobuf/timestamp.proto";
 
 // Common message types
-message Uuid {
-    string value = 1;
-}
-
 message CommandMeta {
-    Uuid api_command_id = 1;
+    string api_command_id = 1;
     google.protobuf.Timestamp created_at = 2;
 }
 

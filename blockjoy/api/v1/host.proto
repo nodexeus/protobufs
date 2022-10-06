@@ -37,8 +37,8 @@ message DeleteHostResponse {
 message ProvisionHostRequest {
     optional string request_id = 1;
     string otp = 2;
-    HostInfo info = 4;
-    ConnectionStatus status = 7;
+    HostInfo info = 3;
+    ConnectionStatus status = 4;
 }
 
 message ProvisionHostResponse {

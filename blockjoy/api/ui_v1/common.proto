@@ -96,7 +96,7 @@ message Host {
 /* HostProvision entity */
 message HostProvision {
   optional string id = 1;
-  optional string org_id = 2;
+  string org_id = 2;
   optional string host_id = 3;
   optional google.protobuf.Timestamp created_at = 4;
   optional google.protobuf.Timestamp claimed_at = 5;

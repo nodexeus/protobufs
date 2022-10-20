@@ -101,6 +101,9 @@ message HostProvision {
   optional google.protobuf.Timestamp created_at = 4;
   optional google.protobuf.Timestamp claimed_at = 5;
   optional string install_cmd = 6;
+  /* IP range must be of format <From IP>-<To IP> */
+  string ip_range = 7;
+  string ip_gateway = 8;
 }
 
 /* Blockchain node representation */

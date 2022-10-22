@@ -69,8 +69,9 @@ service OrganizationService {
   /* Update a single organization */
   rpc Update(UpdateOrganizationRequest) returns (UpdateOrganizationResponse) {}
   /* Mark a single organization as deleted */
-  rpc Delete(RestoreOrganizationRequest) returns (RestoreOrganizationResponse) {}
+  rpc Delete(DeleteOrganizationRequest) returns (DeleteOrganizationResponse) {}
   /* Restore a previously deleted organization */
+  rpc Restore(RestoreOrganizationRequest) returns (RestoreOrganizationResponse) {}
   /* Retrieve organization members */
   rpc Members(OrganizationMemberRequest) returns (OrganizationMemberResponse) {}
 }

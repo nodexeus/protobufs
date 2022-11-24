@@ -17,7 +17,7 @@ message Metrics {
     // This is the age of the most recent block, measured in seconds.
     optional uint64 block_age = 2;
     // This is the current staking status of the node.
-    optional Node.StakingStatus staking_status = 3;
+    optional NodeInfo.StakingStatus staking_status = 3;
     // Iff the blockchain is in consensus, this field is `true``.
     optional bool consensus = 4;
 }
@@ -30,7 +30,7 @@ message HostMetricsRequest {
 
 message HostMetricsResponse {}
 
-service Metrics {
+service MetricsService {
     // Overwrite the metrics for the given nodes.
     rpc Node(NodeMetricsRequest) returns (NodeMetricsResponse);
     // Overwrite the metrics for the giveb host.

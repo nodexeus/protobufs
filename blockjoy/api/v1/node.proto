@@ -5,21 +5,6 @@ package blockjoy.api.v1;
 import "google/protobuf/timestamp.proto";
 import "messages.proto";
 
-// Describe the node's staking status
-enum StakingStatus {
-    // Reserving values up to 15 for possible later use
-    // Up to 15 to ensure only 1 byte is used for the most common values
-    reserved 7 to 15;
-
-    UnknownStakingStatus = 0;
-    Follower = 1;
-    Staked = 2;
-    Staking = 3;
-    Validating = 4;
-    Consensus = 5;
-    Unstaked = 6;
-}
-
 message NodeInfo {
     // Possible states the container is described with
     enum ContainerStatus {
@@ -39,6 +24,21 @@ message NodeInfo {
         Deleted = 9;
         Installing = 10;
         Snapshotting = 11;
+    }
+
+    // Describe the node's staking status
+    enum StakingStatus {
+        // Reserving values up to 15 for possible later use
+        // Up to 15 to ensure only 1 byte is used for the most common values
+        reserved 7 to 15;
+
+        UnknownStakingStatus = 0;
+        Follower = 1;
+        Staked = 2;
+        Staking = 3;
+        Validating = 4;
+        Consensus = 5;
+        Unstaked = 6;
     }
 
     // Describe the node's syncing status

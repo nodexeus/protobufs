@@ -56,9 +56,11 @@ message HostMetrics {
     // This is the number of bytes (not bits) sent over the network since the start of the node.
     // This means that this value is going to increase monotonically when the node starts.
     optional uint64 network_sent = 8;
+    // This is the number of seconds that has elapsed since the node has started.
+    optional uint64 uptime = 9;
 }
 
-service Metrics {
+service MetricsService {
     // Overwrite the metrics for the given nodes.
     rpc Node(NodeMetricsRequest) returns (google.protobuf.Empty);
     // Overwrite the metrics for the given hosts.

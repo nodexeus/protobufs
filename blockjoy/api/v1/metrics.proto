@@ -37,17 +37,26 @@ message HostMetrics {
     // The amount of CPU that is currently in use. This is given as the sum of percentages of each
     // core that is used. Example: if there are 4 cores, and each is at 78% usage, the number sent
     // will be 312.
-    optional uint16 cpu = 1;
+    optional uint16 used_cpu = 1;
     // This is the amount of memory used, given in bytes.
-    optional uint64 mem = 2;
+    optional uint64 used_memory = 2;
     // This is the amount of disk used, given in bytes.
-    optional uint64 disk = 3;
-    // This is the load, given as a percentage. Example: if the load given by top is
-    // `2.73, 2.96, 2.53`, then the value sent here will be 2.96.
-    optional double load = 4;
+    optional uint64 used_disk_space = 3;
+    // This is the load during the last minute, given as a percentage. Example: if the load given
+    // by top is `2.73, 2.96, 2.53`, then the value sent here will be 2.73.
+    optional double load_one = 4;
+    // This is the load during the last five minutes, given as a percentage. Example: if the load
+    // given by top is `2.73, 2.96, 2.53`, then the value sent here will be 2.73.
+    optional double load_five = 5;
+    // This is the load during the last five minutes, given as a percentage. Example: if the load
+    // given by top is `2.73, 2.96, 2.53`, then the value sent here will be 2.73.
+    optional double load_fifteen = 6;
+    // This is the number of bytes (not bits) received over the network since the start of the
+    // node. This means that this value is going to increase monotonically when the node starts.
+    optional uint64 network_received = 7;
     // This is the number of bytes (not bits) sent over the network since the start of the node.
     // This means that this value is going to increase monotonically when the node starts.
-    optional uint64 network = 5;
+    optional uint64 network_sent = 8;
 }
 
 message HostMetricsResponse {}

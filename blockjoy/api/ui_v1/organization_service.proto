@@ -65,6 +65,7 @@ message RestoreOrganizationResponse {
 message RemoveMemberRequest {
   RequestMeta meta = 1;
   string user_id = 2;
+  string org_id = 3;
 }
 
 message LeaveOrganizationRequest {

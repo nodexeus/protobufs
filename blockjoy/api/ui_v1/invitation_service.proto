@@ -11,6 +11,10 @@ message CreateInvitationRequest {
   string org_id = 3;
 }
 
+message CreateInvitationResponse {
+  ResponseMeta meta = 1;
+}
+
 message ListPendingInvitationRequest {
   RequestMeta meta = 1;
   string org_id = 2;
@@ -34,7 +38,7 @@ message InvitationRequest {
 /* Manage invitations */
 service InvitationService {
   /* Create an invitation for an org the calling user is owner/admin of */
-  rpc Create(CreateInvitationRequest) returns (ApiToken) {}
+  rpc Create(CreateInvitationRequest) returns (CreateInvitationResponse) {}
   /* List pending invitations for given org */
   rpc ListPending(ListPendingInvitationRequest) returns (InvitationsResponse) {}
   /* List received invitations for given user */

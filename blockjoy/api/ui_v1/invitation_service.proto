@@ -7,8 +7,8 @@ import "google/protobuf/empty.proto";
 
 message CreateInvitationRequest {
   RequestMeta meta = 1;
-  string email = 2;
-  string org_id = 3;
+  string invitee_email = 2;
+  string created_for_org_id = 3;
 }
 
 message CreateInvitationResponse {

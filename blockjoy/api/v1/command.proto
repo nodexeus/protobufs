@@ -21,7 +21,7 @@ message CommandInfo {
 }
 
 message CommandResponse {
-  repeated CommandInfo commands = 1;
+  repeated Command commands = 1;
 }
 
 message PendingCommandsRequest {

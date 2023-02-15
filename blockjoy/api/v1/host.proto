@@ -79,10 +79,9 @@ message HostGenericCommand {
 message HostInfoGet {}
 
 message HostCommand {
-    string id = 1;
+    string host_id = 1;
     string api_command_id = 2;
     google.protobuf.Timestamp created_at = 3;
-    string host_id = 10;
 
     oneof command {
         HostGenericCommand generic = 4;

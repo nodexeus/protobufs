@@ -148,5 +148,41 @@ message NodeCommand {
         NodeInfoGet info_get = 10;
         NodeCreate create = 11;
         NodeDelete delete = 12;
+        NodeFirewallUpdate firewall_update = 14;
     };
+}
+
+enum Policy {
+    UndefinedPolicy = 0;
+    Allow = 1;
+    Deny = 2;
+    Reject = 3;
+}
+
+enum Direction {
+    UndefinedDirection = 0;
+    Out = 1;
+    In = 2;
+}
+
+enum Protocol{
+    Both = 0;
+    Tcp = 1;
+    Udp = 2;
+}
+
+message Rule {
+    string name = 1;
+    Policy policy = 2;
+    Direction direction = 3;
+    optional Protocol protocol = 4;
+    optional string ips = 5;
+    repeated uint32 ports = 6;
+}
+
+message NodeFirewallUpdate {
+    optional bool enabled = 1;
+    optional Policy default_in = 2;
+    optional Policy default_out = 3;
+    repeated Rule rules = 4;
 }

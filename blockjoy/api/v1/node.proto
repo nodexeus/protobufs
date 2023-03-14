@@ -181,8 +181,8 @@ message Rule {
 }
 
 message NodeFirewallUpdate {
-    optional bool enabled = 1;
-    optional Policy default_in = 2;
-    optional Policy default_out = 3;
+    bool enabled = 1;
+    Policy default_in = 2;
+    Policy default_out = 3;
     repeated Rule rules = 4;
 }

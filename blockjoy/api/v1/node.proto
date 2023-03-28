@@ -176,9 +176,10 @@ enum Direction {
 }
 
 enum Protocol {
-  PROTOCOL_BOTH_UNSPECIFIED = 0;
+  PROTOCOL_UNSPECIFIED = 0;
   PROTOCOL_TCP = 1;
   PROTOCOL_UDP = 2;
+  PROTOCOL_BOTH = 3;
 }
 
 message Rule {

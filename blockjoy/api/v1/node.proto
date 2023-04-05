@@ -92,10 +92,6 @@ message Node {
   // IP-address is stored in the `ip_address` field.
   optional string address = 12;
   string host_id = 13;
-  // Whitelisted IP address for firewall
-  repeated string allow_ips = 14;
-  // Blacklisted IP address for firewall
-  repeated string deny_ips = 15;
 }
 
 message NodeUpdateRequest {

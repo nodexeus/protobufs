@@ -243,6 +243,8 @@ message Node {
   repeated FilteredIpAddr allow_ips = 27;
   // Blacklisted IP address for firewall
   repeated FilteredIpAddr deny_ips = 28;
+  // The nodes DNS record ID at cloudflare
+  string dns_record_id = 29;
 }
 
 message OrgUser {

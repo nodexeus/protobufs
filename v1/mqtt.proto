@@ -4,7 +4,7 @@
 
 syntax = "proto3";
 
-package public.v1;
+package v1;
 
 import "host.proto";
 import "node.proto";

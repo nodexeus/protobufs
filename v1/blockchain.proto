@@ -65,14 +65,6 @@ message SupportedNodeProperty {
   bool required = 5;
 }
 
-enum UiType {
-  UI_TYPE_UNSPECIFIED = 0;
-  UI_TYPE_SWITCH = 1;
-  UI_TYPE_PASSWORD = 2;
-  UI_TYPE_TEXT = 3;
-  UI_TYPE_FILE_UPLOAD = 4;
-}
-
 message GetBlockchainRequest {
   string id = 1;
 }

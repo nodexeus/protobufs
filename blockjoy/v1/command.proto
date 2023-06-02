@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package blockjoy.v1;
 
+import "blockjoy/v1/blockchain.proto";
 import "blockjoy/v1/node.proto";
 import "google/protobuf/timestamp.proto";
 
@@ -141,6 +142,7 @@ message NodeCreate {
   bool self_update = 7;
   repeated Parameter properties = 8;
   repeated Rule rules = 9;
+  BlockchainNetworkType blockchain_net_type = 10;
 }
 
 message NodeDelete {

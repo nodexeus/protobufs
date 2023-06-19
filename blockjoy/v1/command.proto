@@ -153,14 +153,6 @@ message Parameter {
   string value = 2;
 }
 
-// Define config status
-enum ContainerImageStatus {
-  CONTAINER_IMAGE_STATUS_UNSPECIFIED = 0;
-  CONTAINER_IMAGE_STATUS_DEVELOPMENT = 1;
-  CONTAINER_IMAGE_STATUS_UNSTABLE = 2;
-  CONTAINER_IMAGE_STATUS_STABLE = 3;
-}
-
 message ContainerImage {
   // snake_cased name of the blockchain
   string protocol = 1;
@@ -168,7 +160,6 @@ message ContainerImage {
   NodeType node_type = 2;
   // semantic version string of the node type version
   string node_version = 3;
-  ContainerImageStatus status = 4;
 }
 
 message Rule {

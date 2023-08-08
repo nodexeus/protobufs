@@ -58,7 +58,6 @@ service HostService {
   rpc Update(HostServiceUpdateRequest) returns (HostServiceUpdateResponse);
   // Delete a single host
   rpc Delete(HostServiceDeleteRequest) returns (HostServiceDeleteResponse);
-
   // Start a single host
   rpc Start(HostServiceStartRequest) returns (HostServiceStartResponse);
   // Stop a single host

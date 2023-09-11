@@ -121,14 +121,6 @@ message OrgServiceResetProvisionTokenResponse {
 message OrgUser {
   string user_id = 1;
   string org_id = 2;
-  OrgRole role = 3;
-  string name = 4;
-  string email = 5;
-}
-
-enum OrgRole {
-  ORG_ROLE_UNSPECIFIED = 0;
-  ORG_ROLE_MEMBER = 1;
-  ORG_ROLE_OWNER = 2;
-  ORG_ROLE_ADMIN = 3;
+  string name = 3;
+  string email = 4;
 }

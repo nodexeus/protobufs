@@ -12,14 +12,17 @@ service AuthService {
   rpc Refresh(AuthServiceRefreshRequest) returns (AuthServiceRefreshResponse);
   // Send the reset password email out to this user. Intentionally returns
   // nothing to hide whether the user was registered or not.
-  rpc ResetPassword(AuthServiceResetPasswordRequest) returns
-    (AuthServiceResetPasswordResponse);
+  rpc ResetPassword(AuthServiceResetPasswordRequest)
+    returns (AuthServiceResetPasswordResponse);
   // Update the user's password to a new value
-  rpc UpdatePassword(AuthServiceUpdatePasswordRequest) returns
-    (AuthServiceUpdatePasswordResponse);
+  rpc UpdatePassword(AuthServiceUpdatePasswordRequest)
+    returns (AuthServiceUpdatePasswordResponse);
   // Update the user's password via profile UI
   rpc UpdateUIPassword(AuthServiceUpdateUIPasswordRequest)
     returns (AuthServiceUpdateUIPasswordResponse);
+  // List the permissions available for a user and org.
+  rpc ListPermissions(AuthServiceListPermissionsRequest)
+    returns (AuthServiceListPermissionsResponse);
 }
 
 message AuthServiceLoginRequest {
@@ -93,4 +96,13 @@ message AuthServiceConfirmResponse {
 
 message AuthServiceSwitchOrgRequest {
   string org_id = 1;
+}
+
+message AuthServiceListPermissionsRequest {
+  string user_id = 1;
+  string org_id = 2;
+}
+
+message AuthServiceListPermissionsResponse {
+  repeated string permissions = 1;
 }

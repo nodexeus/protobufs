@@ -123,4 +123,9 @@ message OrgUser {
   string org_id = 2;
   string name = 3;
   string email = 4;
+  repeated OrgRole roles = 5;
+}
+
+message OrgRole {
+  optional string name = 1;
 }

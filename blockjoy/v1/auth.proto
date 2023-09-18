@@ -101,6 +101,8 @@ message AuthServiceSwitchOrgRequest {
 message AuthServiceListPermissionsRequest {
   string user_id = 1;
   string org_id = 2;
+  // Also include permissions from the token making the request.
+  optional bool include_token = 3;
 }
 
 message AuthServiceListPermissionsResponse {

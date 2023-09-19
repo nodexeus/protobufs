@@ -156,8 +156,11 @@ message ManifestServiceRetrieveDownloadManifestResponse {
 }
 
 // Type of compression used on chunk data.
-enum Compression {
-  COMPRESSION_UNSPECIFIED = 0;
+message Compression {
+  oneof compression {
+    // ZSTD compression - value means level of compression
+    int32 zstd = 1;
+  }
 }
 
 // Checksum variant.

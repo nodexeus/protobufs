@@ -50,7 +50,7 @@ message Node {
   optional string data_directory_mountpoint = 31;
   // The running node on the host will consist of a couple of processes. These
   // may individually start, stop and fail.
-  repeated Job jobs = 33;
+  repeated NodeJob jobs = 33;
 }
 
 service NodeService {
@@ -375,7 +375,7 @@ message NodeProperty {
 // A job is a process running on the host that is necessary for the operation of
 // a node. Examples here are downloading the chain data or running the
 // blockchain node process.
-message Job {
+message NodeJob {
   // A name to identify this job by.
   string name = 1;
   // The status this job is currently in.

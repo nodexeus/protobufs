@@ -50,7 +50,7 @@ message NodeMetrics {
   // whether it is in sync with the other nodes.
   optional SyncStatus sync_status = 6;
   // A list of the jobs that this node consists of.
-  repeated Job jobs = 10;
+  repeated NodeJob jobs = 10;
 }
 
 // The metrics for a single `Host`. Note that there is no host id in this

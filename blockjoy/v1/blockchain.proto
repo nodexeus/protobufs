@@ -13,14 +13,18 @@ message Blockchain {
   google.protobuf.Timestamp updated_at = 5;
   optional string project_url = 6;
   optional string repo_url = 7;
-  // This list contains all the possible node types that can be created for this
-  // kind of blockchain.
+  // All possible node types that can be created for this chain.
   repeated BlockchainNodeType node_types = 8;
-  optional uint64 node_count = 9;
-  optional uint64 node_count_active = 10;
-  optional uint64 node_count_syncing = 11;
-  optional uint64 node_count_provisioning = 12; 
-  optional uint64 node_count_failed = 14;
+  // Optional statistics around the state of this chain.
+  BlockchainStats stats = 9;
+}
+
+message BlockchainStats {
+  optional uint64 node_count = 1;
+  optional uint64 node_count_active = 2;
+  optional uint64 node_count_syncing = 3;
+  optional uint64 node_count_provisioning = 4;
+  optional uint64 node_count_failed = 5;
 }
 
 // Blockchain related service.
@@ -28,8 +32,8 @@ service BlockchainService {
   // Returns a single blockchain as identified by its id.
   rpc Get(BlockchainServiceGetRequest) returns (BlockchainServiceGetResponse);
   // Returns a list of all blockchains.
-  rpc List(BlockchainServiceListRequest) returns
-    (BlockchainServiceListResponse);
+  rpc List(BlockchainServiceListRequest)
+    returns (BlockchainServiceListResponse);
 }
 
 message BlockchainServiceGetRequest {

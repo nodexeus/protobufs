@@ -23,28 +23,19 @@ message NodeMessage {
 
 message NodeCreated {
   Node node = 1;
-  // The id of the person that updated the node
-  string created_by = 2;
-  string created_by_name = 3;
-  string created_by_email = 4;
+  NodeResource created_by = 2;
 }
 
 message NodeUpdated {
   Node node = 1;
-  // The id of the person that updated the node, if there is one.
-  optional string updated_by = 2;
-  optional string updated_by_name = 3;
-  optional string updated_by_email = 4;
+  NodeResource updated_by = 2;
 }
 
 message NodeDeleted {
   string node_id = 1;
   string host_id = 2;
   string org_id = 3;
-  // The id of the persona that deleted the node
-  string deleted_by = 4;
-  string deleted_by_name = 5;
-  string deleted_by_email = 6;
+  NodeResource deleted_by = 4;
 }
 
 message OrgMessage {
@@ -132,5 +123,3 @@ message HostDeleted {
   string deleted_by_name = 3;
   string deleted_by_email = 4;
 }
-
-

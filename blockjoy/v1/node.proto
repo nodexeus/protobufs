@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package blockjoy.v1;
 
+import "blockjoy/v1/api_key.proto";
 import "google/protobuf/timestamp.proto";
 
 /* Blockchain node representation */
@@ -32,13 +33,7 @@ message Node {
   string ip_gateway = 22;
   bool self_update = 23;
   string network = 24;
-  // The id of the user that created this node. For the earliest nodes we
-  // created, this field was not tracked and is therefore not populated.
-  optional string created_by = 25;
-  // The name of the aforementioned user.
-  optional string created_by_name = 26;
-  // The email of said aforementioned user.
-  optional string created_by_email = 27;
+  NodeResource created_by = 25;
   // A list of ip addresses allowed to access public ports on this node.
   repeated FilteredIpAddr allow_ips = 28;
   // A list of ip addresses denied all access to any ports on this node.
@@ -51,6 +46,18 @@ message Node {
   // The running node on the host will consist of a couple of processes. These
   // may individually start, stop and fail.
   repeated NodeJob jobs = 33;
+}
+
+// Details around the user or resource that updated a node.
+message NodeResource {
+  // The resource type that updated this node.
+  optional ApiResource resource = 1;
+  // The uuid of the resource that updated this node.
+  optional string resource_id = 2;
+  // The name of the creator (if updated by a user resource).
+  optional string name = 3;
+  // The email of the creator (if updated by a user resource).
+  optional string email = 4;
 }
 
 service NodeService {

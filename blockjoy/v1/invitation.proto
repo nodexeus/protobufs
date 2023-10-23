@@ -2,30 +2,29 @@ syntax = "proto3";
 
 package blockjoy.v1;
 
+import "blockjoy/common/v1/resource.proto";
 import "google/protobuf/timestamp.proto";
 
 // The invitation resource. This invites users into organization 
 message Invitation {
   // A uuid that uniquely determines the invitation.
   string id = 1;
-  // The id of the user that created this invitation.
-  string created_by = 2;
-  // The full name of the user that created this invitation.
-  string created_by_name = 3;
   // The id of the organization the invitee is being invited to.
-  string org_id = 4;
+  string org_id = 2;
   // This is the name of the organization that this invitation has been created
   // for.
-  string org_name = 5;
+  string org_name = 3;
   // The id of the person that is being invited here. Note that this is not the
   // uuid of some user, because the person that is being invited might not have
   // an account (yet).
-  string invitee_email = 6;
-  // The moment this invitation was created.
-  google.protobuf.Timestamp created_at = 7;
+  string invitee_email = 4;
   // The status of the invitation, indicating what user action has been taken
   // with this invitation.
-  InvitationStatus status = 8;
+  InvitationStatus status = 5;
+  // The resource that created this invitation.
+  blockjoy.common.v1.EntityUpdate invited_by = 6;
+  // The timestamp when this invitation was created.
+  google.protobuf.Timestamp created_at = 7;
   // If this invitation has been accepted, this field is set to the moment of
   // acceptance.
   optional google.protobuf.Timestamp accepted_at = 9;
@@ -84,8 +83,8 @@ message InvitationServiceCreateResponse {
 message InvitationServiceListRequest {
   optional string org_id = 1;
   optional string invitee_email = 2;
-  optional string created_by = 3;
-  optional InvitationStatus status = 4;
+  blockjoy.common.v1.EntityUpdate invited_by = 3;
+  InvitationStatus status = 4;
 }
 
 message InvitationServiceListResponse {

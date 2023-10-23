@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package blockjoy.v1;
 
+import "blockjoy/common/v1/resource.proto";
 import "google/protobuf/timestamp.proto";
 
 // API key service functionality.
@@ -9,7 +10,8 @@ service ApiKeyService {
   rpc Create(ApiKeyServiceCreateRequest) returns (ApiKeyServiceCreateResponse);
   rpc List(ApiKeyServiceListRequest) returns (ApiKeyServiceListResponse);
   rpc Update(ApiKeyServiceUpdateRequest) returns (ApiKeyServiceUpdateResponse);
-  rpc Regenerate(ApiKeyServiceRegenerateRequest) returns (ApiKeyServiceRegenerateResponse);
+  rpc Regenerate(ApiKeyServiceRegenerateRequest)
+    returns (ApiKeyServiceRegenerateResponse);
   rpc Delete(ApiKeyServiceDeleteRequest) returns (ApiKeyServiceDeleteResponse);
 }
 
@@ -27,7 +29,8 @@ message ApiKeyServiceCreateResponse {
   google.protobuf.Timestamp created_at = 2;
 }
 
-message ApiKeyServiceListRequest {}
+message ApiKeyServiceListRequest {
+}
 
 message ApiKeyServiceListResponse {
   // A list of the api keys.
@@ -78,19 +81,12 @@ message ApiKeyServiceDeleteRequest {
   string id = 1;
 }
 
-message ApiKeyServiceDeleteResponse {}
+message ApiKeyServiceDeleteResponse {
+}
 
 message ApiKeyScope {
   // The resource scope of this api key.
-  ApiResource resource = 1;
+  blockjoy.common.v1.Resource resource = 1;
   // The resource identifier of this api key.
   optional string resource_id = 2;
-}
-
-enum ApiResource {
-  API_RESOURCE_UNSPECIFIED = 0;
-  API_RESOURCE_USER = 1;
-  API_RESOURCE_ORG = 2;
-  API_RESOURCE_NODE = 3;
-  API_RESOURCE_HOST = 4;
 }

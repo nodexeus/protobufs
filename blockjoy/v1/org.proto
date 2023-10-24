@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package blockjoy.v1;
 
+import "blockjoy/common/v1/search.proto";
 import "google/protobuf/timestamp.proto";
 
 // Organization representation
@@ -72,8 +73,8 @@ message OrgServiceListRequest {
 // This message contains fields used to search organizations as opposed to just
 // filtering them.
 message OrgSearch {
-  // Since the id and the name.
-  optional string all = 1;
+  // The way the search parameters should be combined.
+  SearchOperator operator = 1;
   // Search only the id.
   optional string id = 2;
   // Search only the name.

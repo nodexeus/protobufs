@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package blockjoy.v1;
 
+import "blockjoy/common/v1/search.proto";
 import "blockjoy/v1/api_key.proto";
 import "google/protobuf/timestamp.proto";
 
@@ -154,8 +155,8 @@ message NodeServiceListRequest {
 // This message contains fields used to search nodes as opposed to just
 // filtering them.
 message NodeSearch {
-  // Search the id, name and ip fields at once.
-  optional string all = 1;
+  // The way the search parameters should be combined.
+  SearchOperator operator = 1;
   // Search only the name.
   optional string id = 2;
   // Search only the name.

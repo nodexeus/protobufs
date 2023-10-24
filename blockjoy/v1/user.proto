@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package blockjoy.v1;
 
+import "blockjoy/common/v1/search.proto";
 import "google/protobuf/timestamp.proto";
 
 // User representation.
@@ -61,8 +62,8 @@ message UserServiceListRequest {
 // This message contains fields used to search organizations as opposed to just
 // filtering them.
 message UserSearch {
-  // Search the id, full name, and email fields at once.
-  optional string all = 1;
+  // The way the search parameters should be combined.
+  SearchOperator operator = 1;
   // Search only the id.
   optional string id = 2;
   // Return only users whose email has the provided pattern as a substring. Note

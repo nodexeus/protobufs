@@ -3,6 +3,7 @@ syntax = "proto3";
 package blockjoy.v1;
 
 import "blockjoy/common/v1/currency.proto";
+import "blockjoy/common/v1/search.proto";
 import "blockjoy/v1/node.proto";
 import "google/protobuf/timestamp.proto";
 
@@ -135,8 +136,8 @@ message HostServiceListRequest {
 }
 
 message HostSearch {
-  // Search the id, name, version, os and ip fields at once.
-  optional string all = 1;
+  // The way the search parameters should be combined.
+  SearchOperator operator = 1;
   // Search for the id of the host.
   optional string id = 2;
   // Search only for the name of the host.

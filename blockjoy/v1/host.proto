@@ -130,6 +130,23 @@ message HostServiceListRequest {
   // The number of items that will be returned. Together with offset, you can
   // use this to get pagination.
   uint64 limit = 3;
+  // Search params.
+  optional HostSearch search = 4;
+}
+
+message HostSearch {
+  // Search the id, name, version, os and ip fields at once.
+  optional string all = 1;
+  // Search for the id of the host.
+  optional string id = 2;
+  // Search only for the name of the host.
+  optional string name = 3;
+  // Search only for the version of the host.
+  optional string version = 4;
+  // Search only for the operating system.
+  optional string os = 5;
+  // Search only for the ip address.
+  optional string ip = 6;
 }
 
 message HostServiceListResponse {

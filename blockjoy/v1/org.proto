@@ -74,7 +74,7 @@ message OrgServiceListRequest {
 // filtering them.
 message OrgSearch {
   // The way the search parameters should be combined.
-  SearchOperator operator = 1;
+  blockjoy.common.v1.SearchOperator operator = 1;
   // Search only the id.
   optional string id = 2;
   // Search only the name.

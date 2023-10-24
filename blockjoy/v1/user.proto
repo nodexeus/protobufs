@@ -63,7 +63,7 @@ message UserServiceListRequest {
 // filtering them.
 message UserSearch {
   // The way the search parameters should be combined.
-  SearchOperator operator = 1;
+  blockjoy.common.v1.SearchOperator operator = 1;
   // Search only the id.
   optional string id = 2;
   // Return only users whose email has the provided pattern as a substring. Note

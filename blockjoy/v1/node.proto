@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package blockjoy.v1;
 
+import "blockjoy/common/v1/search.proto";
 import "blockjoy/v1/api_key.proto";
 import "google/protobuf/timestamp.proto";
 
@@ -147,6 +148,21 @@ message NodeServiceListRequest {
   repeated string blockchain_ids = 6;
   // If this value is provided, only nodes running on this host are provided.
   optional string host_id = 7;
+  // Search params.
+  optional NodeSearch search = 8;
+}
+
+// This message contains fields used to search nodes as opposed to just
+// filtering them.
+message NodeSearch {
+  // The way the search parameters should be combined.
+  blockjoy.common.v1.SearchOperator operator = 1;
+  // Search only the name.
+  optional string id = 2;
+  // Search only the name.
+  optional string name = 3;
+  // Search only the ip address.
+  optional string ip = 4;
 }
 
 // This response will contain all the filtered nodes.

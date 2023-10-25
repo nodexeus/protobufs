@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package blockjoy.v1;
 
+import "blockjoy/common/v1/search.proto";
 import "google/protobuf/timestamp.proto";
 
 // Organization representation
@@ -65,6 +66,19 @@ message OrgServiceListRequest {
   // The number of items that will be returned. Together with offset, you can
   // use this to get pagination.
   uint64 limit = 3;
+  // Search params.
+  optional OrgSearch search = 8;
+}
+
+// This message contains fields used to search organizations as opposed to just
+// filtering them.
+message OrgSearch {
+  // The way the search parameters should be combined.
+  blockjoy.common.v1.SearchOperator operator = 1;
+  // Search only the id.
+  optional string id = 2;
+  // Search only the name.
+  optional string name = 3;
 }
 
 message OrgServiceListResponse {

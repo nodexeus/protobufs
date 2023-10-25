@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package blockjoy.v1;
 
+import "blockjoy/common/v1/search.proto";
 import "google/protobuf/timestamp.proto";
 
 // User representation.
@@ -49,16 +50,29 @@ message UserServiceListRequest {
   // Return only users from this org. This is required for users that do not
   // have access to the entire system (i.e. blockjoy's admins).
   optional string org_id = 1;
-  // Return only users whose email has the provided pattern as a substring. Note
-  // that this search is not case sensitive. The wildcard symbol here is `'%'`.
-  // For example, a query for all users whose email starts with `baremetal`
-  // would look like `"baremetal%"`.
-  optional string email_like = 2;
   // The number of items to be skipped over.
   uint64 offset = 3;
   // The number of items that will be returned. Together with offset, you can
   // use this to get pagination.
   uint64 limit = 4;
+  // Search params.
+  optional UserSearch search = 5;
+}
+
+// This message contains fields used to search organizations as opposed to just
+// filtering them.
+message UserSearch {
+  // The way the search parameters should be combined.
+  blockjoy.common.v1.SearchOperator operator = 1;
+  // Search only the id.
+  optional string id = 2;
+  // Return only users whose email has the provided pattern as a substring. Note
+  // that this search is not case sensitive. The wildcard symbol here is `'%'`.
+  // For example, a query for all users whose email starts with `baremetal`
+  // would look like `"baremetal%"`.
+  optional string email = 3;
+  // Search only the full name.
+  optional string name = 4;
 }
 
 message UserServiceListResponse {

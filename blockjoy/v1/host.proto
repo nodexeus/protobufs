@@ -3,6 +3,7 @@ syntax = "proto3";
 package blockjoy.v1;
 
 import "blockjoy/common/v1/currency.proto";
+import "blockjoy/common/v1/search.proto";
 import "blockjoy/v1/node.proto";
 import "google/protobuf/timestamp.proto";
 
@@ -130,6 +131,23 @@ message HostServiceListRequest {
   // The number of items that will be returned. Together with offset, you can
   // use this to get pagination.
   uint64 limit = 3;
+  // Search params.
+  optional HostSearch search = 4;
+}
+
+message HostSearch {
+  // The way the search parameters should be combined.
+  blockjoy.common.v1.SearchOperator operator = 1;
+  // Search for the id of the host.
+  optional string id = 2;
+  // Search only for the name of the host.
+  optional string name = 3;
+  // Search only for the version of the host.
+  optional string version = 4;
+  // Search only for the operating system.
+  optional string os = 5;
+  // Search only for the ip address.
+  optional string ip = 6;
 }
 
 message HostServiceListResponse {

@@ -6,6 +6,7 @@ syntax = "proto3";
 
 package blockjoy.v1;
 
+import "blockjoy/common/v1/resource.proto";
 import "blockjoy/v1/host.proto";
 import "blockjoy/v1/invitation.proto";
 import "blockjoy/v1/node.proto";
@@ -23,19 +24,19 @@ message NodeMessage {
 
 message NodeCreated {
   Node node = 1;
-  NodeResource created_by = 2;
+  blockjoy.common.v1.EntityUpdate created_by = 2;
 }
 
 message NodeUpdated {
   Node node = 1;
-  NodeResource updated_by = 2;
+  blockjoy.common.v1.EntityUpdate updated_by = 2;
 }
 
 message NodeDeleted {
   string node_id = 1;
   string host_id = 2;
   string org_id = 3;
-  NodeResource deleted_by = 4;
+  blockjoy.common.v1.EntityUpdate deleted_by = 4;
 }
 
 message OrgMessage {
@@ -54,23 +55,17 @@ message OrgMessage {
 
 message OrgCreated {
   Org org = 1;
-  string created_by = 2;
-  string created_by_name = 3;
-  string created_by_email = 4;
+  blockjoy.common.v1.EntityUpdate created_by = 2;
 }
 
 message OrgUpdated {
   Org org = 1;
-  string updated_by = 2;
-  string updated_by_name = 3;
-  string updated_by_email = 4;
+  blockjoy.common.v1.EntityUpdate updated_by = 2;
 }
 
 message OrgDeleted {
   string org_id = 1;
-  string deleted_by = 2;
-  string deleted_by_name = 3;
-  string deleted_by_email = 4;
+  blockjoy.common.v1.EntityUpdate deleted_by = 2;
 }
 
 // This message signals that an invitation has been created to invite someone
@@ -105,21 +100,15 @@ message HostMessage {
 
 message HostCreated {
   Host host = 1;
-  string created_by = 2;
-  string created_by_name = 3;
-  string created_by_email = 4;
+  blockjoy.common.v1.EntityUpdate created_by = 2;
 }
 
 message HostUpdated {
   Host host = 1;
-  optional string updated_by = 2;
-  optional string updated_by_name = 3;
-  optional string updated_by_email = 4;
+  blockjoy.common.v1.EntityUpdate updated_by = 2;
 }
 
 message HostDeleted {
   string host_id = 1;
-  string deleted_by = 2;
-  string deleted_by_name = 3;
-  string deleted_by_email = 4;
+  blockjoy.common.v1.EntityUpdate deleted_by = 2;
 }

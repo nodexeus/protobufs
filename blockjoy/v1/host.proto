@@ -226,10 +226,22 @@ message Region {
   optional string pricing_tier = 2;
 }
 
+// Used to indicate a change in the host status via MQTT.
+message HostStatus {
+  string host_id = 1;
+  optional HostConnectionStatus connection_status = 2;
+}
+
 enum HostType {
   HOST_TYPE_UNSPECIFIED = 0;
   // This host is a host on the blockjoy cloud platform.
   HOST_TYPE_CLOUD = 1;
   // This host is a private host that can only be used by the org that owns it.
   HOST_TYPE_PRIVATE = 2;
+}
+
+enum HostConnectionStatus {
+  HOST_CONNECTION_STATUS_UNSPECIFIED = 0;
+  HOST_CONNECTION_STATUS_ONLINE = 1;
+  HOST_CONNECTION_STATUS_OFFLINE = 2;
 }

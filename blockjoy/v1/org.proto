@@ -27,28 +27,24 @@ message Org {
   uint64 node_count = 16;
 }
 
-// Manage organizations
+// Service for managing organizations.
 service OrgService {
-  // Get all the organizations for a user. All users automatically get a private
-  // (internal) organization. 
+  // Get all the organizations for a user.
   rpc Get(OrgServiceGetRequest) returns (OrgServiceGetResponse);
+  // List all members of orgs matching a set of criteria.
   rpc List(OrgServiceListRequest) returns (OrgServiceListResponse);
-  // Create a single organization
+  // Create a new organization.
   rpc Create(OrgServiceCreateRequest) returns (OrgServiceCreateResponse);
-  // Update a single organization
+  // Update an existing organization.
   rpc Update(OrgServiceUpdateRequest) returns (OrgServiceUpdateResponse);
-  // Mark a single organization as deleted
+  // Mark an organization as deleted.
   rpc Delete(OrgServiceDeleteRequest) returns (OrgServiceDeleteResponse);
-  // Remove organization member
-  rpc RemoveMember(OrgServiceRemoveMemberRequest) returns
-    (OrgServiceRemoveMemberResponse);
-  // Returns the host provision token for the provided user and organization.
-  rpc GetProvisionToken(OrgServiceGetProvisionTokenRequest) returns
-    (OrgServiceGetProvisionTokenResponse);
-  // Regenerates and returns the host provision token for the provided user and
-  // organization.
-  rpc ResetProvisionToken(OrgServiceResetProvisionTokenRequest) returns
-    (OrgServiceResetProvisionTokenResponse);
+  // Remove a member from an organization.
+  rpc RemoveMember(OrgServiceRemoveMemberRequest) returns (OrgServiceRemoveMemberResponse);
+  // Get the host provision token for a user and organization.
+  rpc GetProvisionToken(OrgServiceGetProvisionTokenRequest) returns (OrgServiceGetProvisionTokenResponse);
+  // Regenerates the host provision token for a user and organization.
+  rpc ResetProvisionToken(OrgServiceResetProvisionTokenRequest) returns (OrgServiceResetProvisionTokenResponse);
 }
 
 message OrgServiceGetRequest {
@@ -109,23 +105,20 @@ message OrgServiceUpdateRequest {
   optional string name = 2;
 }
 
-message OrgServiceUpdateResponse {
-}
+message OrgServiceUpdateResponse {}
 
 message OrgServiceDeleteRequest {
   string id = 1;
 }
 
-message OrgServiceDeleteResponse {
-}
+message OrgServiceDeleteResponse {}
 
 message OrgServiceRemoveMemberRequest {
   string user_id = 1;
   string org_id = 2;
 }
 
-message OrgServiceRemoveMemberResponse {
-}
+message OrgServiceRemoveMemberResponse {}
 
 message OrgServiceGetProvisionTokenRequest {
   string user_id = 1;

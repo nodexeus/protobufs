@@ -28,14 +28,11 @@ service UserService {
   // Delete a single user.
   rpc Delete(UserServiceDeleteRequest) returns (UserServiceDeleteResponse);
   // Retrieve the billing details of this user.
-  rpc GetBilling(UserServiceGetBillingRequest) returns
-    (UserServiceGetBillingResponse);
+  rpc GetBilling(UserServiceGetBillingRequest) returns (UserServiceGetBillingResponse);
   // Overwrite the billing details of this user.
-  rpc UpdateBilling(UserServiceUpdateBillingRequest) returns
-    (UserServiceUpdateBillingResponse);
+  rpc UpdateBilling(UserServiceUpdateBillingRequest) returns (UserServiceUpdateBillingResponse);
   // Remove the billing details of this user.
-  rpc DeleteBilling(UserServiceDeleteBillingRequest) returns
-    (UserServiceDeleteBillingResponse);
+  rpc DeleteBilling(UserServiceDeleteBillingRequest) returns (UserServiceDeleteBillingResponse);
 }
 
 message UserServiceGetRequest {
@@ -107,8 +104,7 @@ message UserServiceDeleteRequest {
   string id = 1;
 }
 
-message UserServiceDeleteResponse {
-}
+message UserServiceDeleteResponse {}
 
 message UserServiceGetBillingRequest {
   string user_id = 1;
@@ -131,5 +127,4 @@ message UserServiceDeleteBillingRequest {
   string user_id = 1;
 }
 
-message UserServiceDeleteBillingResponse {
-}
+message UserServiceDeleteBillingResponse {}

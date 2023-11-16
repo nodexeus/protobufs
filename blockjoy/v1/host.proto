@@ -166,6 +166,8 @@ message HostServiceUpdateRequest {
   optional string region = 4;
   // Optionally set a billing amount for this host.
   optional blockjoy.common.v1.BillingAmount billing_amount = 7;
+  // This is total disk space installed on host, given in bytes.
+  optional uint64 total_disk_space = 8;
 }
 
 message HostServiceUpdateResponse {

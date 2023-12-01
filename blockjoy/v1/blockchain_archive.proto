@@ -68,8 +68,8 @@ message DownloadManifest {
 message ArchiveChunk {
   // The persistent chunk key.
   string key = 1;
-  // A temporary, pre-signed download url.
-  string url = 2;
+  // A temporary pre-signed download url (or none for a blueprint).
+  optional string url = 2;
   // The checksum of the chunk data.
   Checksum checksum = 3;
   // The chunk data size (in bytes).

@@ -136,6 +136,8 @@ message NodeServiceListRequest {
   optional string host_id = 7;
   // Search params.
   optional NodeSearch search = 8;
+  // The field sorting order of results.
+  repeated NodeSort sort = 9;
 }
 
 // This message contains fields used to search nodes as opposed to just
@@ -149,6 +151,24 @@ message NodeSearch {
   optional string name = 3;
   // Search only the ip address.
   optional string ip = 4;
+}
+
+message NodeSort {
+  NodeSortField field = 1;
+  blockjoy.common.v1.SortOrder order = 2;
+}
+
+enum NodeSortField {
+  NODE_SORT_FIELD_UNSPECIFIED = 0;
+  NODE_SORT_FIELD_HOST_NAME = 1;
+  NODE_SORT_FIELD_NODE_NAME = 2;
+  NODE_SORT_FIELD_NODE_TYPE = 3;
+  NODE_SORT_FIELD_CREATED_AT = 4;
+  NODE_SORT_FIELD_UPDATED_AT = 5;
+  NODE_SORT_FIELD_NODE_STATUS = 6;
+  NODE_SORT_FIELD_SYNC_STATUS = 7;
+  NODE_SORT_FIELD_CONTAINER_STATUS = 8;
+  NODE_SORT_FIELD_STAKING_STATUS = 9;
 }
 
 // This response will contain all the filtered nodes.

@@ -135,6 +135,8 @@ message HostServiceListRequest {
   uint64 limit = 3;
   // Search params.
   optional HostSearch search = 4;
+  // The field sorting order of results.
+  repeated HostSort sort = 5;
 }
 
 message HostSearch {
@@ -150,6 +152,20 @@ message HostSearch {
   optional string os = 5;
   // Search only for the ip address.
   optional string ip = 6;
+}
+
+message HostSort {
+  HostSortField field = 1;
+  blockjoy.common.v1.SortOrder order = 2;
+}
+
+enum HostSortField {
+  HOST_SORT_FIELD_UNSPECIFIED = 0;
+  HOST_SORT_FIELD_HOST_NAME = 1;
+  HOST_SORT_FIELD_CREATED_AT = 2;
+  HOST_SORT_FIELD_VERSION = 3;
+  HOST_SORT_FIELD_OS = 4;
+  HOST_SORT_FIELD_OS_VERSION = 5;
 }
 
 message HostServiceListResponse {

@@ -19,6 +19,7 @@ message Blockchain {
   repeated BlockchainNodeType node_types = 8;
   // Optional statistics around the state of this chain.
   BlockchainStats stats = 9;
+  BlockchainVisibility visibility = 10;
 }
 
 // Service for blockchain-specific requests.
@@ -108,6 +109,7 @@ message BlockchainNodeType {
   google.protobuf.Timestamp created_at = 4;
   google.protobuf.Timestamp updated_at = 5;
   repeated BlockchainVersion versions = 6;
+  BlockchainVisibility visibility = 7;
 }
 
 message BlockchainVersion {
@@ -178,4 +180,11 @@ message BlockchainStats {
   optional uint64 node_count_syncing = 3;
   optional uint64 node_count_provisioning = 4;
   optional uint64 node_count_failed = 5;
+}
+
+enum BlockchainVisibility {
+  BLOCKCHAIN_VISIBILITY_UNSPECIFIED = 0;
+  BLOCKCHAIN_VISIBILITY_PRIVATE = 1;
+  BLOCKCHAIN_VISIBILITY_PUBLIC = 2;
+  BLOCKCHAIN_VISIBILITY_DEVELOPMENT = 3;
 }

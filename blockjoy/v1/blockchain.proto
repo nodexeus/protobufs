@@ -20,6 +20,7 @@ message Blockchain {
   // Optional statistics around the state of this chain.
   BlockchainStats stats = 9;
   BlockchainVisibility visibility = 10;
+  string ticker = 11;
 }
 
 // Service for blockchain-specific requests.

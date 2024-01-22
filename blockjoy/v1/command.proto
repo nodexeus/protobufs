@@ -9,7 +9,7 @@ import "google/protobuf/timestamp.proto";
 
 message Command {
   // A unique command identifier.
-  optional string id = 1;
+  string id = 1;
   // A command may have an exit code.
   optional CommandExitCode exit_code = 2;
   // A command may have an outcome message.

@@ -157,6 +157,7 @@ message OrgUser {
   string name = 3;
   string email = 4;
   repeated OrgRole roles = 5;
+  google.protobuf.Timestamp joined_at = 6;
 }
 
 message OrgRole {

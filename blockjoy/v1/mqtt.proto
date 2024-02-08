@@ -1,7 +1,3 @@
-// This file contains messages that are being sent over our message queue, MQTT.
-// Not all messages that are sent over MQTT are included here, but some of the
-// messages need special
-
 syntax = "proto3";
 
 package blockjoy.v1;
@@ -24,19 +20,19 @@ message NodeMessage {
 
 message NodeCreated {
   Node node = 1;
-  blockjoy.common.v1.EntityUpdate created_by = 2;
+  blockjoy.common.v1.Resource created_by = 2;
 }
 
 message NodeUpdated {
   Node node = 1;
-  blockjoy.common.v1.EntityUpdate updated_by = 2;
+  blockjoy.common.v1.Resource updated_by = 2;
 }
 
 message NodeDeleted {
   string node_id = 1;
   string host_id = 2;
   string org_id = 3;
-  blockjoy.common.v1.EntityUpdate deleted_by = 4;
+  blockjoy.common.v1.Resource deleted_by = 4;
 }
 
 message OrgMessage {
@@ -55,17 +51,17 @@ message OrgMessage {
 
 message OrgCreated {
   Org org = 1;
-  blockjoy.common.v1.EntityUpdate created_by = 2;
+  blockjoy.common.v1.Resource created_by = 2;
 }
 
 message OrgUpdated {
   Org org = 1;
-  blockjoy.common.v1.EntityUpdate updated_by = 2;
+  blockjoy.common.v1.Resource updated_by = 2;
 }
 
 message OrgDeleted {
   string org_id = 1;
-  blockjoy.common.v1.EntityUpdate deleted_by = 2;
+  blockjoy.common.v1.Resource deleted_by = 2;
 }
 
 // This message signals that an invitation has been created to invite someone
@@ -100,15 +96,15 @@ message HostMessage {
 
 message HostCreated {
   Host host = 1;
-  blockjoy.common.v1.EntityUpdate created_by = 2;
+  blockjoy.common.v1.Resource created_by = 2;
 }
 
 message HostUpdated {
   Host host = 1;
-  blockjoy.common.v1.EntityUpdate updated_by = 2;
+  blockjoy.common.v1.Resource updated_by = 2;
 }
 
 message HostDeleted {
   string host_id = 1;
-  blockjoy.common.v1.EntityUpdate deleted_by = 2;
+  blockjoy.common.v1.Resource deleted_by = 2;
 }

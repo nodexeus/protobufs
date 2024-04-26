@@ -136,7 +136,7 @@ message BlockchainServiceAddNodeTypeResponse {}
 
 message BlockchainServiceAddVersionRequest {
   // The blockchain UUID to add the new version to.
-  string id = 1;
+  string blockchain_id = 1;
   // A semantically parseable representation of the new version.
   string version = 2;
   // A readable description of the new version.

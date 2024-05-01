@@ -129,7 +129,9 @@ message HostServiceGetResponse {
 }
 
 message HostServiceListRequest {
-  repeated string org_id = 1;
+  repeated string org_ids = 1;
+  // The version of the blockvisor software running on the host.
+  repeated string versions = 6;
   // The number of items to be skipped over.
   uint64 offset = 2;
   // The number of items that will be returned. Together with offset, you can
@@ -139,8 +141,6 @@ message HostServiceListRequest {
   optional HostSearch search = 4;
   // The field sorting order of results.
   repeated HostSort sort = 5;
-  // The version of the blockvisor software running on the host.
-  repeated string version = 6;
 }
 
 message HostSearch {

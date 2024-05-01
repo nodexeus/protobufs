@@ -158,10 +158,10 @@ message NodeServiceListRequest {
   repeated string regions = 14;
   // If this value is provided, only nodes that are in this container status
   // will be returned.
-  repeated blockjoy.common.v1.ContainerStatus container_status = 15;
+  repeated blockjoy.common.v1.ContainerStatus container_statuses = 15;
   // If this value is provided, only nodes that are in this sync status will be
   // returned.
-  repeated blockjoy.common.v1.SyncStatus sync_status = 16;
+  repeated blockjoy.common.v1.SyncStatus sync_statuses = 16;
   // Search params.
   optional NodeSearch search = 8;
   // The field sorting order of results.

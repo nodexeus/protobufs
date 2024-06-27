@@ -109,8 +109,8 @@ message NodeServiceCreateRequest {
 
 // Message returned when a node is created.
 message NodeServiceCreateResponse {
-  // The actual node that was just created.
-  Node node = 1;
+  // All nodes that were created.
+  repeated Node nodes = 1;
 }
 
 // This message is used to read info about a single node. For requests
@@ -288,16 +288,15 @@ message NodeServiceDeleteRequest {
 
 message NodeServiceDeleteResponse {}
 
-// This message contains the two possible ways in which the location of a node
-// may be determined.
+// Determines the placement of a new node.
 message NodePlacement {
   oneof placement {
-    // Simply place the node on the provided host id. This means that retrying
-    // on another host is disabled.
-    string host_id = 1;
-    // The scheduler decides where to place this node. Refer to the
-    // documentation of the `NodeScheduler` message for more details.
-    NodeScheduler scheduler = 2;
+    // The scheduler determines placement (see `NodeScheduler`).
+    NodeScheduler scheduler = 1;
+    // Use this host id (retrying on another host is disabled).
+    string host_id = 2;
+    // Batch create multiple nodes on these hosts.
+    MultipleNodes multiple = 3;
   }
 }
 
@@ -343,6 +342,15 @@ message NodeScheduler {
   optional SimilarNodeAffinity similarity = 2;
   // The region where the node should be ran.
   string region = 3;
+}
+
+message MultipleNodes {
+  repeated NodeCount node_counts = 1;
+}
+
+message NodeCount {
+  string host_id = 1;
+  uint32 node_count = 2;
 }
 
 // IP Addresses used to filter access.

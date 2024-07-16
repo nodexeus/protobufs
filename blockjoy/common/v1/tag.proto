@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package blockjoy.common.v1;
+
+message Tags {
+  repeated Tag tags = 1;
+}
+
+message Tag {
+  string name = 1;
+}

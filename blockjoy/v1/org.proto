@@ -280,7 +280,7 @@ message Invoice {
   // The invoice number is displayed on the invoice.
   optional string number = 1;
   optional google.protobuf.Timestamp created_at = 2;
-  Discount discount = 3;
+  repeated Discount discount = 3;
   optional string pdf_url = 4;
   repeated LineItem line_items = 5;
   optional InvoiceStatus status = 6;
@@ -290,6 +290,7 @@ message Invoice {
 
 message Discount {
   optional string name = 1;
+  optional blockjoy.common.v1.Amount amount = 2;
 }
 
 message LineItem {
@@ -301,12 +302,7 @@ message LineItem {
   optional string plan = 6;
   bool proration = 7;
   optional uint64 quantity = 8;
-  repeated LineItemDiscount discounts = 9;
-}
-
-message LineItemDiscount {
-  optional string name = 1;
-  optional blockjoy.common.v1.Amount amount = 2;
+  repeated Discount discounts = 9;
 }
 
 enum InvoiceStatus {

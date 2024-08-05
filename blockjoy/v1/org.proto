@@ -280,7 +280,7 @@ message Invoice {
   // The invoice number is displayed on the invoice.
   optional string number = 1;
   optional google.protobuf.Timestamp created_at = 2;
-  repeated Discount discount = 3;
+  repeated Discount discounts = 3;
   optional string pdf_url = 4;
   repeated LineItem line_items = 5;
   optional InvoiceStatus status = 6;

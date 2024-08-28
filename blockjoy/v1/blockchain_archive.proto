@@ -6,54 +6,80 @@ import "blockjoy/common/v1/image.proto";
 
 // Manage blockchain data archives.
 service BlockchainArchiveService {
-  // Get the download manifest for a specific image and blockchain network.
-  rpc HasBlockchainArchive(BlockchainArchiveServiceHasBlockchainArchiveRequest) returns (BlockchainArchiveServiceHasBlockchainArchiveResponse);
-  // Get the download manifest for a specific image and blockchain network.
-  rpc GetDownloadManifest(BlockchainArchiveServiceGetDownloadManifestRequest) returns (BlockchainArchiveServiceGetDownloadManifestResponse);
-  // Get an upload manifest for a specific image and blockchain network.
-  rpc GetUploadManifest(BlockchainArchiveServiceGetUploadManifestRequest) returns (BlockchainArchiveServiceGetUploadManifestResponse);
+  // Get the download manifest metadata for a specific image and blockchain network.
+  rpc GetDownloadMetadata(BlockchainArchiveServiceGetDownloadMetadataRequest) returns (BlockchainArchiveServiceGetDownloadMetadataResponse);
+  // Get presigned download URLs for download manifest data chunks.
+  rpc GetDownloadChunks(BlockchainArchiveServiceGetDownloadChunksRequest) returns (BlockchainArchiveServiceGetDownloadChunksResponse);
+  // Get presigned upload URLs for blockchain archive data chunks.
+  rpc GetUploadSlots(BlockchainArchiveServiceGetUploadSlotsRequest) returns (BlockchainArchiveServiceGetUploadSlotsResponse);
   // Put a new download manifest for retrieval with `GetDownloadManifest`.
   rpc PutDownloadManifest(BlockchainArchiveServicePutDownloadManifestRequest) returns (BlockchainArchiveServicePutDownloadManifestResponse);
 }
 
-message BlockchainArchiveServiceHasBlockchainArchiveRequest {
+message BlockchainArchiveServiceGetDownloadMetadataRequest {
   // The archive image identifier.
   blockjoy.common.v1.ImageIdentifier id = 1;
   // The network name (e.g. "main", "testnet").
   string network = 2;
+  // The data version (or latest if none).
+  optional uint64 data_version = 3;
 }
 
-message BlockchainArchiveServiceHasBlockchainArchiveResponse {
-  bool available = 1;
+message BlockchainArchiveServiceGetDownloadMetadataResponse {
+  // The data version of the download manifest.
+  uint64 data_version = 1;
+  // The total size (in bytes) of the uncompressed data.
+  uint64 total_size = 2;
+  // The chunk compression type.
+  optional Compression compression = 3;
+  // The total number of download manifest chunks.
+  uint32 chunks = 4;
 }
 
-message BlockchainArchiveServiceGetDownloadManifestRequest {
+message BlockchainArchiveServiceGetDownloadChunksRequest {
   // The archive image identifier.
   blockjoy.common.v1.ImageIdentifier id = 1;
   // The network name (e.g. "main", "testnet").
   string network = 2;
+  // The data version for the download manifest.
+  uint64 data_version = 3;
+  // The set of chunk indexes to generate download URLs for.
+  repeated uint32 chunk_indexes = 4;
 }
 
-message BlockchainArchiveServiceGetDownloadManifestResponse {
-  DownloadManifest manifest = 1;
+message BlockchainArchiveServiceGetDownloadChunksResponse {
+  // Presigned URLs for the requested download manifest chunk indexes.
+  repeated ArchiveChunk chunks = 1;
 }
 
-// Pre-signed upload URL slots for the blockchain archive data chunks.
-message BlockchainArchiveServiceGetUploadManifestRequest {
+message BlockchainArchiveServiceGetUploadSlotsRequest {
   // The archive image identifier.
   blockjoy.common.v1.ImageIdentifier id = 1;
   // The network name (e.g. "main", "testnet").
   string network = 2;
   // The data version. If not set, will increment the last data version.
   optional uint64 data_version = 3;
-  // Requested number of upload URL slots.
-  uint32 slots = 4;
   // Expiry duration of an upload URL (in seconds).
-  optional uint32 url_expires = 5;
+  optional uint32 url_expires = 4;
+  // The requested data slot indexes to generate upload URLs for.
+  repeated uint32 slot_indexes = 5;
 }
 
-message BlockchainArchiveServiceGetUploadManifestResponse {
-  UploadManifest manifest = 1;
+message BlockchainArchiveServiceGetUploadSlotsResponse {
+  // The data version of the upload slots.
+  uint64 data_version = 1;
+  // A list of slots for uploading archive chunks.
+  repeated UploadSlot slots = 2;
+}
+
+// An upload slot for a chunk of data.
+message UploadSlot {
+  // The index of this upload slot.
+  uint32 index = 1;
+  // The persistent key to an archive chunk.
+  string key = 2;
+  // A temporary, pre-signed upload url for the data.
+  string url = 3;
 }
 
 message BlockchainArchiveServicePutDownloadManifestRequest {
@@ -61,34 +87,30 @@ message BlockchainArchiveServicePutDownloadManifestRequest {
   blockjoy.common.v1.ImageIdentifier id = 1;
   // The network name (e.g. "main", "testnet").
   string network = 2;
-  // The download manifest to store.
-  DownloadManifest manifest = 3;
+  // The total size (in bytes) of the uncompressed data.
+  uint64 total_size = 3;
+  // The chunk compression type.
+  optional Compression compression = 4;
+  // Metadata for each archive data chunk.
+  repeated ArchiveChunk chunks = 5;
 }
 
 message BlockchainArchiveServicePutDownloadManifestResponse {}
 
-// Download manifest with metadata and pointers to archive data chunks.
-message DownloadManifest {
-  // Total size of uncompressed data
-  uint64 total_size = 1;
-  // Chunk compression type or none
-  optional Compression compression = 2;
-  // Full list of chunks
-  repeated ArchiveChunk chunks = 3;
-}
-
 // Metadata describing an archive chunk URL and file mapping.
 message ArchiveChunk {
+  // The index of this archive chunk.
+  uint32 index = 1;
   // The persistent chunk key.
-  string key = 1;
+  string key = 2;
   // A temporary pre-signed download url (or none for a blueprint).
-  optional string url = 2;
+  optional string url = 3;
   // The checksum of the chunk data.
-  Checksum checksum = 3;
+  Checksum checksum = 4;
   // The chunk data size (in bytes).
-  uint64 size = 4;
+  uint64 size = 5;
   // Mappings from chunks to file paths.
-  repeated ChunkTarget destinations = 5;
+  repeated ChunkTarget destinations = 6;
 }
 
 // The target file for a decompressed data chunk.
@@ -116,18 +138,4 @@ message Compression {
     // ZStandard compression, where the value is the compression level.
     int32 zstd = 1;
   }
-}
-
-// Upload manifest with slots for uploading archive data chunks.
-message UploadManifest {
-  // A list of slots for uploading archive chunks.
-  repeated UploadSlot slots = 1;
-}
-
-// An upload slot for a chunk of data.
-message UploadSlot {
-  // The persistent key to an archive chunk.
-  string key = 1;
-  // A temporary, pre-signed upload url for the data.
-  string url = 2;
 }

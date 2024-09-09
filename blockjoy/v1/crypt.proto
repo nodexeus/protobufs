@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package blockjoy.v1;
+
+import "blockjoy/common/v1/resource.proto";
+
+// Encryption and decryption of resource-specific data.
+service CryptService {
+  // Returns a decrypted resource secret.
+  rpc GetSecret(CryptServiceGetSecretRequest) returns (CryptServiceGetSecretResponse);
+  // Write a secret to encrypted storage.
+  rpc PutSecret(CryptServicePutSecretRequest) returns (CryptServicePutSecretResponse);
+}
+
+message CryptServiceGetSecretRequest {
+  // The resource type requesting this secret.
+  blockjoy.common.v1.Resource resource = 1;
+  // The resource id requesting this secret.
+  string resource_id = 2;
+  // The secret name to read.
+  string name = 3;
+}
+
+message CryptServiceGetSecretResponse {
+  // The decrypted secret bytes.
+  bytes value = 1;
+}
+
+message CryptServicePutSecretRequest {
+  // The resource type writing this secret.
+  blockjoy.common.v1.Resource resource = 1;
+  // The resource id writing this secret.
+  string resource_id = 2;
+  // The secret name to write.
+  string name = 3;
+  // The secret bytes to encrypt.
+  bytes value = 4;
+}
+
+message CryptServicePutSecretResponse {}

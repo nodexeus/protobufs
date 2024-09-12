@@ -58,6 +58,8 @@ message Node {
   // If this is an rpc node, this field contains the url where rpc requests can
   // be sent to.
   string url = 36;
+  // Set if this node was recreated from an existing one.
+  optional string old_node_id = 37;
 }
 
 // Service for interacting with a node.
@@ -88,6 +90,8 @@ service NodeService {
 
 // This message is used to create a new node.
 message NodeServiceCreateRequest {
+  // Set when recreating a new node from an existing one.
+  optional string old_node_id = 1;
   // The id of the organization for which the node should be created.
   string org_id = 2;
   // The id of the blockchain that should be ran inside the node.

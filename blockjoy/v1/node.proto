@@ -5,6 +5,7 @@ package blockjoy.v1;
 import "blockjoy/common/v1/node.proto";
 import "blockjoy/common/v1/resource.proto";
 import "blockjoy/common/v1/search.proto";
+import "blockjoy/common/v1/tag.proto";
 import "google/protobuf/timestamp.proto";
 
 // Blockchain node representation
@@ -60,6 +61,8 @@ message Node {
   string url = 36;
   // Set if this node was recreated from an existing one.
   optional string old_node_id = 37;
+  // A list of tags that are attached to this node.
+  blockjoy.common.v1.Tags tags = 38;
 }
 
 // Service for interacting with a node.
@@ -111,6 +114,8 @@ message NodeServiceCreateRequest {
   repeated FilteredIpAddr allow_ips = 9;
   // A list of ip addresses denied all access to any ports on this node.
   repeated FilteredIpAddr deny_ips = 10;
+  // A list of tags that are attached to this node.
+  optional blockjoy.common.v1.Tags tags = 11;
 }
 
 // Message returned when a node is created.
@@ -241,6 +246,9 @@ message NodeServiceUpdateConfigRequest {
   optional string note = 4;
   // Update the frontend display name of this node.
   optional string display_name = 5;
+  // If this is provided, the tags contained in this will update the existing
+  // tags.
+  optional blockjoy.common.v1.UpdateTags update_tags = 10;
 }
 
 message NodeServiceUpdateConfigResponse {}

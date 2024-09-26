@@ -9,3 +9,12 @@ message Tags {
 message Tag {
   string name = 1;
 }
+
+message UpdateTags {
+  oneof update {
+    // Overwrite the tag list and set it to the provided value.
+    Tags overwrite_tags = 1;
+    // Add a single tag to the existing tag list.
+    Tag add_tag = 2;
+  }
+}

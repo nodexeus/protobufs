@@ -201,18 +201,9 @@ message HostServiceUpdateRequest {
   optional uint64 total_disk_space = 8;
   // The entity that can make decisions on whether to run nodes on this host.
   optional ManagedBy managed_by = 9;
-  // If this is provided, the tags contained in this will overwrite the existing
+  // If this is provided, the tags contained in this will update the existing
   // tags.
-  optional UpdateTags update_tags = 10;
-}
-
-message UpdateTags {
-  oneof update {
-    // A list of tags that are attached to this host.
-    blockjoy.common.v1.Tags overwrite_tags = 1;
-    // A single tag that is added.
-    blockjoy.common.v1.Tag add_tag = 2;
-  }
+  optional blockjoy.common.v1.UpdateTags update_tags = 10;
 }
 
 message HostServiceUpdateResponse {}

@@ -77,8 +77,8 @@ service HostService {
 message HostServiceCreateRequest {
   // An org-user's provisioning token to create this host.
   string provision_token = 1;
-  // The org id for a private host.
-  optional string org_id = 2;
+  // Whether this host is private to the provisioning org.
+  bool is_private = 2;
   // The network name of the host.
   string network_name = 3;
   // The display name of the host.
@@ -113,6 +113,7 @@ message HostServiceCreateResponse {
   Host host = 1;
   string token = 2;
   string refresh = 3;
+  string provision_org_id = 4;
 }
 
 message HostServiceGetRequest {

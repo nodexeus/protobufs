@@ -2,23 +2,19 @@ syntax = "proto3";
 
 package blockjoy.common.v1;
 
-// Details around the resource that updated some entity.
-message EntityUpdate {
-  // The resource type that updated an entity.
-  Resource resource = 1;
-  // The uuid of the resource that updated an entity.
-  optional string resource_id = 2;
-  // The name of the updator (if updated by a user resource).
-  optional string name = 3;
-  // The email of the updator (if updated by a user resource).
-  optional string email = 4;
+// A resource type and id.
+message Resource {
+  // The resource type.
+  ResourceType resource_type = 1;
+  // The uuid of the resource.
+  string resource_id = 2;
 }
 
 // All supported resource types.
-enum Resource {
-  RESOURCE_UNSPECIFIED = 0;
-  RESOURCE_USER = 1;
-  RESOURCE_ORG = 2;
-  RESOURCE_HOST = 3;
-  RESOURCE_NODE = 4;
+enum ResourceType {
+  RESOURCE_TYPE_UNSPECIFIED = 0;
+  RESOURCE_TYPE_USER = 1;
+  RESOURCE_TYPE_ORG = 2;
+  RESOURCE_TYPE_HOST = 3;
+  RESOURCE_TYPE_NODE = 4;
 }

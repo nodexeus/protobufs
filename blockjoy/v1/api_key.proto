@@ -22,8 +22,8 @@ service ApiKeyService {
 message ApiKeyServiceCreateRequest {
   // The (non-unique) label for this api key.
   string label = 1;
-  // The scope of the api key.
-  ApiKeyScope scope = 2;
+  // The resource of this api key.
+  blockjoy.common.v1.Resource resource = 2;
 }
 
 message ApiKeyServiceCreateResponse {
@@ -42,11 +42,11 @@ message ApiKeyServiceListResponse {
 
 message ListApiKey {
   // The unique identifier to this api key.
-  optional string id = 1;
+  optional string api_key_id = 1;
   // The (non-unique) label for this api key.
   optional string label = 2;
-  // The scope of this api key.
-  ApiKeyScope scope = 3;
+  // The resource of this api key.
+  blockjoy.common.v1.Resource resource = 3;
   // The time this api key was created.
   google.protobuf.Timestamp created_at = 4;
   // The last time this api key was updated.
@@ -55,11 +55,9 @@ message ListApiKey {
 
 message ApiKeyServiceUpdateRequest {
   // The unique identifier to the api key to update.
-  string id = 1;
+  string api_key_id = 1;
   // The (non-unique) new label for this api key.
   optional string label = 2;
-  // The new scope of this api key.
-  ApiKeyScope scope = 3;
 }
 
 message ApiKeyServiceUpdateResponse {
@@ -69,7 +67,7 @@ message ApiKeyServiceUpdateResponse {
 
 message ApiKeyServiceRegenerateRequest {
   // The unique identifier to the api key to regenerate.
-  string id = 1;
+  string api_key_id = 1;
 }
 
 message ApiKeyServiceRegenerateResponse {
@@ -81,14 +79,7 @@ message ApiKeyServiceRegenerateResponse {
 
 message ApiKeyServiceDeleteRequest {
   // The unique identifier to the api key to delete.
-  string id = 1;
+  string api_key_id = 1;
 }
 
 message ApiKeyServiceDeleteResponse {}
-
-message ApiKeyScope {
-  // The resource scope of this api key.
-  blockjoy.common.v1.Resource resource = 1;
-  // The resource identifier of this api key.
-  optional string resource_id = 2;
-}

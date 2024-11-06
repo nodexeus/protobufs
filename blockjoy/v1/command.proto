@@ -40,14 +40,16 @@ service CommandService {
 
 message CommandServiceAckRequest {
   string command_id = 1;
+  string org_id = 2;
 }
 
 message CommandServiceAckResponse {}
 
 message CommandServiceListRequest {
-  optional string node_id = 1;
+  string org_id = 1;
   optional string host_id = 2;
-  optional CommandExitCode exit_code = 3;
+  optional string node_id = 3;
+  optional CommandExitCode exit_code = 4;
 }
 
 message CommandServiceListResponse {
@@ -56,7 +58,8 @@ message CommandServiceListResponse {
 
 message CommandServicePendingRequest {
   string host_id = 1;
-  optional string filter_type = 2;
+  string org_id = 2;
+  optional string filter_type = 3;
 }
 
 message CommandServicePendingResponse {
@@ -65,9 +68,10 @@ message CommandServicePendingResponse {
 
 message CommandServiceUpdateRequest {
   string command_id = 1;
-  optional CommandExitCode exit_code = 2;
-  optional string exit_message = 3;
-  optional uint64 retry_hint_seconds = 4;
+  string org_id = 2;
+  optional CommandExitCode exit_code = 3;
+  optional string exit_message = 4;
+  optional uint64 retry_hint_seconds = 5;
 }
 
 message CommandServiceUpdateResponse {

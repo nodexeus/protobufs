@@ -21,18 +21,16 @@ message MetricsServiceNodeRequest {
 message NodeMetrics {
   // The node id of the metrics.
   string node_id = 1;
-  // The org id of the node.
-  string org_id = 2;
   // The current status of the node.
-  optional blockjoy.common.v1.NodeStatus node_status = 3;
+  optional blockjoy.common.v1.NodeStatus node_status = 2;
   // The current height of the blockchain.
-  optional uint64 height = 4;
+  optional uint64 height = 3;
   // The age of the most recent block (in seconds).
-  optional uint64 block_age = 5;
+  optional uint64 block_age = 4;
   // Whether the blockchain is in consensus.
-  optional bool consensus = 6;
+  optional bool consensus = 5;
   // A list of jobs running on the node.
-  repeated blockjoy.common.v1.NodeJob jobs = 7;
+  repeated blockjoy.common.v1.NodeJob jobs = 6;
 }
 
 message MetricsServiceNodeResponse {}

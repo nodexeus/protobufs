@@ -12,14 +12,14 @@ import "google/protobuf/timestamp.proto";
 
 message Node {
   string node_id = 1;
-  string org_id = 2;
-  string org_name = 3;
-  string node_name = 4;
-  optional string display_name = 5;
-  optional string old_node_id = 6;
-  string image_id = 7;
-  string config_id = 8;
-  blockjoy.common.v1.NodeConfig config = 9;
+  string node_name = 2;
+  optional string display_name = 3;
+  optional string old_node_id = 4;
+  string image_id = 5;
+  string config_id = 6;
+  blockjoy.common.v1.NodeConfig config = 7;
+  string org_id = 8;
+  string org_name = 9;
   string host_id = 10;
   optional string host_org_id = 11;
   string host_network_name = 12;
@@ -98,7 +98,6 @@ message NodeServiceCreateResponse {
 
 message NodeServiceGetRequest {
   string node_id = 1;
-  string org_id = 2;
 }
 
 message NodeServiceGetResponse {
@@ -139,24 +138,22 @@ message NodeSearch {
   blockjoy.common.v1.SearchOperator operator = 1;
   // Search for the node id.
   optional string node_id = 2;
-  // Search for the node org id.
-  optional string org_id = 3;
   // Search for the node name.
-  optional string node_name = 4;
+  optional string node_name = 3;
   // Search for the display name.
-  optional string display_name = 5;
+  optional string display_name = 4;
   // Search for the DNS name.
-  optional string dns_name = 6;
+  optional string dns_name = 5;
   // Search for the node state.
-  optional blockjoy.common.v1.NodeState node_state = 7;
+  optional blockjoy.common.v1.NodeState node_state = 6;
   // Search for the next state.
-  optional blockjoy.common.v1.NextState next_state = 8;
+  optional blockjoy.common.v1.NextState next_state = 7;
   // Search for the protocol state.
-  optional string protocol_state = 9;
+  optional string protocol_state = 8;
   // Search for the protocol health.
-  optional string protocol_health = 10;
+  optional string protocol_health = 9;
   // Search for the node ip address.
-  optional string ip = 11;
+  optional string ip = 10;
 }
 
 message NodeSort {
@@ -187,24 +184,22 @@ message NodeServiceListResponse {
 message NodeServiceReportStatusRequest {
   // The id of the node to report.
   string node_id = 1;
-  // The org id of the node.
-  string org_id = 2;
   // The running config of the node.
-  string config_id = 3;
+  string config_id = 2;
   // Update the node status.
-  optional blockjoy.common.v1.NodeStatus status = 4;
+  optional blockjoy.common.v1.NodeStatus status = 3;
   // Update the peer-to-peer address.
-  optional string p2p_address = 5;
+  optional string p2p_address = 4;
 }
 
 message NodeServiceReportStatusResponse {}
 
 // Report an error with the node.
 message NodeServiceReportErrorRequest {
-  // The id of the node to report on.
-  string node_id = 1;
-  // The org id of the node.
-  string org_id = 2;
+  // The id of the user that created the report.
+  string user_id = 1;
+  // The id of the node that this report pertains to.
+  string node_id = 2;
   // An error description of the problem.
   string message = 3;
 }
@@ -216,63 +211,55 @@ message NodeServiceReportErrorResponse {
 message NodeServiceUpdateConfigRequest {
   // The id of the node to update.
   string node_id = 1;
-  // The org id of the node.
-  string org_id = 2;
   // Whether the node should automatically be upgraded.
-  optional bool auto_upgrade = 3;
+  optional bool auto_upgrade = 2;
   // Move this node to a new org.
-  optional string new_org_id = 4;
+  optional string new_org_id = 3;
   // Update the display name of this node.
-  optional string new_display_name = 5;
+  optional string new_display_name = 4;
   // Update the note that explains what this node is for.
-  optional string new_note = 6;
+  optional string new_note = 5;
   // Update these property keys to these values.
-  repeated blockjoy.common.v1.ImagePropertyValue new_values = 7;
+  repeated blockjoy.common.v1.ImagePropertyValue new_values = 6;
   // Replace the firewall config with a new one.
-  optional blockjoy.common.v1.FirewallConfig new_firewall = 8;
+  optional blockjoy.common.v1.FirewallConfig new_firewall = 7;
   // Update the node tags.
-  optional blockjoy.common.v1.UpdateTags update_tags = 9;
+  optional blockjoy.common.v1.UpdateTags update_tags = 8;
 }
 
 message NodeServiceUpdateConfigResponse {}
 
 message NodeServiceUpgradeImageRequest {
-  // The ids of the nodes to upgrade.
+  // The ids of the nodes that you want to upgrade.
   repeated string node_ids = 1;
-  // The org ids of the nodes to upgrade.
-  repeated string org_ids = 2;
   // The image_id to upgrade the nodes to.
-  string image_id = 3;
-  // The org id of a private image.
-  optional string image_org_id = 4;
+  string image_id = 2;
+  // The org_id of the image.
+  optional string org_id = 3;
 }
 
 message NodeServiceUpgradeImageResponse {}
 
 message NodeServiceStartRequest {
   string node_id = 1;
-  string org_id = 2;
 }
 
 message NodeServiceStartResponse {}
 
 message NodeServiceStopRequest {
   string node_id = 1;
-  string org_id = 2;
 }
 
 message NodeServiceStopResponse {}
 
 message NodeServiceRestartRequest {
   string node_id = 1;
-  string org_id = 2;
 }
 
 message NodeServiceRestartResponse {}
 
 message NodeServiceDeleteRequest {
   string node_id = 1;
-  string org_id = 2;
 }
 
 message NodeServiceDeleteResponse {}

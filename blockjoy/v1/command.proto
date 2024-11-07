@@ -76,13 +76,12 @@ message CommandServiceUpdateResponse {
 
 message HostCommand {
   string host_id = 1;
-  string network_name = 7;
 
   oneof command {
-    HostStart start = 3;
-    HostStop stop = 4;
-    HostRestart restart = 5;
-    HostPending pending = 6;
+    HostStart start = 2;
+    HostStop stop = 3;
+    HostRestart restart = 4;
+    HostPending pending = 5;
   }
 }
 
@@ -95,19 +94,18 @@ message HostRestart {}
 message HostPending {}
 
 message NodeCommand {
-  string node_id = 1;
-  string node_name = 2;
-  string host_id = 3;
-  string network_name = 4;
+  string host_id = 1;
+  string node_id = 2;
+  string node_name = 3;
 
   oneof command {
-    NodeCreate create = 5;
-    NodeStart start = 6;
-    NodeStop stop = 7;
-    NodeRestart restart = 8;
-    NodeUpdate update = 9;
-    NodeUpgrade upgrade = 10;
-    NodeDelete delete = 11;
+    NodeCreate create = 4;
+    NodeStart start = 5;
+    NodeStop stop = 6;
+    NodeRestart restart = 7;
+    NodeUpdate update = 8;
+    NodeUpgrade upgrade = 9;
+    NodeDelete delete = 10;
   }
 }
 

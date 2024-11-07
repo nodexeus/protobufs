@@ -6,11 +6,44 @@ import "blockjoy/common/v1/node.proto";
 
 // A service for sending host and node metrics.
 service MetricsService {
-  // Send the metrics for a set of nodes.
-  rpc Node(MetricsServiceNodeRequest) returns (MetricsServiceNodeResponse);
   // Send the metrics for a set of hosts.
   rpc Host(MetricsServiceHostRequest) returns (MetricsServiceHostResponse);
+  // Send the metrics for a set of nodes.
+  rpc Node(MetricsServiceNodeRequest) returns (MetricsServiceNodeResponse);
 }
+
+// Send metrics for a host.
+message MetricsServiceHostRequest {
+  HostMetrics metrics = 1;
+}
+
+// The metrics of a single host.
+message HostMetrics {
+  // The host id of the metrics.
+  string host_id = 1;
+  // The amount of CPU in use (in hundreths of a core).
+  optional uint64 used_cpu_hundreths = 2;
+  // The amount of memory in use (in bytes).
+  optional uint64 used_memory_bytes = 3;
+  // The amount of disk space used (in bytes).
+  optional uint64 used_disk_bytes = 4;
+  // The load during the last minute (in percent).
+  optional double load_one_percent = 5;
+  // The load during the last five minutes (in percent).
+  optional double load_five_percent = 6;
+  // The load during the last fifteen minutes (in percent).
+  optional double load_fifteen_percent = 7;
+  // The amount of network data received since the host was started (in bytes).
+  optional uint64 network_received_bytes = 8;
+  // The amount of network data sent since the host was started (in bytes).
+  optional uint64 network_sent_bytes = 9;
+  // The time since the host started (in seconds).
+  optional uint64 uptime_seconds = 10;
+  // A list of IPs in use by the host.
+  repeated string used_ips = 11;
+}
+
+message MetricsServiceHostResponse {}
 
 // Send metrics for a set of nodes.
 message MetricsServiceNodeRequest {
@@ -34,38 +67,3 @@ message NodeMetrics {
 }
 
 message MetricsServiceNodeResponse {}
-
-// Send metrics for a set of hosts.
-message MetricsServiceHostRequest {
-  repeated HostMetrics metrics = 1;
-}
-
-// The metrics of a single host.
-message HostMetrics {
-  // The host id of the metrics.
-  string host_id = 1;
-  // The org id for a private host.
-  optional string org_id = 2;
-  // The amount of CPU in use (in hundreths of a core).
-  optional uint64 used_cpu_hundreths = 3;
-  // The amount of memory in use (in bytes).
-  optional uint64 used_memory_bytes = 4;
-  // The amount of disk space used (in bytes).
-  optional uint64 used_disk_bytes = 5;
-  // The load during the last minute (in percent).
-  optional double load_one_percent = 6;
-  // The load during the last five minutes (in percent).
-  optional double load_five_percent = 7;
-  // The load during the last fifteen minutes (in percent).
-  optional double load_fifteen_percent = 8;
-  // The amount of network data received since the host was started (in bytes).
-  optional uint64 network_received_bytes = 9;
-  // The amount of network data sent since the host was started (in bytes).
-  optional uint64 network_sent_bytes = 10;
-  // The time since the host started (in seconds).
-  optional uint64 uptime_seconds = 11;
-  // A list of IPs in use by the host.
-  repeated string used_ips = 12;
-}
-
-message MetricsServiceHostResponse {}

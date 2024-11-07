@@ -196,10 +196,10 @@ message NodeServiceReportStatusResponse {}
 
 // Report an error with the node.
 message NodeServiceReportErrorRequest {
-  // The id of the user that created the report.
-  string user_id = 1;
-  // The id of the node that this report pertains to.
-  string node_id = 2;
+  // The node id of the report.
+  string node_id = 1;
+  // The resource creating the report.
+  blockjoy.common.v1.Resource created_by = 2;
   // An error description of the problem.
   string message = 3;
 }
@@ -234,7 +234,7 @@ message NodeServiceUpgradeImageRequest {
   repeated string node_ids = 1;
   // The image_id to upgrade the nodes to.
   string image_id = 2;
-  // The org_id of the image.
+  // The org_id of a private image.
   optional string org_id = 3;
 }
 

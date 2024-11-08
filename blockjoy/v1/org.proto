@@ -115,6 +115,7 @@ enum OrgSortField {
 
 message OrgServiceListResponse {
   repeated Org orgs = 1;
+  uint64 total = 2;
 }
 
 message OrgServiceCreateRequest {

@@ -193,6 +193,7 @@ enum ProtocolSortField {
 
 message ProtocolServiceListProtocolsResponse {
   repeated Protocol protocols = 1;
+  uint64 total = 2;
 }
 
 message ProtocolServiceListVersionsRequest {

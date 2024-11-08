@@ -178,6 +178,7 @@ enum NodeSortField {
 // This response contains the filtered nodes.
 message NodeServiceListResponse {
   repeated Node nodes = 1;
+  uint64 total = 2;
 }
 
 // Report the current status of a node.

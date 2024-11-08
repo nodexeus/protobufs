@@ -178,6 +178,7 @@ enum HostSortField {
 
 message HostServiceListResponse {
   repeated Host hosts = 1;
+  uint64 total = 2;
 }
 
 message HostServiceUpdateRequest {

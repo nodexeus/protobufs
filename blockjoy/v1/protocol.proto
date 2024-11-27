@@ -50,6 +50,8 @@ service ProtocolService {
   rpc GetStats(ProtocolServiceGetStatsRequest) returns (ProtocolServiceGetStatsResponse);
   // List all deployable protocols.
   rpc ListProtocols(ProtocolServiceListProtocolsRequest) returns (ProtocolServiceListProtocolsResponse);
+  // List the different variants for some protocol.
+  rpc ListVariants(ProtocolServiceListVariantsRequest) returns (ProtocolServiceListVariantsResponse);
   // List all versions for some version key.
   rpc ListVersions(ProtocolServiceListVersionsRequest) returns (ProtocolServiceListVersionsResponse);
   // Update existing protocol metadata.
@@ -194,6 +196,17 @@ enum ProtocolSortField {
 message ProtocolServiceListProtocolsResponse {
   repeated Protocol protocols = 1;
   uint64 total = 2;
+}
+
+message ProtocolServiceListVariantsRequest {
+  // The protocol id to list the variants of.
+  string protocol_id = 1;
+  // The org id for private protocols or versions.
+  optional string org_id = 2;
+}
+
+message ProtocolServiceListVariantsResponse {
+  repeated string variant_keys = 1;
 }
 
 message ProtocolServiceListVersionsRequest {

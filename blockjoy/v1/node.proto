@@ -3,6 +3,7 @@ syntax = "proto3";
 package blockjoy.v1;
 
 import "blockjoy/common/v1/config.proto";
+import "blockjoy/common/v1/currency.proto";
 import "blockjoy/common/v1/node.proto";
 import "blockjoy/common/v1/protocol.proto";
 import "blockjoy/common/v1/resource.proto";
@@ -46,6 +47,8 @@ message Node {
   blockjoy.common.v1.Resource created_by = 33;
   google.protobuf.Timestamp created_at = 34;
   google.protobuf.Timestamp updated_at = 35;
+  // The cost of this node.
+  optional blockjoy.common.v1.BillingAmount cost = 36;
 }
 
 // Service for interacting with a node.
@@ -226,6 +229,8 @@ message NodeServiceUpdateConfigRequest {
   optional blockjoy.common.v1.FirewallConfig new_firewall = 7;
   // Update the node tags.
   optional blockjoy.common.v1.UpdateTags update_tags = 8;
+  // The cost of this node.
+  optional blockjoy.common.v1.BillingAmount cost = 9;
 }
 
 message NodeServiceUpdateConfigResponse {}

@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package blockjoy.v1;
 
+import "blockjoy/common/v1/currency.proto";
 import "blockjoy/common/v1/resource.proto";
 import "blockjoy/common/v1/search.proto";
 import "blockjoy/common/v1/tag.proto";
@@ -50,6 +51,8 @@ message Host {
   google.protobuf.Timestamp created_at = 20;
   // When this host was last updated.
   google.protobuf.Timestamp updated_at = 21;
+  // The cost of this host.
+  optional blockjoy.common.v1.BillingAmount cost = 22;
 }
 
 // Service for managing hosts.
@@ -206,6 +209,8 @@ message HostServiceUpdateRequest {
   optional ScheduleType schedule_type = 11;
   // Update the existing host tags.
   optional blockjoy.common.v1.UpdateTags update_tags = 12;
+  // The cost of this host.
+  optional blockjoy.common.v1.BillingAmount cost = 13;
 }
 
 message HostServiceUpdateResponse {

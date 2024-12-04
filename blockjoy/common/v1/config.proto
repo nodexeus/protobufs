@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package blockjoy.common.v1;
 
+import "blockjoy/common/v1/protocol.proto";
+
 // The top-level message encapsulating all node config.
 message NodeConfig {
   VmConfig vm = 1;
@@ -49,6 +51,8 @@ message ImagePropertyValue {
   string key = 1;
   // The configured value of the image property.
   string value = 2;
+  // How this field should be displayed in the UI.
+  UiType ui_type = 3;
 }
 
 // The firewall config of a node.

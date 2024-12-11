@@ -44,16 +44,20 @@ message ImageProperty {
   string default_value = 7;
   // Whether the value may change at runtime.
   bool dynamic_value = 8;
-  // A readable description of this property.
-  optional string description = 9;
   // How this field should be displayed in the UI.
-  blockjoy.common.v1.UiType ui_type = 10;
+  blockjoy.common.v1.UiType ui_type = 9;
+  // The display name of this property.
+  optional string display_name = 10;
+  // The display name of the property group.
+  optional string display_group = 11;
+  // Additional information describing this property.
+  optional string description = 12;
   // Additional CPU cores needed when using this property.
-  optional int64 add_cpu_cores = 11;
+  optional int64 add_cpu_cores = 13;
   // Additional memory bytes needed when using this property.
-  optional int64 add_memory_bytes = 12;
+  optional int64 add_memory_bytes = 14;
   // Additional disk bytes needed when using this property.
-  optional int64 add_disk_bytes = 13;
+  optional int64 add_disk_bytes = 15;
 }
 
 // An identifier to archive data in external storage.
@@ -104,7 +108,7 @@ message ImageServiceAddImageRequest {
 }
 
 message AddImageProperty {
-  // The lookup key for this image property.
+  // The lookup key for this property (in lower-kebab-case).
   string key = 1;
   // A repeated key to group switches and enums.
   optional string key_group = 2;
@@ -116,16 +120,20 @@ message AddImageProperty {
   string default_value = 5;
   // Whether the value may change at runtime.
   bool dynamic_value = 6;
-  // A readable description of this property.
-  optional string description = 7;
   // How this field should be displayed in the UI.
-  blockjoy.common.v1.UiType ui_type = 8;
+  blockjoy.common.v1.UiType ui_type = 7;
+  // The display name of this property.
+  optional string display_name = 8;
+  // The display name of the property group.
+  optional string display_group = 9;
+  // Additional information describing this property.
+  optional string description = 10;
   // Additional CPU cores needed when using this property.
-  optional int64 add_cpu_cores = 9;
+  optional int64 add_cpu_cores = 11;
   // Additional memory bytes needed when using this property.
-  optional int64 add_memory_bytes = 10;
+  optional int64 add_memory_bytes = 12;
   // Additional disk bytes needed when using this property.
-  optional int64 add_disk_bytes = 11;
+  optional int64 add_disk_bytes = 13;
 }
 
 message ArchivePointer {

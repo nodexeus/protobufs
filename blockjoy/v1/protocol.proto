@@ -63,7 +63,7 @@ service ProtocolService {
 message ProtocolServiceAddProtocolRequest {
   // Whether this is public or private protocol.
   optional string org_id = 1;
-  // The lookup key for this protocol.
+  // The lookup key for this protocol (in lower-kebab-case).
   string key = 2;
   // The display name for this protocol.
   string name = 3;

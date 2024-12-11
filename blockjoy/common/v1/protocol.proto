@@ -6,9 +6,9 @@ package blockjoy.common.v1;
 //
 // The string representation is: "{protocol_key}/{variant_key}"
 message ProtocolVersionKey {
-  // The key identifier to the protocol.
+  // The key identifier to the protocol (in lower-kebab-case).
   string protocol_key = 1;
-  // The key identifier to the protocol variant.
+  // The key identifier to the protocol variant (in lower-kebab-case).
   string variant_key = 2;
 }
 

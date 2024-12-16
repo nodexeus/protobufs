@@ -121,18 +121,20 @@ message NodeServiceListRequest {
   repeated NodeSort sort = 5;
   // If non-empty, only return nodes for these protocol ids.
   repeated string protocol_ids = 6;
-  // If non-empty, only return nodes running on these hosts.
-  repeated string host_ids = 7;
-  // If non-empty, only return nodes created by these user ids.
-  repeated string user_ids = 8;
-  // If non-empty, only return nodes with these ip addresses.
-  repeated string ip_addresses = 9;
-  // If non-empty, only return nodes in these states.
-  repeated blockjoy.common.v1.NodeState node_states = 10;
-  // If non-empty, only return nodes with these next states.
-  repeated blockjoy.common.v1.NextState next_states = 11;
+  // If non-empty, only return nodes for these protocol version keys.
+  repeated blockjoy.common.v1.ProtocolVersionKey version_keys = 7;
   // If non-empty, only return nodes with these semantic versions.
-  repeated string semantic_versions = 12;
+  repeated string semantic_versions = 8;
+  // If non-empty, only return nodes running on these hosts.
+  repeated string host_ids = 9;
+  // If non-empty, only return nodes created by these user ids.
+  repeated string user_ids = 10;
+  // If non-empty, only return nodes with these ip addresses.
+  repeated string ip_addresses = 11;
+  // If non-empty, only return nodes in these states.
+  repeated blockjoy.common.v1.NodeState node_states = 12;
+  // If non-empty, only return nodes with these next states.
+  repeated blockjoy.common.v1.NextState next_states = 13;
 }
 
 // The fields used to search nodes rather than just filtering them.

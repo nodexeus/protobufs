@@ -47,8 +47,10 @@ message ImageConfig {
 message ImagePropertyValue {
   // The key of the image property.
   string key = 1;
+  // The group key for switches and enums.
+  optional string key_group = 2;
   // The configured value of the image property.
-  string value = 2;
+  string value = 3;
 }
 
 // The firewall config of a node.

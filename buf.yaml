@@ -4,7 +4,7 @@ build:
     - .direnv
 lint:
   use:
-    - DEFAULT
+    - STANDARD
     - COMMENT_RPC
     - COMMENT_SERVICE
     - PACKAGE_NO_IMPORT_CYCLE

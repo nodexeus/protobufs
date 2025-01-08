@@ -56,52 +56,38 @@ enum NodeHealth {
   NODE_HEALTH_UNHEALTHY = 3;
 }
 
-// Determines the placement of a new node.
-message NodePlacement {
-  oneof placement {
-    // Find a suitable host.
-    NodeScheduler scheduler = 1;
-    // Create a node on this host.
-    string host_id = 2;
-    // Batch create nodes on these hosts.
-    BatchHost batch_host = 3;
-    // Batch create nodes in these regions.
-    BatchRegion batch_region = 4;
+// Determines how and where nodes are created.
+message NodeLauncher {
+  oneof launch {
+    // Create nodes on these hosts.
+    ByHost by_host = 1;
+    // Create nodes in these regions.
+    ByRegion by_region = 2;
   }
 }
 
-// Batch create nodes across multiple hosts.
-message BatchHost {
+// Create nodes across multiple hosts.
+message ByHost {
   repeated HostCount host_counts = 1;
 }
 
-// Batch create nodes on this host.
+// Create nodes on this host.
 message HostCount {
   string host_id = 1;
   uint32 node_count = 2;
 }
 
-// Batch create nodes across multiple regions.
-message BatchRegion {
+// Create nodes across multiple regions.
+message ByRegion {
   repeated RegionCount region_counts = 1;
 }
 
-// Batch create nodes in this region.
+// Create nodes in this region.
 message RegionCount {
   string region_id = 1;
   uint32 node_count = 2;
   optional ResourceAffinity resource = 3;
   optional SimilarNodeAffinity similarity = 4;
-}
-
-// Controls how a suitable host is found for a node.
-message NodeScheduler {
-  // Affinity to scheduling on the most or least heavily utilized hosts.
-  optional ResourceAffinity resource = 1;
-  // Affinity to similar nodes on a host. This takes precedence over `resource`.
-  optional SimilarNodeAffinity similarity = 2;
-  // The region for the node. This takes precedence over `similarity`.
-  optional string region = 3;
 }
 
 // Whether nodes will be scheduled on the most or least heavily utilized hosts.

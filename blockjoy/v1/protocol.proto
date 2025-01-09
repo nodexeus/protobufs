@@ -110,8 +110,8 @@ message ProtocolServiceGetPricingRequest {
   blockjoy.common.v1.ProtocolVersionKey version_key = 1;
   // The org id for private protocols or versions.
   optional string org_id = 2;
-  // The region to request an instance for.
-  string region = 3;
+  // The region id to request an instance for.
+  string region_id = 3;
 }
 
 message ProtocolServiceGetPricingResponse {

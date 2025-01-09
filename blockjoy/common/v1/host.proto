@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package blockjoy.common.v1;
+
+message HostIpAddress {
+  // The ip address.
+  string ip = 1;
+  // Whether the ip address is in use by a node.
+  bool assigned = 2;
+}
+
+// Used to indicate a change in the host status.
+message HostStatus {
+  string host_id = 1;
+  optional HostConnectionStatus connection_status = 2;
+}
+
+// The connection status of a host.
+enum HostConnectionStatus {
+  HOST_CONNECTION_STATUS_UNSPECIFIED = 0;
+  HOST_CONNECTION_STATUS_ONLINE = 1;
+  HOST_CONNECTION_STATUS_OFFLINE = 2;
+}
+
+// When to schedule nodes to a host.
+enum ScheduleType {
+  SCHEDULE_TYPE_UNSPECIFIED = 0;
+  SCHEDULE_TYPE_AUTOMATIC = 1;
+  SCHEDULE_TYPE_MANUAL = 2;
+}

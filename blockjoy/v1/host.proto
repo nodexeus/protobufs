@@ -3,6 +3,7 @@ syntax = "proto3";
 package blockjoy.v1;
 
 import "blockjoy/common/v1/currency.proto";
+import "blockjoy/common/v1/host.proto";
 import "blockjoy/common/v1/resource.proto";
 import "blockjoy/common/v1/search.proto";
 import "blockjoy/common/v1/tag.proto";
@@ -15,14 +16,14 @@ message Host {
   optional string org_id = 2;
   // The org name of a private host.
   optional string org_name = 3;
-  // The region of this host.
-  optional string region = 4;
+  // The region of the host.
+  Region region = 4;
   // The network name of the host.
   string network_name = 5;
   // The display name of the host.
   optional string display_name = 6;
   // When to schedule nodes to this host.
-  ScheduleType schedule_type = 7;
+  blockjoy.common.v1.ScheduleType schedule_type = 7;
   // The operating system running on the host.
   string os = 8;
   // The version of the operating system running on the host.
@@ -34,7 +35,7 @@ message Host {
   // The IP gateway for this host.
   string ip_gateway = 12;
   // IP addresses available to nodes running on this host.
-  repeated HostIpAddress ip_addresses = 13;
+  repeated blockjoy.common.v1.HostIpAddress ip_addresses = 13;
   // The number of logical cores this host has.
   uint64 cpu_cores = 14;
   // The amount of memory this host has (in bytes).
@@ -55,29 +56,42 @@ message Host {
   optional blockjoy.common.v1.BillingAmount cost = 22;
 }
 
-// Service for managing hosts.
-service HostService {
-  // Create a single host.
-  rpc Create(HostServiceCreateRequest) returns (HostServiceCreateResponse);
-  // Get info for a single host.
-  rpc Get(HostServiceGetRequest) returns (HostServiceGetResponse);
-  // List all hosts matching some criteria.
-  rpc List(HostServiceListRequest) returns (HostServiceListResponse);
-  // Update a single host.
-  rpc Update(HostServiceUpdateRequest) returns (HostServiceUpdateResponse);
-  // Delete a single host.
-  rpc Delete(HostServiceDeleteRequest) returns (HostServiceDeleteResponse);
-  // Start a single host.
-  rpc Start(HostServiceStartRequest) returns (HostServiceStartResponse);
-  // Stop a single host.
-  rpc Stop(HostServiceStopRequest) returns (HostServiceStopResponse);
-  // Restart a single host.
-  rpc Restart(HostServiceRestartRequest) returns (HostServiceRestartResponse);
-  // Returns a list of regions where there are hosts available
-  rpc Regions(HostServiceRegionsRequest) returns (HostServiceRegionsResponse);
+message Region {
+  // The id of this region.
+  string region_id = 1;
+  // The display name of this region.
+  string name = 2;
+  // The SKU code for this region.
+  optional string sku_code = 3;
 }
 
-message HostServiceCreateRequest {
+// Service for managing hosts.
+service HostService {
+  // Create a new host.
+  rpc CreateHost(HostServiceCreateHostRequest) returns (HostServiceCreateHostResponse);
+  // Create a new region.
+  rpc CreateRegion(HostServiceCreateRegionRequest) returns (HostServiceCreateRegionResponse);
+  // Get the info for a host.
+  rpc GetHost(HostServiceGetHostRequest) returns (HostServiceGetHostResponse);
+  // Get the info for a region.
+  rpc GetRegion(HostServiceGetRegionRequest) returns (HostServiceGetRegionResponse);
+  // List all hosts matching some criteria.
+  rpc ListHosts(HostServiceListHostsRequest) returns (HostServiceListHostsResponse);
+  // List the regions with available hosts.
+  rpc ListRegions(HostServiceListRegionsRequest) returns (HostServiceListRegionsResponse);
+  // Update an existing host.
+  rpc UpdateHost(HostServiceUpdateHostRequest) returns (HostServiceUpdateHostResponse);
+  // Delete an existing host.
+  rpc DeleteHost(HostServiceDeleteHostRequest) returns (HostServiceDeleteHostResponse);
+  // Start a host.
+  rpc Start(HostServiceStartRequest) returns (HostServiceStartResponse);
+  // Stop a host.
+  rpc Stop(HostServiceStopRequest) returns (HostServiceStopResponse);
+  // Restart a host.
+  rpc Restart(HostServiceRestartRequest) returns (HostServiceRestartResponse);
+}
+
+message HostServiceCreateHostRequest {
   // An org-user's provisioning token to create this host.
   string provision_token = 1;
   // Whether this host is private to the provisioning org.
@@ -86,10 +100,10 @@ message HostServiceCreateRequest {
   string network_name = 3;
   // The display name of the host.
   optional string display_name = 4;
-  // The region of the host
-  optional string region = 5;
+  // The region id of the host.
+  string region_id = 5;
   // When to schedule nodes to this host.
-  ScheduleType schedule_type = 6;
+  blockjoy.common.v1.ScheduleType schedule_type = 6;
   // The operating system this host is running.
   string os = 7;
   // The operating system version.
@@ -112,22 +126,39 @@ message HostServiceCreateRequest {
   blockjoy.common.v1.Tags tags = 16;
 }
 
-message HostServiceCreateResponse {
+message HostServiceCreateHostResponse {
   Host host = 1;
   string token = 2;
   string refresh = 3;
   string provision_org_id = 4;
 }
 
-message HostServiceGetRequest {
+message HostServiceCreateRegionRequest {
+  string name = 1;
+  optional string sku_code = 2;
+}
+
+message HostServiceCreateRegionResponse {
+  Region region = 1;
+}
+
+message HostServiceGetHostRequest {
   string host_id = 1;
 }
 
-message HostServiceGetResponse {
+message HostServiceGetHostResponse {
   Host host = 1;
 }
 
-message HostServiceListRequest {
+message HostServiceGetRegionRequest {
+  string region_id = 1;
+}
+
+message HostServiceGetRegionResponse {
+  Region region = 1;
+}
+
+message HostServiceListHostsRequest {
   // Only list private hosts with these org ids.
   repeated string org_ids = 1;
   // Only list hosts running these blockvisor versions.
@@ -179,12 +210,23 @@ enum HostSortField {
   HOST_SORT_FIELD_UPDATED_AT = 11;
 }
 
-message HostServiceListResponse {
+message HostServiceListHostsResponse {
   repeated Host hosts = 1;
   uint64 total = 2;
 }
 
-message HostServiceUpdateRequest {
+message HostServiceListRegionsRequest {
+  // The image to find hosts for.
+  string image_id = 1;
+  // The org id to include private hosts, images or protocols.
+  optional string org_id = 2;
+}
+
+message HostServiceListRegionsResponse {
+  repeated Region regions = 1;
+}
+
+message HostServiceUpdateHostRequest {
   // The host id to update.
   string host_id = 1;
   // Update the network name of the host.
@@ -192,7 +234,7 @@ message HostServiceUpdateRequest {
   // Update the display name of the host.
   optional string display_name = 3;
   // Update the region of the host.
-  optional string region = 4;
+  optional string region_id = 4;
   // Update the OS running on the host.
   optional string os = 5;
   // Update the OS version running on the host.
@@ -206,16 +248,22 @@ message HostServiceUpdateRequest {
   // Update the amount of disk space on the host.
   optional uint64 disk_bytes = 10;
   // When to schedule nodes to this host.
-  optional ScheduleType schedule_type = 11;
+  optional blockjoy.common.v1.ScheduleType schedule_type = 11;
   // Update the existing host tags.
   optional blockjoy.common.v1.UpdateTags update_tags = 12;
   // The cost of this host.
   optional blockjoy.common.v1.BillingAmount cost = 13;
 }
 
-message HostServiceUpdateResponse {
+message HostServiceUpdateHostResponse {
   Host host = 1;
 }
+
+message HostServiceDeleteHostRequest {
+  string host_id = 1;
+}
+
+message HostServiceDeleteHostResponse {}
 
 message HostServiceStartRequest {
   string host_id = 1;
@@ -234,52 +282,3 @@ message HostServiceRestartRequest {
 }
 
 message HostServiceRestartResponse {}
-
-message HostServiceDeleteRequest {
-  string host_id = 1;
-}
-
-message HostServiceDeleteResponse {}
-
-message HostServiceRegionsRequest {
-  // The image to find hosts for.
-  string image_id = 1;
-  // The org id to include private hosts, images or protocols.
-  optional string org_id = 2;
-}
-
-message HostServiceRegionsResponse {
-  repeated Region regions = 1;
-}
-
-message Region {
-  optional string name = 1;
-  optional string pricing_tier = 2;
-}
-
-message HostIpAddress {
-  // The ip address.
-  string ip = 1;
-  // Whether the ip address is in use by a node.
-  bool assigned = 2;
-}
-
-// Used to indicate a change in the host status.
-message HostStatus {
-  string host_id = 1;
-  optional HostConnectionStatus connection_status = 2;
-}
-
-// The connection status of a host.
-enum HostConnectionStatus {
-  HOST_CONNECTION_STATUS_UNSPECIFIED = 0;
-  HOST_CONNECTION_STATUS_ONLINE = 1;
-  HOST_CONNECTION_STATUS_OFFLINE = 2;
-}
-
-// When to schedule nodes to a host.
-enum ScheduleType {
-  SCHEDULE_TYPE_UNSPECIFIED = 0;
-  SCHEDULE_TYPE_AUTOMATIC = 1;
-  SCHEDULE_TYPE_MANUAL = 2;
-}

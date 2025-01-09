@@ -25,21 +25,21 @@ message Node {
   optional string host_org_id = 11;
   string host_network_name = 12;
   optional string host_display_name = 13;
-  string protocol_id = 14;
-  string protocol_name = 15;
-  string protocol_version_id = 16;
-  blockjoy.common.v1.ProtocolVersionKey version_key = 17;
-  string semantic_version = 18;
-  bool auto_upgrade = 19;
-  string ip_address = 20;
-  string ip_gateway = 21;
-  string dns_name = 22;
-  optional string p2p_address = 23;
-  optional string dns_url = 24;
-  optional uint64 block_height = 25;
-  optional uint64 block_age = 26;
-  optional string note = 27;
-  blockjoy.common.v1.NodePlacement placement = 28;
+  optional string host_region = 14;
+  string protocol_id = 15;
+  string protocol_name = 16;
+  string protocol_version_id = 17;
+  blockjoy.common.v1.ProtocolVersionKey version_key = 18;
+  string semantic_version = 19;
+  bool auto_upgrade = 20;
+  string ip_address = 21;
+  string ip_gateway = 22;
+  string dns_name = 23;
+  optional string p2p_address = 24;
+  optional string dns_url = 25;
+  optional uint64 block_height = 26;
+  optional uint64 block_age = 27;
+  optional string note = 28;
   blockjoy.common.v1.NodeStatus node_status = 29;
   repeated blockjoy.common.v1.NodeJob jobs = 30;
   repeated blockjoy.common.v1.NodeReport reports = 31;
@@ -47,7 +47,6 @@ message Node {
   blockjoy.common.v1.Resource created_by = 33;
   google.protobuf.Timestamp created_at = 34;
   google.protobuf.Timestamp updated_at = 35;
-  // The cost of this node.
   optional blockjoy.common.v1.BillingAmount cost = 36;
 }
 
@@ -85,8 +84,8 @@ message NodeServiceCreateRequest {
   string image_id = 2;
   // Recreate a new node with the config from an existing one.
   optional string old_node_id = 3;
-  // How to determine the host placment of the new node.
-  blockjoy.common.v1.NodePlacement placement = 4;
+  // Determines how and where nodes are created.
+  blockjoy.common.v1.NodeLauncher launcher = 4;
   // The image properties changed from their default values.
   repeated NewImagePropertyValue new_values = 5;
   // Additional firewall rules to add to the node.

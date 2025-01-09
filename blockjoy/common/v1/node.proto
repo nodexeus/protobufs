@@ -56,26 +56,38 @@ enum NodeHealth {
   NODE_HEALTH_UNHEALTHY = 3;
 }
 
-// Determines the placement of a new node.
-message NodePlacement {
-  oneof placement {
-    // Find a suitable host.
-    NodeScheduler scheduler = 1;
-    // Create a node on this host.
-    string host_id = 2;
-    // Create multiple nodes on these hosts.
-    MultipleNodes multiple = 3;
+// Determines how and where nodes are created.
+message NodeLauncher {
+  oneof launch {
+    // Create nodes on these hosts.
+    ByHost by_host = 1;
+    // Create nodes in these regions.
+    ByRegion by_region = 2;
   }
 }
 
-// Controls how a suitable host is found for a node.
-message NodeScheduler {
-  // Affinity to scheduling on the most or least heavily utilized hosts.
-  ResourceAffinity resource = 1;
-  // Affinity to similar nodes on a host. This takes precedence over `resource`.
-  optional SimilarNodeAffinity similarity = 2;
-  // The region for the node. This takes precedence over `similarity`.
-  optional string region = 3;
+// Create nodes across multiple hosts.
+message ByHost {
+  repeated HostCount host_counts = 1;
+}
+
+// Create nodes on this host.
+message HostCount {
+  string host_id = 1;
+  uint32 node_count = 2;
+}
+
+// Create nodes across multiple regions.
+message ByRegion {
+  repeated RegionCount region_counts = 1;
+}
+
+// Create nodes in this region.
+message RegionCount {
+  string region_id = 1;
+  uint32 node_count = 2;
+  optional ResourceAffinity resource = 3;
+  optional SimilarNodeAffinity similarity = 4;
 }
 
 // Whether nodes will be scheduled on the most or least heavily utilized hosts.
@@ -94,15 +106,6 @@ enum SimilarNodeAffinity {
   SIMILAR_NODE_AFFINITY_CLUSTER = 1;
   // Avoid scheduling on hosts running similar nodes (e.g. for redundancy).
   SIMILAR_NODE_AFFINITY_SPREAD = 2;
-}
-
-message MultipleNodes {
-  repeated NodeCount node_counts = 1;
-}
-
-message NodeCount {
-  string host_id = 1;
-  uint32 node_count = 2;
 }
 
 // A job is an auxiliary process for a running node.

@@ -26,7 +26,7 @@ message Node {
   string host_network_name = 12;
   optional string host_display_name = 13;
   string region_id = 14;
-  string region_name = 15;
+  string region_key = 15;
   string protocol_id = 16;
   string protocol_name = 17;
   string protocol_version_id = 18;

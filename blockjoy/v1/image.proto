@@ -64,7 +64,7 @@ message ImageProperty {
 message Archive {
   string archive_id = 1;
   string image_id = 2;
-  string store_id = 3;
+  string store_key = 3;
   repeated string image_property_ids = 4;
 }
 
@@ -141,8 +141,8 @@ message ArchivePointer {
   repeated string new_archive_keys = 1;
   // The archive data pointer for this combination of new_archive properties.
   oneof pointer {
-    // Use this store id.
-    string store_id = 3;
+    // Use this store key.
+    string store_key = 3;
     // This combination of new_archive properties is disallowed.
     google.protobuf.Empty disallowed = 4;
   }
@@ -179,7 +179,7 @@ message ImageServiceListArchivesResponse {
 
 message ImageServiceUpdateArchiveRequest {
   string archive_id = 1;
-  optional string store_id = 2;
+  optional string store_key = 2;
 }
 
 message ImageServiceUpdateArchiveResponse {

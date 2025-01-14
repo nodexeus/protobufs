@@ -37,8 +37,8 @@ message ImageConfig {
   string image_uri = 2;
   // The archive id for this image config.
   string archive_id = 3;
-  // The store id pointing to external archive data.
-  string store_id = 4;
+  // The store key pointing to external archive data.
+  string store_key = 4;
   // The configured image property values.
   repeated PropertyValueConfig values = 5;
 }

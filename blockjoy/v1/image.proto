@@ -20,10 +20,11 @@ message Image {
   uint64 min_cpu_cores = 9;
   uint64 min_memory_bytes = 10;
   uint64 min_disk_bytes = 11;
-  repeated blockjoy.common.v1.RamdiskConfig ramdisks = 12;
-  blockjoy.common.v1.Visibility visibility = 13;
-  google.protobuf.Timestamp created_at = 14;
-  google.protobuf.Timestamp updated_at = 15;
+  string min_babel_version = 12;
+  repeated blockjoy.common.v1.RamdiskConfig ramdisks = 13;
+  blockjoy.common.v1.Visibility visibility = 14;
+  google.protobuf.Timestamp created_at = 15;
+  google.protobuf.Timestamp updated_at = 16;
 }
 
 // A config property of an image.
@@ -95,16 +96,18 @@ message ImageServiceAddImageRequest {
   repeated AddImageProperty properties = 5;
   // The firewall config for this image.
   blockjoy.common.v1.FirewallConfig firewall = 6;
-  // The minimum CPU cores nodes for this image will launch with.
+  // The minimum CPU cores to run this image.
   uint64 min_cpu_cores = 7;
-  // The minimum memory nodes for this image will launch with.
+  // The minimum memory to run this image.
   uint64 min_memory_bytes = 8;
-  // The minimum disk space nodes for this image will launch with.
+  // The minimum disk space to run this image.
   uint64 min_disk_bytes = 9;
+  // The minimum babel version to run this image.
+  string min_babel_version = 10;
   // The set of attached ramdisks.
-  repeated blockjoy.common.v1.RamdiskConfig ramdisks = 10;
+  repeated blockjoy.common.v1.RamdiskConfig ramdisks = 11;
   // Point each combination of new_archive properties to the correct data.
-  repeated ArchivePointer archive_pointers = 11;
+  repeated ArchivePointer archive_pointers = 12;
 }
 
 message AddImageProperty {

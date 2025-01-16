@@ -41,6 +41,8 @@ message ImageConfig {
   string store_key = 4;
   // The configured image property values.
   repeated PropertyValueConfig values = 5;
+  // The minimum semantic babel version to run this image.
+  string min_babel_version = 6;
 }
 
 // A configured image property.

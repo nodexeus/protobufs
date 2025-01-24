@@ -5,30 +5,41 @@ package blockjoy.v1;
 import "blockjoy/common/v1/resource.proto";
 import "google/protobuf/timestamp.proto";
 
-// API key service functionality.
+message ApiKey {
+  // The id of this api key.
+  string api_key_id = 1;
+  // A descriptive label for this api key.
+  string label = 2;
+  // The resource this key takes actions as.
+  blockjoy.common.v1.Resource resource = 3;
+  // The granted set of key permissions.
+  repeated string permissions = 4;
+  // The time this api key was created.
+  google.protobuf.Timestamp created_at = 5;
+}
+
+// Service for managing api keys.
 service ApiKeyService {
   // Create a new api key.
   rpc Create(ApiKeyServiceCreateRequest) returns (ApiKeyServiceCreateResponse);
   // List existing api keys.
   rpc List(ApiKeyServiceListRequest) returns (ApiKeyServiceListResponse);
-  // Update an existing api key.
-  rpc Update(ApiKeyServiceUpdateRequest) returns (ApiKeyServiceUpdateResponse);
-  // Regenerate an existing api key token.
-  rpc Regenerate(ApiKeyServiceRegenerateRequest) returns (ApiKeyServiceRegenerateResponse);
   // Delete an existing api key.
   rpc Delete(ApiKeyServiceDeleteRequest) returns (ApiKeyServiceDeleteResponse);
 }
 
 message ApiKeyServiceCreateRequest {
-  // The (non-unique) label for this api key.
+  // A descriptive label for this api key.
   string label = 1;
-  // The resource of this api key.
+  // The resource this key will take actions as.
   blockjoy.common.v1.Resource resource = 2;
+  // Grant the key these permissions.
+  repeated string permissions = 3;
 }
 
 message ApiKeyServiceCreateResponse {
-  // The bearer secret representation of the api key.
-  optional string api_key = 1;
+  // The bearer secret for this api key.
+  string api_key = 1;
   // The time this api key was created.
   google.protobuf.Timestamp created_at = 2;
 }
@@ -37,48 +48,11 @@ message ApiKeyServiceListRequest {}
 
 message ApiKeyServiceListResponse {
   // A list of the api keys.
-  repeated ListApiKey api_keys = 1;
-}
-
-message ListApiKey {
-  // The unique identifier to this api key.
-  optional string api_key_id = 1;
-  // The (non-unique) label for this api key.
-  optional string label = 2;
-  // The resource of this api key.
-  blockjoy.common.v1.Resource resource = 3;
-  // The time this api key was created.
-  google.protobuf.Timestamp created_at = 4;
-  // The last time this api key was updated.
-  google.protobuf.Timestamp updated_at = 5;
-}
-
-message ApiKeyServiceUpdateRequest {
-  // The unique identifier to the api key to update.
-  string api_key_id = 1;
-  // The (non-unique) new label for this api key.
-  optional string label = 2;
-}
-
-message ApiKeyServiceUpdateResponse {
-  // The time the api key was updated.
-  google.protobuf.Timestamp updated_at = 1;
-}
-
-message ApiKeyServiceRegenerateRequest {
-  // The unique identifier to the api key to regenerate.
-  string api_key_id = 1;
-}
-
-message ApiKeyServiceRegenerateResponse {
-  // The new bearer secret representation for this api key.
-  optional string api_key = 1;
-  // The time the api key was updated.
-  google.protobuf.Timestamp updated_at = 2;
+  repeated ApiKey api_keys = 1;
 }
 
 message ApiKeyServiceDeleteRequest {
-  // The unique identifier to the api key to delete.
+  // The id of the api key to delete.
   string api_key_id = 1;
 }
 

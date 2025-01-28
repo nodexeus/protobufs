@@ -12,6 +12,16 @@ message ProtocolVersionKey {
   string variant_key = 2;
 }
 
+// Metadata associated with a `ProtocolVersionKey`.
+message VersionMetadata {
+  // The lookup key for metadata (e.g. `network`).
+  string metadata_key = 1;
+  // The value of the metadata key (e.g. `mainnet`).
+  string value = 2;
+  // A readable description of what the key and value represent.
+  optional string description = 3;
+}
+
 // The type of field to display in the UI.
 enum UiType {
   UI_TYPE_UNSPECIFIED = 0;

@@ -26,12 +26,13 @@ message ProtocolVersion {
   optional string org_id = 2;
   string protocol_id = 3;
   blockjoy.common.v1.ProtocolVersionKey version_key = 4;
-  string semantic_version = 5;
-  string sku_code = 6;
-  optional string description = 7;
-  blockjoy.common.v1.Visibility visibility = 8;
-  google.protobuf.Timestamp created_at = 9;
-  google.protobuf.Timestamp updated_at = 10;
+  repeated blockjoy.common.v1.VersionMetadata metadata = 5;
+  string semantic_version = 6;
+  string sku_code = 7;
+  optional string description = 8;
+  blockjoy.common.v1.Visibility visibility = 9;
+  google.protobuf.Timestamp created_at = 10;
+  google.protobuf.Timestamp updated_at = 11;
 }
 
 // Service for managing deployable protocols.
@@ -82,12 +83,14 @@ message ProtocolServiceAddVersionRequest {
   optional string org_id = 1;
   // The lookup key of this version.
   blockjoy.common.v1.ProtocolVersionKey version_key = 2;
+  // The metadata associated with the `version_key`.
+  repeated blockjoy.common.v1.VersionMetadata metadata = 3;
   // A semantic version of the protocol software.
-  string semantic_version = 3;
+  string semantic_version = 4;
   // The SKU code for this version (e.g. ETH-MN).
-  string sku_code = 4;
+  string sku_code = 5;
   // A readable description of this protocol version.
-  optional string description = 5;
+  optional string description = 6;
 }
 
 message ProtocolServiceAddVersionResponse {

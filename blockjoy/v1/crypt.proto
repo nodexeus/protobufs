@@ -15,8 +15,8 @@ service CryptService {
 message CryptServiceGetSecretRequest {
   // The resource requesting this secret.
   blockjoy.common.v1.Resource resource = 1;
-  // The secret name to read.
-  string name = 2;
+  // The secret key to read.
+  string key = 2;
 }
 
 message CryptServiceGetSecretResponse {
@@ -27,8 +27,8 @@ message CryptServiceGetSecretResponse {
 message CryptServicePutSecretRequest {
   // The resource writing this secret.
   blockjoy.common.v1.Resource resource = 1;
-  // The secret name to write.
-  string name = 2;
+  // The secret key to write.
+  string key = 2;
   // The secret bytes to encrypt.
   bytes value = 3;
 }

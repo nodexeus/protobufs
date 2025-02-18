@@ -25,6 +25,7 @@ message Image {
   blockjoy.common.v1.Visibility visibility = 14;
   google.protobuf.Timestamp created_at = 15;
   google.protobuf.Timestamp updated_at = 16;
+  optional string dns_scheme = 17;
 }
 
 // A config property of an image.
@@ -108,6 +109,8 @@ message ImageServiceAddImageRequest {
   repeated blockjoy.common.v1.RamdiskConfig ramdisks = 11;
   // Point each combination of new_archive properties to the correct data.
   repeated ArchivePointer archive_pointers = 12;
+  // The DNS scheme (e.g. "https", "wss") for node RPC requests.
+  optional string dns_scheme = 13;
 }
 
 message AddImageProperty {

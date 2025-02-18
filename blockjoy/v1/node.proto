@@ -50,6 +50,7 @@ message Node {
   google.protobuf.Timestamp created_at = 36;
   google.protobuf.Timestamp updated_at = 37;
   optional blockjoy.common.v1.BillingAmount cost = 38;
+  repeated blockjoy.common.v1.VersionMetadata version_metadata = 39;
 }
 
 // Service for interacting with a node.

@@ -199,6 +199,8 @@ message OrgServiceListPaymentMethodsResponse {
 }
 
 message PaymentMethod {
+  // The unique id identifying this payment method.
+  string id = 1;
   // The id of the org to which this payment method belongs.
   optional string org_id = 2;
   // The id of the user that created this payment method.

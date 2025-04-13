@@ -39,7 +39,7 @@ message Node {
   string dns_name = 25;
   optional string p2p_address = 26;
   optional string dns_url = 27;
-  optional uint64 block_height = 28;
+  optional uint64 apr = 28;
   optional uint64 block_age = 29;
   optional string note = 30;
   blockjoy.common.v1.NodeStatus node_status = 31;
@@ -185,7 +185,7 @@ enum NodeSortField {
   NODE_SORT_FIELD_NEXT_STATE = 5;
   NODE_SORT_FIELD_PROTOCOL_STATE = 6;
   NODE_SORT_FIELD_PROTOCOL_HEALTH = 7;
-  NODE_SORT_FIELD_BLOCK_HEIGHT = 8;
+  NODE_SORT_FIELD_APR = 8;
   NODE_SORT_FIELD_CREATED_AT = 9;
   NODE_SORT_FIELD_UPDATED_AT = 10;
 }

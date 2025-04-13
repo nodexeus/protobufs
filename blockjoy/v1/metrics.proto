@@ -56,8 +56,8 @@ message NodeMetrics {
   string node_id = 1;
   // The current status of the node.
   optional blockjoy.common.v1.NodeStatus node_status = 2;
-  // The current height of the blockchain.
-  optional uint64 height = 3;
+  // The current APR of the node.
+  optional uint64 apr = 3;
   // The age of the most recent block (in seconds).
   optional uint64 block_age = 4;
   // Whether the blockchain is in consensus.

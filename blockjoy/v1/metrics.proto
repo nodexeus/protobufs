@@ -57,7 +57,7 @@ message NodeMetrics {
   // The current status of the node.
   optional blockjoy.common.v1.NodeStatus node_status = 2;
   // The current APR of the node.
-  optional uint64 apr = 3;
+  optional double apr = 3;
   // The age of the most recent block (in seconds).
   optional uint64 block_age = 4;
   // Whether the blockchain is in consensus.

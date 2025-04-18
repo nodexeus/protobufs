@@ -60,10 +60,12 @@ message NodeMetrics {
   optional double apr = 3;
   // The age of the most recent block (in seconds).
   optional uint64 block_age = 4;
+  // The APR of the node.
+  optional double apr = 5;
   // Whether the blockchain is in consensus.
-  optional bool consensus = 5;
+  optional bool consensus = 6;
   // A list of jobs running on the node.
-  repeated blockjoy.common.v1.NodeJob jobs = 6;
+  repeated blockjoy.common.v1.NodeJob jobs = 7;
 }
 
 message MetricsServiceNodeResponse {}

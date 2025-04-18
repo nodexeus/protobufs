@@ -41,16 +41,17 @@ message Node {
   optional string dns_url = 27;
   optional double apr = 28;
   optional uint64 block_age = 29;
-  optional string note = 30;
-  blockjoy.common.v1.NodeStatus node_status = 31;
-  repeated blockjoy.common.v1.NodeJob jobs = 32;
-  repeated blockjoy.common.v1.NodeReport reports = 33;
-  blockjoy.common.v1.Tags tags = 34;
-  blockjoy.common.v1.Resource created_by = 35;
-  google.protobuf.Timestamp created_at = 36;
-  google.protobuf.Timestamp updated_at = 37;
-  optional blockjoy.common.v1.BillingAmount cost = 38;
-  repeated blockjoy.common.v1.VersionMetadata version_metadata = 39;
+  optional double apr = 30;
+  optional string note = 31;
+  blockjoy.common.v1.NodeStatus node_status = 32;
+  repeated blockjoy.common.v1.NodeJob jobs = 33;
+  repeated blockjoy.common.v1.NodeReport reports = 34;
+  blockjoy.common.v1.Tags tags = 35;
+  blockjoy.common.v1.Resource created_by = 36;
+  google.protobuf.Timestamp created_at = 37;
+  google.protobuf.Timestamp updated_at = 38;
+  optional blockjoy.common.v1.BillingAmount cost = 39;
+  repeated blockjoy.common.v1.VersionMetadata version_metadata = 40;
 }
 
 // Service for interacting with a node.

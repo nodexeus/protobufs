@@ -56,8 +56,8 @@ message NodeMetrics {
   string node_id = 1;
   // The current status of the node.
   optional blockjoy.common.v1.NodeStatus node_status = 2;
-  // The current APR of the node.
-  optional double apr = 3;
+  // The current block_height of the node.
+  optional uint64 block_height = 3;
   // The age of the most recent block (in seconds).
   optional uint64 block_age = 4;
   // The APR of the node.

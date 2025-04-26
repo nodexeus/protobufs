@@ -52,6 +52,8 @@ message Node {
   optional blockjoy.common.v1.BillingAmount cost = 38;
   repeated blockjoy.common.v1.VersionMetadata version_metadata = 39;
   optional double apr = 40;
+  optional bool jailed = 41;
+  optional string jailed_reason = 42;
 }
 
 // Service for interacting with a node.
@@ -190,6 +192,7 @@ enum NodeSortField {
   NODE_SORT_FIELD_CREATED_AT = 9;
   NODE_SORT_FIELD_UPDATED_AT = 10;
   NODE_SORT_FIELD_APR = 11;
+  NODE_SORT_FIELD_JAILED = 12;
 }
 
 // This response contains the filtered nodes.

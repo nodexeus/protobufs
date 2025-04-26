@@ -66,6 +66,10 @@ message NodeMetrics {
   repeated blockjoy.common.v1.NodeJob jobs = 6;
   // The APR of the node.
   optional double apr = 7;
+  // Whether the node is jailed.
+  optional bool jailed = 8;
+  // The reason for the node being jailed.
+  optional string jailed_reason = 9;
 }
 
 message MetricsServiceNodeResponse {}

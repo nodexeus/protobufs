@@ -54,6 +54,7 @@ message Node {
   optional double apr = 40;
   optional bool jailed = 41;
   optional string jailed_reason = 42;
+  optional string sqd_name = 43;
 }
 
 // Service for interacting with a node.
@@ -193,6 +194,7 @@ enum NodeSortField {
   NODE_SORT_FIELD_UPDATED_AT = 10;
   NODE_SORT_FIELD_APR = 11;
   NODE_SORT_FIELD_JAILED = 12;
+  NODE_SORT_FIELD_SQD_NAME = 13;
 }
 
 // This response contains the filtered nodes.

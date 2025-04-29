@@ -70,6 +70,8 @@ message NodeMetrics {
   optional bool jailed = 8;
   // The reason for the node being jailed.
   optional string jailed_reason = 9;
+  // SQD Name of the node
+  optional string sqd_name = 10;
 }
 
 message MetricsServiceNodeResponse {}

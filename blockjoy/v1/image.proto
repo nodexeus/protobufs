@@ -82,6 +82,20 @@ service ImageService {
   rpc UpdateArchive(ImageServiceUpdateArchiveRequest) returns (ImageServiceUpdateArchiveResponse);
   // Update the config of an existing image.
   rpc UpdateImage(ImageServiceUpdateImageRequest) returns (ImageServiceUpdateImageResponse);
+  
+  // Admin endpoints for image management
+  // List all images with basic info for admin management.
+  rpc ListImages(ImageServiceListImagesRequest) returns (ImageServiceListImagesResponse);
+  // Get detailed image info including all properties for admin management.
+  rpc GetImageDetails(ImageServiceGetImageDetailsRequest) returns (ImageServiceGetImageDetailsResponse);
+  // Add a new property to an existing image.
+  rpc AddImageProperty(ImageServiceAddImagePropertyRequest) returns (ImageServiceAddImagePropertyResponse);
+  // Update an existing image property.
+  rpc UpdateImageProperty(ImageServiceUpdateImagePropertyRequest) returns (ImageServiceUpdateImagePropertyResponse);
+  // Delete an image property.
+  rpc DeleteImageProperty(ImageServiceDeleteImagePropertyRequest) returns (ImageServiceDeleteImagePropertyResponse);
+  // Copy properties from one image version to another.
+  rpc CopyImageProperties(ImageServiceCopyImagePropertiesRequest) returns (ImageServiceCopyImagePropertiesResponse);
 }
 
 message ImageServiceAddImageRequest {
@@ -199,4 +213,93 @@ message ImageServiceUpdateImageRequest {
 
 message ImageServiceUpdateImageResponse {
   Image image = 1;
+}
+
+// Summary information about an image for admin list views.
+message ImageSummary {
+  string image_id = 1;
+  string protocol_name = 2;
+  blockjoy.common.v1.ProtocolVersionKey version_key = 3;
+  uint64 build_version = 4;
+  uint32 property_count = 5;
+  google.protobuf.Timestamp created_at = 6;
+  optional string org_id = 7;
+  optional string description = 8;
+  blockjoy.common.v1.Visibility visibility = 9;
+}
+
+// Request message for listing images with filtering and pagination.
+message ImageServiceListImagesRequest {
+  optional string search = 1;
+  optional string protocol_filter = 2;
+  optional string org_filter = 3;
+  uint32 page = 4;
+  uint32 page_size = 5;
+}
+
+// Response message for listing images.
+message ImageServiceListImagesResponse {
+  repeated ImageSummary images = 1;
+  uint32 total_count = 2;
+}
+
+// Request message for getting detailed image information.
+message ImageServiceGetImageDetailsRequest {
+  string image_id = 1;
+  optional string org_id = 2;
+}
+
+// Response message for getting detailed image information.
+message ImageServiceGetImageDetailsResponse {
+  Image image = 1;
+}
+
+// Request message for adding a new image property.
+message ImageServiceAddImagePropertyRequest {
+  string image_id = 1;
+  AddImageProperty property = 2;
+  bool apply_to_newer_versions = 3;
+}
+
+// Response message for adding a new image property.
+message ImageServiceAddImagePropertyResponse {
+  ImageProperty property = 1;
+  repeated string affected_image_ids = 2;
+}
+
+// Request message for updating an existing image property.
+message ImageServiceUpdateImagePropertyRequest {
+  string image_property_id = 1;
+  AddImageProperty property = 2;
+  bool apply_to_newer_versions = 3;
+}
+
+// Response message for updating an existing image property.
+message ImageServiceUpdateImagePropertyResponse {
+  ImageProperty property = 1;
+  repeated string affected_image_ids = 2;
+}
+
+// Request message for deleting an image property.
+message ImageServiceDeleteImagePropertyRequest {
+  string image_property_id = 1;
+  bool apply_to_newer_versions = 2;
+}
+
+// Response message for deleting an image property.
+message ImageServiceDeleteImagePropertyResponse {
+  repeated string affected_image_ids = 1;
+}
+
+// Request message for copying properties between image versions.
+message ImageServiceCopyImagePropertiesRequest {
+  string source_image_id = 1;
+  repeated string target_image_ids = 2;
+  optional bool overwrite_existing = 3;
+}
+
+// Response message for copying properties between image versions.
+message ImageServiceCopyImagePropertiesResponse {
+  repeated string affected_image_ids = 1;
+  uint32 properties_copied = 2;
 }

@@ -16,7 +16,7 @@ Then each time you want to get new ts files from the changed protos run:
     --ts_proto_out=./generated \
     --ts_proto_opt=env=browser,outputServices=nice-grpc,outputServices=generic-definitions,outputJsonMethods=false,useExactTypes=false,esModuleInterop=true \
     --proto_path=./ \
-    ./v1/*
+    ./blockjoy/v1/*
 ```
 
 

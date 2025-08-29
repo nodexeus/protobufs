@@ -226,6 +226,7 @@ message ImageSummary {
   optional string org_id = 7;
   optional string description = 8;
   blockjoy.common.v1.Visibility visibility = 9;
+  string semantic_version = 10;
 }
 
 // Request message for listing images with filtering and pagination.

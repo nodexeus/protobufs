@@ -60,6 +60,8 @@ message ImageProperty {
   optional int64 add_memory_bytes = 14;
   // Additional disk bytes needed when using this property.
   optional int64 add_disk_bytes = 15;
+  // JSON string array of variant keys where this property should be displayed. NULL means show for all variants.
+  optional string variants = 16;
 }
 
 // An identifier to archive data in external storage.
@@ -154,6 +156,8 @@ message AddImageProperty {
   optional int64 add_memory_bytes = 12;
   // Additional disk bytes needed when using this property.
   optional int64 add_disk_bytes = 13;
+  // JSON string array of variant keys where this property should be displayed. NULL means show for all variants.
+  optional string variants = 14;
 }
 
 message ArchivePointer {

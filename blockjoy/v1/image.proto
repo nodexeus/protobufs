@@ -70,6 +70,8 @@ message Archive {
   string image_id = 2;
   string store_key = 3;
   repeated string image_property_ids = 4;
+  string client_name = 5;
+  string data_directory = 6;
 }
 
 // Service for managing protocol image builds.

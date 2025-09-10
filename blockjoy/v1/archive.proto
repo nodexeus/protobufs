@@ -12,6 +12,11 @@ service ArchiveService {
   rpc GetUploadSlots(ArchiveServiceGetUploadSlotsRequest) returns (ArchiveServiceGetUploadSlotsResponse);
   // Put a new download manifest for retrieval with `GetDownloadManifest`.
   rpc PutDownloadManifest(ArchiveServicePutDownloadManifestRequest) returns (ArchiveServicePutDownloadManifestResponse);
+  
+  // R4.2: Get download metadata for specific client
+  rpc GetDownloadMetadataForClient(GetDownloadMetadataForClientRequest) returns (ArchiveServiceGetDownloadMetadataResponse);
+  // R4.2: Discover available archives for all clients in an image  
+  rpc DiscoverClientArchives(DiscoverClientArchivesRequest) returns (DiscoverClientArchivesResponse);
 }
 
 message ArchiveServiceGetDownloadMetadataRequest {
@@ -138,4 +143,36 @@ message Compression {
     // ZStandard compression, where the value is the compression level.
     int32 zstd = 1;
   }
+}
+
+// R4.2: Request to get download metadata for a specific client
+message GetDownloadMetadataForClientRequest {
+  // The client name (e.g., "reth", "lighthouse")
+  string client_name = 1;
+  // The store key for this client's archive
+  string store_key = 2;
+  // Whether this is a public or private archive.
+  optional string org_id = 3;
+  // The data version (or latest if none).
+  optional uint64 data_version = 4;
+}
+
+// R4.2: Request to discover all client archives for an image
+message DiscoverClientArchivesRequest {
+  // The image ID to discover client archives for
+  string image_id = 1;
+  // Whether this is a public or private archive.
+  optional string org_id = 2;
+}
+
+// R4.2: Response containing all client archives for an image
+message DiscoverClientArchivesResponse {
+  repeated ClientArchive client_archives = 1;
+}
+
+// R4.2: Information about a client-specific archive
+message ClientArchive {
+  string client_name = 1;
+  string store_key = 2;
+  string data_directory = 3;
 }

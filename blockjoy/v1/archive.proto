@@ -10,6 +10,8 @@ service ArchiveService {
   rpc GetDownloadChunks(ArchiveServiceGetDownloadChunksRequest) returns (ArchiveServiceGetDownloadChunksResponse);
   // Get presigned upload URLs for archive data chunks.
   rpc GetUploadSlots(ArchiveServiceGetUploadSlotsRequest) returns (ArchiveServiceGetUploadSlotsResponse);
+  // Get presigned upload URLs for archive data chunks using store key.
+  rpc GetUploadSlotsByStoreKey(ArchiveServiceGetUploadSlotsByStoreKeyRequest) returns (ArchiveServiceGetUploadSlotsResponse);
   // Put a new download manifest for retrieval with `GetDownloadManifest`.
   rpc PutDownloadManifest(ArchiveServicePutDownloadManifestRequest) returns (ArchiveServicePutDownloadManifestResponse);
   
@@ -58,6 +60,20 @@ message ArchiveServiceGetDownloadChunksResponse {
 message ArchiveServiceGetUploadSlotsRequest {
   // An identifier to some property-set archive.
   string archive_id = 1;
+  // Whether this is a public or private archive.
+  optional string org_id = 2;
+  // The data version. If not set, will increment the last data version.
+  optional uint64 data_version = 3;
+  // Expiry duration of an upload URL (in seconds).
+  optional uint32 url_expires = 4;
+  // The requested data slot indexes to generate upload URLs for.
+  repeated uint32 slot_indexes = 5;
+}
+
+// R2.5: Request to get upload slots using store key for multi-client uploads
+message ArchiveServiceGetUploadSlotsByStoreKeyRequest {
+  // The store key for this client's archive
+  string store_key = 1;
   // Whether this is a public or private archive.
   optional string org_id = 2;
   // The data version. If not set, will increment the last data version.

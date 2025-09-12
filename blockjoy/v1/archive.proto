@@ -12,6 +12,10 @@ service ArchiveService {
   rpc GetUploadSlots(ArchiveServiceGetUploadSlotsRequest) returns (ArchiveServiceGetUploadSlotsResponse);
   // Get presigned upload URLs for archive data chunks using store key.
   rpc GetUploadSlotsByStoreKey(ArchiveServiceGetUploadSlotsByStoreKeyRequest) returns (ArchiveServiceGetUploadSlotsResponse);
+  // Get the download manifest metadata using store key.
+  rpc GetDownloadMetadataByStoreKey(ArchiveServiceGetDownloadMetadataByStoreKeyRequest) returns (ArchiveServiceGetDownloadMetadataResponse);
+  // Get presigned download URLs for download manifest data chunks using store key.
+  rpc GetDownloadChunksByStoreKey(ArchiveServiceGetDownloadChunksByStoreKeyRequest) returns (ArchiveServiceGetDownloadChunksResponse);
   // Put a new download manifest for retrieval with `GetDownloadManifest`.
   rpc PutDownloadManifest(ArchiveServicePutDownloadManifestRequest) returns (ArchiveServicePutDownloadManifestResponse);
   
@@ -82,6 +86,28 @@ message ArchiveServiceGetUploadSlotsByStoreKeyRequest {
   optional uint32 url_expires = 4;
   // The requested data slot indexes to generate upload URLs for.
   repeated uint32 slot_indexes = 5;
+}
+
+// Request to get download metadata using store key for multi-client downloads
+message ArchiveServiceGetDownloadMetadataByStoreKeyRequest {
+  // The store key for this client's archive
+  string store_key = 1;
+  // Whether this is a public or private archive.
+  optional string org_id = 2;
+  // The data version (or latest if none).
+  optional uint64 data_version = 3;
+}
+
+// Request to get download chunks using store key for multi-client downloads
+message ArchiveServiceGetDownloadChunksByStoreKeyRequest {
+  // The store key for this client's archive
+  string store_key = 1;
+  // Whether this is a public or private archive.
+  optional string org_id = 2;
+  // The data version for the download manifest.
+  uint64 data_version = 3;
+  // The set of chunk indexes to generate download URLs for.
+  repeated uint32 chunk_indexes = 4;
 }
 
 message ArchiveServiceGetUploadSlotsResponse {

@@ -18,6 +18,8 @@ service ArchiveService {
   rpc GetDownloadChunksByStoreKey(ArchiveServiceGetDownloadChunksByStoreKeyRequest) returns (ArchiveServiceGetDownloadChunksResponse);
   // Put a new download manifest for retrieval with `GetDownloadManifest`.
   rpc PutDownloadManifest(ArchiveServicePutDownloadManifestRequest) returns (ArchiveServicePutDownloadManifestResponse);
+  // Put a new download manifest using store key for multi-client uploads.
+  rpc PutDownloadManifestByStoreKey(ArchiveServicePutDownloadManifestByStoreKeyRequest) returns (ArchiveServicePutDownloadManifestResponse);
   
   // R4.2: Get download metadata for specific client
   rpc GetDownloadMetadataForClient(GetDownloadMetadataForClientRequest) returns (ArchiveServiceGetDownloadMetadataResponse);
@@ -130,6 +132,22 @@ message UploadSlot {
 message ArchiveServicePutDownloadManifestRequest {
   // An identifier to some property-set archive.
   string archive_id = 1;
+  // Whether this is a public or private archive.
+  optional string org_id = 2;
+  // The data version to save.
+  uint64 data_version = 3;
+  // The total size (in bytes) of the uncompressed data.
+  uint64 total_size = 4;
+  // The chunk compression type.
+  optional Compression compression = 5;
+  // Metadata for each archive data chunk.
+  repeated ArchiveChunk chunks = 6;
+}
+
+// Request to put download manifest using store key for multi-client uploads
+message ArchiveServicePutDownloadManifestByStoreKeyRequest {
+  // The store key for this client's archive
+  string store_key = 1;
   // Whether this is a public or private archive.
   optional string org_id = 2;
   // The data version to save.

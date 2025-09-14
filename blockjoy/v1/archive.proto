@@ -158,6 +158,12 @@ message ArchiveServicePutDownloadManifestByStoreKeyRequest {
   optional Compression compression = 5;
   // Metadata for each archive data chunk.
   repeated ArchiveChunk chunks = 6;
+  // R4.2: The image ID this archive belongs to (for multi-client support)
+  optional string image_id = 7;
+  // R4.2: The client name (e.g., "reth", "lighthouse") - derived from store_key if not provided
+  optional string client_name = 8;
+  // R4.2: The data directory path - derived from store_key if not provided
+  optional string data_directory = 9;
 }
 
 message ArchiveServicePutDownloadManifestResponse {}

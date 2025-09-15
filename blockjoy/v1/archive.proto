@@ -266,4 +266,6 @@ message GetS3ConfigResponse {
   optional string session_token = 5;
   // Expiration time for the credentials (in seconds from now)
   optional uint32 expires_in = 6;
+  // Custom endpoint URL for S3-compatible services (e.g., MinIO, R2)
+  optional string endpoint_url = 7;
 }

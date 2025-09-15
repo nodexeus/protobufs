@@ -23,8 +23,11 @@ service ArchiveService {
   
   // R4.2: Get download metadata for specific client
   rpc GetDownloadMetadataForClient(GetDownloadMetadataForClientRequest) returns (ArchiveServiceGetDownloadMetadataResponse);
-  // R4.2: Discover available archives for all clients in an image  
+  // R4.2: Discover available archives for all clients in an image
   rpc DiscoverClientArchives(DiscoverClientArchivesRequest) returns (DiscoverClientArchivesResponse);
+
+  // Get S3 configuration for direct bucket access to discover snapshots
+  rpc GetS3Config(GetS3ConfigRequest) returns (GetS3ConfigResponse);
 }
 
 message ArchiveServiceGetDownloadMetadataRequest {
@@ -241,4 +244,26 @@ message ClientArchive {
   string client_name = 1;
   string store_key = 2;
   string data_directory = 3;
+}
+
+// Request for S3 configuration
+message GetS3ConfigRequest {
+  // Optional: specify if you want read-only or read-write access
+  optional bool read_only = 1;
+}
+
+// Response with S3 configuration and temporary credentials
+message GetS3ConfigResponse {
+  // S3 bucket name
+  string bucket = 1;
+  // AWS region
+  string region = 2;
+  // Temporary access key ID
+  string access_key_id = 3;
+  // Temporary secret access key
+  string secret_access_key = 4;
+  // Session token for temporary credentials
+  optional string session_token = 5;
+  // Expiration time for the credentials (in seconds from now)
+  optional uint32 expires_in = 6;
 }

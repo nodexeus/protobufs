@@ -1,0 +1,151 @@
+syntax = "proto3";
+
+package blockjoy.v1;
+
+import "google/protobuf/timestamp.proto";
+
+// The kind of load balancer engine. Only BASIC is implemented in v1;
+// ADVANCED_RPC is reserved for the future eRPC engine.
+enum LbType {
+  LB_TYPE_UNSPECIFIED = 0;
+  LB_TYPE_BASIC = 1;
+  LB_TYPE_ADVANCED_RPC = 2;
+}
+
+// The backend selection policy.
+enum LbPolicy {
+  LB_POLICY_UNSPECIFIED = 0;
+  LB_POLICY_ROUND_ROBIN = 1;
+  LB_POLICY_LEAST_CONN = 2;
+}
+
+// Whether a member is a platform node or an off-platform endpoint.
+enum LbMemberKind {
+  LB_MEMBER_KIND_UNSPECIFIED = 0;
+  LB_MEMBER_KIND_NODE = 1;
+  LB_MEMBER_KIND_EXTERNAL = 2;
+}
+
+// The upstream scheme the load balancer uses to reach a member.
+enum LbMemberScheme {
+  LB_MEMBER_SCHEME_UNSPECIFIED = 0;
+  LB_MEMBER_SCHEME_HTTP = 1;
+  LB_MEMBER_SCHEME_HTTPS = 2;
+}
+
+// A single backend behind a load balancer.
+message LoadBalancerMember {
+  string member_id = 1;
+  LbMemberKind kind = 2;
+  // Set when kind == NODE.
+  optional string node_id = 3;
+  // The dial host. Derived from node IP for NODE members; user-supplied for EXTERNAL.
+  string host = 4;
+  uint32 port = 5;
+  LbMemberScheme scheme = 6;
+  bool enabled = 7;
+}
+
+// A load balancer owned by an org, backed by a Caddy node.
+message LoadBalancer {
+  string lb_id = 1;
+  string org_id = 2;
+  // The user-chosen short name (DNS label).
+  string name = 3;
+  // The full public hostname, e.g. reth-a3f9k.lb.nodexeus.io.
+  string fqdn = 4;
+  LbType type = 5;
+  LbPolicy policy = 6;
+  // The id of the backing Caddy node.
+  string node_id = 7;
+  repeated LoadBalancerMember members = 8;
+  google.protobuf.Timestamp created_at = 9;
+  google.protobuf.Timestamp updated_at = 10;
+}
+
+// A member to add to a load balancer.
+message NewLbMember {
+  LbMemberKind kind = 1;
+  // Required when kind == NODE; ignored for EXTERNAL.
+  optional string node_id = 2;
+  // Required when kind == EXTERNAL; ignored for NODE (derived from node IP).
+  optional string host = 3;
+  uint32 port = 4;
+  LbMemberScheme scheme = 5;
+}
+
+// Manages load balancers for an org.
+service LoadBalancerService {
+  // Create a new load balancer, provisioning its backing Caddy node.
+  rpc Create(LoadBalancerServiceCreateRequest) returns (LoadBalancerServiceCreateResponse);
+  // Get a single load balancer by id.
+  rpc Get(LoadBalancerServiceGetRequest) returns (LoadBalancerServiceGetResponse);
+  // List load balancers for an org.
+  rpc List(LoadBalancerServiceListRequest) returns (LoadBalancerServiceListResponse);
+  // Update a load balancer's name and/or policy.
+  rpc Update(LoadBalancerServiceUpdateRequest) returns (LoadBalancerServiceUpdateResponse);
+  // Delete a load balancer, its DNS record and backing node.
+  rpc Delete(LoadBalancerServiceDeleteRequest) returns (LoadBalancerServiceDeleteResponse);
+  // Add a member behind a load balancer.
+  rpc AddMember(LoadBalancerServiceAddMemberRequest) returns (LoadBalancerServiceAddMemberResponse);
+  // Remove a member from a load balancer.
+  rpc RemoveMember(LoadBalancerServiceRemoveMemberRequest) returns (LoadBalancerServiceRemoveMemberResponse);
+}
+
+message LoadBalancerServiceCreateRequest {
+  string org_id = 1;
+  string name = 2;
+  LbPolicy policy = 3;
+  // The region the backing Caddy node is placed in.
+  string region_id = 4;
+}
+message LoadBalancerServiceCreateResponse {
+  LoadBalancer load_balancer = 1;
+}
+
+message LoadBalancerServiceGetRequest {
+  string lb_id = 1;
+}
+message LoadBalancerServiceGetResponse {
+  LoadBalancer load_balancer = 1;
+}
+
+message LoadBalancerServiceListRequest {
+  string org_id = 1;
+  uint64 offset = 2;
+  uint64 limit = 3;
+}
+message LoadBalancerServiceListResponse {
+  repeated LoadBalancer load_balancers = 1;
+  uint64 total = 2;
+}
+
+message LoadBalancerServiceUpdateRequest {
+  string lb_id = 1;
+  optional string name = 2;
+  optional LbPolicy policy = 3;
+}
+message LoadBalancerServiceUpdateResponse {
+  LoadBalancer load_balancer = 1;
+}
+
+message LoadBalancerServiceDeleteRequest {
+  string lb_id = 1;
+}
+message LoadBalancerServiceDeleteResponse {}
+
+message LoadBalancerServiceAddMemberRequest {
+  string lb_id = 1;
+  NewLbMember member = 2;
+}
+message LoadBalancerServiceAddMemberResponse {
+  LoadBalancer load_balancer = 1;
+}
+
+message LoadBalancerServiceRemoveMemberRequest {
+  string lb_id = 1;
+  string member_id = 2;
+}
+message LoadBalancerServiceRemoveMemberResponse {
+  LoadBalancer load_balancer = 1;
+}

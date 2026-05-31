@@ -106,6 +106,7 @@ message NodeCommand {
     NodeUpdate update = 8;
     NodeUpgrade upgrade = 9;
     NodeDelete delete = 10;
+    NodeRunPlugin run_plugin = 11;
   }
 }
 
@@ -136,6 +137,15 @@ message NodeUpgrade {
 }
 
 message NodeDelete {}
+
+// Invoke a babel plugin function on a running node with an opaque payload.
+// The API-reachable equivalent of `bv node run <function> <payload>`.
+message NodeRunPlugin {
+  // The plugin function (custom rhai method) to invoke.
+  string function = 1;
+  // Opaque payload passed to the function as its single string argument.
+  bytes payload = 2;
+}
 
 // Exit code type after executing a command.
 enum CommandExitCode {

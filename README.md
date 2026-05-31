@@ -1,15 +1,96 @@
-# gRCP API protobuf definitions
-[![GitHub Super-Linter](https://github.com/blockjoy/api-proto/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/marketplace/actions/super-linter)
+# BlockVisor API Protobuf Definitions
 
-## Compilation for TypeScript
+Protobuf / gRPC API definitions for `blockvisor-api`, the control plane of the BlockVisor stack. This repository contains **only `.proto` files** — no generated code is committed. Each consumer (the Rust API server, the TypeScript frontend, BlockVisor host agents) generates its own bindings from these definitions.
 
-Run this for the initial setup:
+## Layout
+
+Two packages, mirrored by directory:
+
+| Path | Package | Contents |
+| --- | --- | --- |
+| `blockjoy/v1/` | `blockjoy.v1` | One file per gRPC service, plus that service's request/response messages. |
+| `blockjoy/common/v1/` | `blockjoy.common.v1` | Shared, service-agnostic types with **no services** (e.g. `Resource`, node/VM/image config, firewall rules, currency, search/tag helpers). |
+
+The `blockjoy.v1` services import shared types from `blockjoy.common.v1`. Import cycles between packages are forbidden (enforced by the `PACKAGE_NO_IMPORT_CYCLE` lint rule).
+
+## Services (`blockjoy/v1/`)
+
+| File | Service | Purpose |
+| --- | --- | --- |
+| `api_key.proto` | `ApiKeyService` | Create, list, and delete API keys. |
+| `archive.proto` | `ArchiveService` | Presigned download/upload of archived protocol data, including multi-client (`ByStoreKey`) flows and direct S3 config. |
+| `auth.proto` | `AuthService` | Login, token refresh, registration confirmation, password reset/update, permission listing. |
+| `bundle.proto` | `BundleService` | Retrieve bundle URLs and list bundle versions. |
+| `command.proto` | `CommandService` | Deliver host/node commands and collect acknowledgements and status updates. |
+| `crypt.proto` | `CryptService` | Get/put resource-scoped encrypted secrets. |
+| `discovery.proto` | `DiscoveryService` | Service discovery (e.g. notification/MQTT URL). |
+| `event.proto` | *(none)* | Event payload messages only (node/host/org/invitation events). |
+| `host.proto` | `HostService` | CRUD for hosts and regions; start/stop/restart hosts. |
+| `image.proto` | `ImageService` | Manage protocol image builds, archives, and image properties. |
+| `invitation.proto` | `InvitationService` | Create/list/accept/decline/revoke org invitations; admin bulk invite. |
+| `metrics.proto` | `MetricsService` | Submit host and node metrics. |
+| `node.proto` | `NodeService` | Node lifecycle (create/get/list/start/stop/restart/delete), config updates, image upgrades, status/error reporting. |
+| `org.proto` | `OrgService` | Org CRUD, membership, provision tokens, billing/payment/address. |
+| `protocol.proto` | `ProtocolService` | Manage deployable protocols, versions, variants, pricing, and stats. |
+| `user.proto` | `UserService` | User CRUD and user settings. |
+
+## Command & node lifecycle
+
+`CommandService` delivers `Command` messages, each wrapping either a `NodeCommand` or a `HostCommand` (`command.proto`).
+
+- **Node commands:** `NodeCreate`, `NodeStart`, `NodeStop`, `NodeRestart`, `NodeUpdate`, `NodeUpgrade`, `NodeDelete`.
+- **Host commands:** `HostStart`, `HostStop`, `HostRestart`, `HostPending`.
+
+A command can report a `CommandExitCode` (e.g. `OK`, `INTERNAL_ERROR`, `NODE_NOT_FOUND`, `BLOCKING_JOB_RUNNING`, `SERVICE_NOT_READY`, `SERVICE_BROKEN`, `NOT_SUPPORTED`, `NODE_UPGRADE_ROLLBACK`, `NODE_UPGRADE_FAILURE`).
+
+Node state is reported via `NodeStatus` (`blockjoy/common/v1/node.proto`). `NodeState`:
+
+```mermaid
+graph TD;
+    STARTING --> RUNNING;
+    RUNNING --> STOPPED;
+    STOPPED --> STARTING;
+    RUNNING --> UPGRADING --> RUNNING;
+    RUNNING --> FAILED;
+    STOPPED --> DELETING --> DELETED;
+```
+
+`NextState` (`STOPPING`, `DELETING`, `UPGRADING`) signals the transition a node has been asked to make. Health is tracked separately via `NodeHealth` (`HEALTHY` / `NEUTRAL` / `UNHEALTHY`).
+
+## Conventions
+
+- **Service naming:** each service is `XService`; RPCs are verbs (`Get`, `List`, `Create`, `Update`, `Delete`, …).
+- **Message naming:** request/response messages are `XServiceMethodRequest` / `XServiceMethodResponse` (e.g. `ArchiveServiceGetDownloadMetadataRequest`). Match this long form for new RPCs.
+- **Comments required:** every service and RPC needs a leading doc comment (enforced by `COMMENT_SERVICE` / `COMMENT_RPC`).
+- **Enums:** follow the `STANDARD` convention — prefixed values with a `_UNSPECIFIED = 0` zero value (e.g. `NODE_STATE_UNSPECIFIED`).
+- **Optional fields:** a field that may be absent is `optional`. For update RPCs, an unset field generally means "do not update" — clients cannot null out a field by omitting it.
+
+## Tooling & checks
+
+Tooling is provided via a Nix flake + [direnv](https://direnv.net) (`.envrc` is `use flake`). Entering the directory loads a dev shell with [`buf`](https://buf.build) on `PATH`. Without Nix, install `buf` manually.
+
 ```bash
-npm install protobufjs long nice-grpc-common grpc-tools ts-proto
+buf lint                                     # lint (STANDARD, COMMENT_RPC, COMMENT_SERVICE, PACKAGE_NO_IMPORT_CYCLE)
+buf format -w                                # auto-format in place
+buf format --diff --exit-code                # check formatting (CI fails on any diff)
+buf breaking --against '.git#branch=main'    # detect breaking changes vs main
+```
+
+CI (`.github/workflows/test.yml`) runs lint, the format check, and breaking-change detection against `main` on every push and PR. **All three must pass.** Because breaking-change detection is enforced, add new fields with new field numbers rather than renaming, removing, or renumbering existing ones.
+
+When adding an RPC: add it to the `service` block with a doc comment, define the matching `Request`/`Response` messages in the same file, then run `buf format -w` and `buf lint`.
+
+## Generating TypeScript bindings
+
+Bindings are generated with [`ts-proto`](https://github.com/stephenh/ts-proto) (dependencies declared in `package.json`). Initial setup:
+
+```bash
+npm install
 mkdir generated
 ```
 
-Then each time you want to get new ts files from the changed protos run:
+Then regenerate after changing protos:
+
 ```bash
 ./node_modules/.bin/grpc_tools_node_protoc \
     --plugin=protoc-gen-ts_proto=./node_modules/.bin/protoc-gen-ts_proto \
@@ -19,79 +100,4 @@ Then each time you want to get new ts files from the changed protos run:
     ./blockjoy/v1/*
 ```
 
-
-## API v1
-
-### HostsService
-
-#### InfoUpdate
-
-
-Update host info. Possible fields are defined in [host.proto](https://github.com/blockjoy/api-proto/blob/63e00e0fdc527b737da2b4b8e3d051dc89e0d148/blockjoy/api/v1/host.proto#L14-L22)
-Fields set to None are _NOT_ updated resulting in not being able to set a field to null.
-
-
-#### Provision
-
-
-see [OpenAPI doc](https://stakejoy.stoplight.io/docs/blockvisor-api/6119082e85f3b-claim-a-host-provision)
-Calling HostsService.Provision results in claiming the host provision earlier created during BV setup.
-
-The provision token required in [ProvisionHostRequest](https://github.com/blockjoy/api-proto/blob/63e00e0fdc527b737da2b4b8e3d051dc89e0d148/blockjoy/api/v1/host.proto#L26)
-is assigned to the user who provisioned (registered) the host by showing it on the command-line.
-
-
-### Command flow service
-
-
-#### Commands
-
-
-This represents a bidirectional stream, where the stakejoy-api sends commands and retrieves status updates sent by BV
-asynchronously. Commands are defined to be at a single node level, so each command will be executed by BV (via babel)
-against a single node on given host.
-
-
-Possible commands are (defined in [node.proto](https://github.com/blockjoy/api-proto/blob/main/blockjoy/api/v1/node.proto)):
-
-- **NodeStart:** Start node VM
-- **NodeStop:** Stop node VM
-- **NodeRestart:** Restart node VM
-- **NodeUpgrade:** Upgrade node VM
-- **NodeInfoUpdate:** Force node status update
-- **NodeInfoGet:** Force retrieving current node status
-- **NodeCreate:** Create a node
-- **NodeDelete:** Delete a node
-- **NodeGenericCommand:** Generic command used for building yet unknown commands (use with caution! Try to create a dedicated command instead if applicable)
-- **HostGenericCommand:** Generic host command (same here: use with caution!)
-- **HostUpdateBVS:** Update BVS
-- **HostRestartBVS:** Restart BVS
-- **HostRemoveBVS:** Remove BVS from host
-
-
-All commands are wrapped inside a [NodeCommand](https://github.com/blockjoy/api-proto/blob/63e00e0fdc527b737da2b4b8e3d051dc89e0d148/blockjoy/api/v1/node.proto#L75) message, containing the node ID and corresponding metadata.
-
-
-**Info updates**
-
-
-Info updates will be sent from BV to API. Possible updates:
-
-
-- HostInfo
-- NodeInfo
-- CommandInfo
-
-
-#### Container states flow
-
-```mermaid
-graph TD;
-    UndefinedContainerStatus --> Installing --> Creating;
-    Creating --> Stopped;
-    Stopped --> Starting --> Running;
-    Running --> Stopping --> Stopped;
-    Running --> Upgrading --> Upgraded --> Running;
-    Stopped --> Deleting --> Deleted;
-    Stopped --> Snapshotting --> Starting;
-```
+The `generated/` directory is git-ignored.

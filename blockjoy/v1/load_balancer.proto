@@ -17,6 +17,14 @@ enum LbPolicy {
   LB_POLICY_UNSPECIFIED = 0;
   LB_POLICY_ROUND_ROBIN = 1;
   LB_POLICY_LEAST_CONN = 2;
+  // Always selects the first available backend.
+  LB_POLICY_FIRST = 3;
+  // Selects a backend at random.
+  LB_POLICY_RANDOM = 4;
+  // Hashes the client IP to select a backend.
+  LB_POLICY_IP_HASH = 5;
+  // Hashes the request URI to select a backend.
+  LB_POLICY_URI_HASH = 6;
 }
 
 // Whether a member is a platform node or an off-platform endpoint.

@@ -4,14 +4,6 @@ package blockjoy.v1;
 
 import "google/protobuf/timestamp.proto";
 
-// The kind of load balancer engine. Only BASIC is implemented in v1;
-// ADVANCED_RPC is reserved for the future eRPC engine.
-enum LbType {
-  LB_TYPE_UNSPECIFIED = 0;
-  LB_TYPE_BASIC = 1;
-  LB_TYPE_ADVANCED_RPC = 2;
-}
-
 // The backend selection policy.
 enum LbPolicy {
   LB_POLICY_UNSPECIFIED = 0;
@@ -62,13 +54,18 @@ message LoadBalancer {
   string name = 3;
   // The full public hostname, e.g. reth-a3f9k.lb.nodexeus.io.
   string fqdn = 4;
-  LbType type = 5;
+  reserved 5;
+  reserved "type";
   LbPolicy policy = 6;
   // The id of the backing Caddy node.
   string node_id = 7;
   repeated LoadBalancerMember members = 8;
   google.protobuf.Timestamp created_at = 9;
   google.protobuf.Timestamp updated_at = 10;
+  // The resolved engine key, e.g. "caddy" (for display).
+  string engine = 11;
+  // The backing image.
+  string image_id = 12;
 }
 
 // A member to add to a load balancer.
@@ -98,6 +95,8 @@ service LoadBalancerService {
   rpc AddMember(LoadBalancerServiceAddMemberRequest) returns (LoadBalancerServiceAddMemberResponse);
   // Remove a member from a load balancer.
   rpc RemoveMember(LoadBalancerServiceRemoveMemberRequest) returns (LoadBalancerServiceRemoveMemberResponse);
+  // List the load balancer engine offerings available to an org.
+  rpc ListEngines(LoadBalancerServiceListEnginesRequest) returns (LoadBalancerServiceListEnginesResponse);
 }
 
 message LoadBalancerServiceCreateRequest {
@@ -106,6 +105,8 @@ message LoadBalancerServiceCreateRequest {
   LbPolicy policy = 3;
   // The region the backing Caddy node is placed in.
   string region_id = 4;
+  // The backing image to provision the load balancer from.
+  string image_id = 5;
 }
 message LoadBalancerServiceCreateResponse {
   LoadBalancer load_balancer = 1;
@@ -156,4 +157,23 @@ message LoadBalancerServiceRemoveMemberRequest {
 }
 message LoadBalancerServiceRemoveMemberResponse {
   LoadBalancer load_balancer = 1;
+}
+
+message LoadBalancerServiceListEnginesRequest {
+  string org_id = 1;
+}
+
+// A load balancer engine offering: a marketed variant backed by an image.
+message LbEngineOffering {
+  string image_id = 1;
+  string version_id = 2;
+  // The marketed variant name, e.g. "Basic".
+  string display_name = 3;
+  string description = 4;
+  // The hidden engine key, e.g. "caddy".
+  string engine = 5;
+  repeated LbPolicy policies = 6;
+}
+message LoadBalancerServiceListEnginesResponse {
+  repeated LbEngineOffering offerings = 1;
 }

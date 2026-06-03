@@ -107,6 +107,7 @@ message NodeCommand {
     NodeUpgrade upgrade = 9;
     NodeDelete delete = 10;
     NodeRunPlugin run_plugin = 11;
+    NodeRename rename = 12;
   }
 }
 
@@ -145,6 +146,15 @@ message NodeRunPlugin {
   string function = 1;
   // Opaque payload passed to the function as its single string argument.
   bytes payload = 2;
+}
+
+// Rename a node's identity (name + dns). Applied by the host to its in-memory
+// name index and the cached node state; the subsequent NodeRestart re-renders
+// config files with the new NODE_NAME.
+message NodeRename {
+  string node_id = 1;
+  string new_node_name = 2;
+  string new_dns_name = 3;
 }
 
 // Exit code type after executing a command.

@@ -81,6 +81,10 @@ service NodeService {
   rpc Restart(NodeServiceRestartRequest) returns (NodeServiceRestartResponse);
   // Delete a node.
   rpc Delete(NodeServiceDeleteRequest) returns (NodeServiceDeleteResponse);
+  // Super-admin: list nodes eligible to be a migration target for a given source node.
+  rpc MigrationCandidates(NodeServiceMigrationCandidatesRequest) returns (NodeServiceMigrationCandidatesResponse);
+  // Super-admin: migrate a node's identity onto a target node.
+  rpc Migrate(NodeServiceMigrateRequest) returns (NodeServiceMigrateResponse);
 }
 
 // Create a new node for some image.
@@ -288,3 +292,39 @@ message NodeServiceDeleteRequest {
 }
 
 message NodeServiceDeleteResponse {}
+
+message NodeServiceMigrationCandidatesRequest {
+  // The source node whose identity will be migrated.
+  string node_id = 1;
+}
+
+message NodeServiceMigrationCandidatesResponse {
+  repeated MigrationCandidate candidates = 1;
+}
+
+message MigrationCandidate {
+  // Full target node summary (name, org, host, state, ip, ...).
+  Node node = 1;
+  // Whether the candidate is currently Running.
+  bool is_running = 2;
+  // Warning: the candidate's org has more than one node (likely a real
+  // customer org rather than an idle staging slot).
+  bool in_use = 3;
+}
+
+message NodeServiceMigrateRequest {
+  // The live source node A whose identity is taken over.
+  string source_node_id = 1;
+  // The replacement target node B that takes over A's identity.
+  string target_node_id = 2;
+  // The org that A is moved into after migration. Required.
+  string destination_org_id = 3;
+}
+
+// Result of a node migration: both nodes after the identity swap.
+message NodeServiceMigrateResponse {
+  // Updated source node A (now tagged "-migrated").
+  Node source = 1;
+  // Updated target node B (now live under A's old identity).
+  Node target = 2;
+}
